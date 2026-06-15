@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brandor Your Ultimate Branding Door</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --denim:#173b61;
+    --turquoise:#17616E;
+    --greyblue:#7697A0;
+    --orange:#FD8916;
+    --pure:#FFEBD0;
+    --ink:#0e2840;
+    --display: 'Baloo 2', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'Space Mono', monospace;
+    --arch-r: 999px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    color:var(--denim);
+    background:var(--pure);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* ===================== NAV ===================== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(255,235,208,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(23,59,97,0.08);
+    transition:background .3s ease;
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:1180px; margin:0 auto;
+  }
+  .logo-mark{display:flex; align-items:center; gap:10px;}
+  .logo-mark img{height:36px; width:auto;}
+  .logo-mark span{
+    font-family:var(--display); font-weight:700; font-size:1.45rem;
+    color:var(--denim); letter-spacing:.5px;
+  }
+  .nav-links{display:flex; gap:36px; align-items:center;}
+  .nav-links a{
+    font-size:.95rem; font-weight:600; color:var(--denim);
+    position:relative; padding:4px 0;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; height:2px; width:0;
+    background:var(--orange); transition:width .25s ease;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after{width:100%;}
+  .nav-links a.active{color:var(--orange);}
+  .nav-cta{
+    background:var(--orange); color:var(--pure)!important;
+    padding:10px 22px; border-radius:var(--arch-r); font-weight:700;
+    font-size:.9rem; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .nav-cta:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(253,137,22,.35);}
+  .nav-cta::after{display:none;}
+
+  .menu-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .menu-toggle span{width:26px; height:3px; background:var(--denim); border-radius:2px;}
+
+  /* ===================== HERO ===================== */
+  .hero{
+    position:relative;
+    padding:160px 0 100px;
+    background:var(--pure);
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:.78rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--orange); font-weight:700; display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:''; width:34px; height:2px; background:var(--orange); display:inline-block;}
+
+  h1{
+    font-family:var(--display); font-weight:800;
+    font-size:clamp(2.6rem, 5.4vw, 4.6rem);
+    line-height:1.05; color:var(--denim); letter-spacing:-1px;
+    margin-bottom:24px;
+  }
+  h1 .accent{color:var(--orange);}
+
+  .hero p.lead{
+    font-size:1.1rem; color:var(--ink); opacity:.8; max-width:480px; margin-bottom:36px;
+  }
+  .btn-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 30px; border-radius:var(--arch-r); font-weight:700; font-size:.95rem;
+    transition:all .25s ease; border:2px solid transparent;
+  }
+  .btn-primary{background:var(--denim); color:var(--pure);}
+  .btn-primary:hover{background:var(--orange); transform:translateY(-3px); box-shadow:0 10px 24px rgba(23,59,97,.25);}
+  .btn-outline{border-color:var(--denim); color:var(--denim);}
+  .btn-outline:hover{background:var(--denim); color:var(--pure); transform:translateY(-3px);}
+
+  /* The Door visual */
+  .door-frame{
+    position:relative;
+    width:100%;
+    min-height:480px;
+    aspect-ratio: 1 / 1.05;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .door-frame .arch-outer{
+    position:absolute; inset:0;
+    background:var(--denim);
+    border-radius: 50% 50% 0 0 / 62% 62% 0 0;
+    overflow:hidden;
+  }
+  .door-frame .arch-inner{
+    position:absolute;
+    left:14%; right:14%; top:26%; bottom:0;
+    background:var(--orange);
+    border-radius: 50% 50% 0 0 / 78% 78% 0 0;
+    overflow:hidden;
+    transform-origin:bottom center;
+    animation: doorOpen 1.4s cubic-bezier(.4,0,.2,1) 0.4s both;
+  }
+  .door-frame .arch-inner img{
+    width:100%; height:100%; object-fit:cover; object-position:center 30%;
+    position:absolute; inset:0;
+  }
+  .door-dot{
+    position:absolute; left:50%; top:46%; width:14px; height:14px; border-radius:50%;
+    background:var(--pure); transform:translate(-50%,-50%);
+    animation: dotFade 1.4s ease 1.2s both;
+  }
+  @keyframes doorOpen{
+    from{ transform: scaleY(0); opacity:0; }
+    to{ transform: scaleY(1); opacity:1; }
+  }
+  @keyframes dotFade{
+    from{opacity:0;} to{opacity:1;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .door-frame .arch-inner, .door-dot{animation:none;}
+  }
+
+  .floating-tag{
+    position:absolute; bottom:24px; left:24px; right:24px;
+    background:rgba(23,59,97,.92); color:var(--pure);
+    border-radius:18px; padding:16px 20px; backdrop-filter:blur(6px);
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    font-family:var(--mono); font-size:.78rem; letter-spacing:.04em;
+  }
+  .floating-tag strong{font-family:var(--body); font-size:.95rem; display:block; margin-bottom:2px;}
+
+  /* ===================== MARQUEE STRIP ===================== */
+  .marquee{
+    background:var(--denim); color:var(--pure); overflow:hidden; padding:14px 0;
+    border-top:1px solid rgba(255,235,208,.08); border-bottom:1px solid rgba(255,235,208,.08);
+  }
+  .marquee-track{
+    display:flex; gap:48px; white-space:nowrap; width:max-content;
+    animation: scroll 28s linear infinite;
+    font-family:var(--mono); font-size:.85rem; letter-spacing:.12em; text-transform:uppercase;
+  }
+  .marquee-track span{display:flex; align-items:center; gap:48px;}
+  .marquee-track span::after{content:'◆'; color:var(--orange); font-size:.6rem;}
+  @keyframes scroll{
+    from{transform:translateX(0);} to{transform:translateX(-50%);}
+  }
+
+  /* ===================== SECTION GENERAL ===================== */
+  section{padding:110px 0;}
+  .section-head{max-width:680px; margin-bottom:64px;}
+  .section-head .eyebrow{margin-bottom:18px;}
+  h2{
+    font-family:var(--display); font-weight:800; font-size:clamp(2rem, 4vw, 3rem);
+    color:var(--denim); letter-spacing:-.5px; margin-bottom:18px;
+  }
+  .section-head p{font-size:1.05rem; color:var(--ink); opacity:.75; max-width:560px;}
+
+  /* ===================== SERVICES ===================== */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;
+  }
+  .service-card{
+    background:var(--pure);
+    border:2px solid rgba(23,59,97,.08);
+    border-radius: 32px 32px 14px 14px;
+    padding:38px 30px 32px;
+    position:relative;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(23,59,97,.12);
+    border-color:rgba(253,137,22,.3);
+  }
+  .service-arch{
+    width:64px; height:64px; border-radius:50% 50% 14% 14% / 70% 70% 14% 14%;
+    background:var(--turquoise);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:26px; position:relative;
+  }
+  .service-arch::after{
+    content:''; width:8px; height:8px; border-radius:50%; background:var(--pure);
+    position:absolute; bottom:18px;
+  }
+  .service-card h3{
+    font-family:var(--display); font-weight:700; font-size:1.35rem; margin-bottom:12px; color:var(--denim);
+  }
+  .service-card ul{list-style:none; margin-top:16px; display:flex; flex-direction:column; gap:8px;}
+  .service-card ul li{
+    font-size:.92rem; color:var(--ink); opacity:.8;
+    padding-left:18px; position:relative;
+  }
+  .service-card ul li::before{
+    content:''; position:absolute; left:0; top:9px; width:8px; height:8px;
+    border-radius:50% 50% 0 50%; background:var(--orange);
+    transform:rotate(45deg);
+  }
+  .service-card p.desc{font-size:.95rem; color:var(--ink); opacity:.75;}
+
+  /* ===================== APPROACH (dark turquoise band) ===================== */
+  .approach{
+    background:var(--turquoise);
+    color:var(--pure);
+    position:relative;
+    background-image: linear-gradient(135deg, rgba(23,59,97,.55), rgba(23,97,110,.92)), url('assets/pattern.png');
+    background-size: cover, 480px;
+    background-position:center, center;
+    background-repeat:no-repeat, repeat;
+  }
+  .approach .section-head p{color:var(--pure); opacity:.75;}
+  .approach .eyebrow{color:var(--orange);}
+  .approach h2{color:var(--pure);}
+
+  .timeline{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:24px; counter-reset:step;
+  }
+  .step{
+    position:relative; padding-top:36px;
+  }
+  .step::before{
+    counter-increment:step;
+    content: counter(step, decimal-leading-zero);
+    font-family:var(--mono); font-size:.85rem; color:var(--orange);
+    display:block; margin-bottom:18px; letter-spacing:.1em;
+  }
+  .step-arch{
+    width:100%; height:6px; background:rgba(255,235,208,.18); border-radius:6px; margin-bottom:22px; position:relative; overflow:hidden;
+  }
+  .step-arch::after{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:100%; background:var(--orange);
+    transform-origin:left; transform:scaleX(1);
+    transition:transform 1s ease;
+  }
+  .js .step-arch::after{transform:scaleX(0);}
+  .js .step.in-view .step-arch::after{transform:scaleX(1);}
+  .step h4{font-family:var(--display); font-size:1.18rem; font-weight:700; margin-bottom:10px;}
+  .step p{font-size:.92rem; opacity:.78;}
+
+  /* ===================== WHY US ===================== */
+  .why-grid{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:60px; align-items:center;
+  }
+  .why-visual{
+    position:relative; border-radius:36px 36px 16px 16px; overflow:hidden;
+    background:var(--denim); aspect-ratio:4/5; display:flex; align-items:center; justify-content:center;
+  }
+  .why-visual img{
+    width:62%; opacity:.95;
+  }
+  .why-list{display:flex; flex-direction:column; gap:22px;}
+  .why-item{display:flex; gap:18px; align-items:flex-start;}
+  .why-icon{
+    flex-shrink:0; width:46px; height:46px; border-radius:50% 50% 16% 50% / 64% 64% 16% 64%;
+    background:var(--orange); display:flex; align-items:center; justify-content:center;
+    color:var(--pure); font-weight:800; font-family:var(--display); font-size:1.1rem;
+  }
+  .why-item h4{font-family:var(--display); font-size:1.08rem; font-weight:700; margin-bottom:4px; color:var(--denim);}
+  .why-item p{font-size:.92rem; color:var(--ink); opacity:.75;}
+
+  /* ===================== CLIENTS ===================== */
+  .clients{background:var(--pure); text-align:center;}
+  .clients .section-head{margin:0 auto 50px; text-align:center;}
+  .clients .section-head p{margin:0 auto;}
+  .client-pills{
+    display:flex; flex-wrap:wrap; justify-content:center; gap:16px;
+  }
+  .client-pill{
+    border:2px solid rgba(23,59,97,.12); border-radius:var(--arch-r);
+    padding:14px 28px; font-family:var(--mono); font-size:.85rem;
+    letter-spacing:.05em; color:var(--denim); font-weight:700;
+    transition:all .25s ease;
+  }
+  .client-pill:hover{
+    background:var(--denim); color:var(--pure); border-color:var(--denim);
+  }
+
+  /* ===================== CONTACT ===================== */
+  .contact{
+    background:var(--denim); color:var(--pure); position:relative; overflow:hidden;
+  }
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .contact .eyebrow{color:var(--orange);}
+  .contact h2{color:var(--pure);}
+  .contact p.lead{color:var(--pure); opacity:.75; max-width:460px; margin-bottom:36px;}
+  .contact-detail{display:flex; gap:16px; align-items:flex-start; margin-bottom:22px;}
+  .contact-detail .dot{
+    flex-shrink:0; width:38px; height:38px; border-radius:50% 50% 14% 50% / 60% 60% 14% 60%;
+    background:var(--orange); display:flex; align-items:center; justify-content:center;
+    font-weight:800; color:var(--denim); font-family:var(--display);
+  }
+  .contact-detail strong{display:block; font-size:.95rem; margin-bottom:2px;}
+  .contact-detail span{font-size:.9rem; opacity:.7;}
+
+  .contact-arch{
+    position:relative; background:var(--orange); border-radius:40% 40% 16% 16% / 60% 60% 16% 16%;
+    padding:50px 38px 38px; color:var(--denim);
+  }
+  .contact-arch h3{font-family:var(--display); font-size:1.5rem; font-weight:800; margin-bottom:24px;}
+  .form-row{margin-bottom:18px; display:flex; flex-direction:column; gap:6px;}
+  .form-row label{font-size:.8rem; font-weight:700; font-family:var(--mono); letter-spacing:.06em; text-transform:uppercase;}
+  .form-row input, .form-row textarea, .form-row select{
+    background:var(--pure); border:none; border-radius:14px; padding:14px 16px;
+    font-family:var(--body); font-size:.95rem; color:var(--denim); resize:none;
+  }
+  .form-row input:focus, .form-row textarea:focus, .form-row select:focus{
+    outline:3px solid var(--denim); outline-offset:1px;
+  }
+  .contact-arch .btn-primary{
+    width:100%; justify-content:center; background:var(--denim); color:var(--pure); margin-top:8px;
+    border:none; cursor:pointer; font-size:1rem;
+  }
+  .contact-arch .btn-primary:hover{background:var(--turquoise);}
+
+  /* ===================== FOOTER ===================== */
+  footer{
+    background:var(--denim); color:var(--pure); padding:50px 0 30px;
+    border-top:1px solid rgba(255,235,208,.1);
+  }
+  .footer-grid{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;
+    padding-bottom:30px; border-bottom:1px solid rgba(255,235,208,.1); margin-bottom:24px;
+  }
+  .footer-grid .logo-mark span{color:var(--pure);}
+  .footer-links{display:flex; gap:30px; flex-wrap:wrap;}
+  .footer-links a{font-size:.9rem; opacity:.8; font-weight:600;}
+  .footer-links a:hover{opacity:1; color:var(--orange);}
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    font-size:.82rem; opacity:.6; font-family:var(--mono);
+  }
+
+  /* ===================== PARTNERS ===================== */
+  .partner-logos {
+    display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:60px; align-items:center;
+  }
+  .partner-logo {
+    width:120px; opacity:0.4; filter:grayscale(100%); transition:all .3s ease;
+  }
+  .partner-logo:hover {
+    opacity:1; filter:grayscale(0%);
+  }
+
+  /* ===================== TEAM ===================== */
+  .team{background:var(--pure);}
+  .team .section-head{text-align:center; margin:0 auto 64px;}
+  .team-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:40px;}
+  .team-member{text-align:center;}
+  .team-photo{
+    width:100%; aspect-ratio:4/5; background:var(--denim);
+    border-radius:50% 50% 16px 16px / 60% 60% 16px 16px;
+    margin-bottom:24px; position:relative; overflow:hidden;
+    transition:transform .3s ease;
+  }
+  .team-photo img{width:100%; height:100%; object-fit:cover; mix-blend-mode:luminosity; opacity:0.8; transition:all .3s ease;}
+  .team-member:hover .team-photo{transform:translateY(-8px); box-shadow:0 14px 28px rgba(23,59,97,.15);}
+  .team-member:hover .team-photo img{mix-blend-mode:normal; opacity:1; transform:scale(1.05);}
+  .team-member h4{font-family:var(--display); font-size:1.3rem; font-weight:700; color:var(--denim); margin-bottom:4px;}
+  .team-member p{font-size:.9rem; color:var(--orange); font-family:var(--mono); font-weight:700; letter-spacing:.05em; text-transform:uppercase;}
+
+  /* ===================== FORM VALIDATION ===================== */
+  .form-row input.is-invalid, .form-row textarea.is-invalid { outline: 2px solid #e74c3c; outline-offset: 1px; }
+  .form-row input.is-valid, .form-row textarea.is-valid { outline: 2px solid #2ecc71; outline-offset: 1px; }
+
+  /* ===================== BACK TO TOP ===================== */
+  .btt-btn {
+    position:fixed; bottom:30px; right:30px; z-index:90;
+    width:50px; height:50px; border-radius:50%;
+    background:var(--orange); color:var(--pure);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.5rem; border:none; cursor:pointer;
+    opacity:0; visibility:hidden; transform:translateY(20px);
+    transition:all .3s ease; box-shadow:0 8px 24px rgba(253,137,22,.4);
+  }
+  .btt-btn.show { opacity:1; visibility:visible; transform:translateY(0); }
+  .btt-btn:hover { background:var(--denim); transform:translateY(-5px); box-shadow:0 12px 28px rgba(23,59,97,.3); }
+
+  /* ===================== REVEAL ANIMATION ===================== */
+  .reveal{opacity:1; transform:translateY(0) scale(1); transition:opacity .7s cubic-bezier(0.2, 0.8, 0.2, 1), transform .7s cubic-bezier(0.2, 0.8, 0.2, 1);}
+  .js .reveal{opacity:0; transform:translateY(40px) scale(0.96);}
+  .js .reveal.in-view{opacity:1; transform:translateY(0) scale(1);}
+  
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width:920px){
+    .hero .wrap{grid-template-columns:1fr; gap:50px;}
+    .hero{padding:140px 0 70px;}
+    .door-frame{max-width:420px; margin:0 auto;}
+    .services-grid{grid-template-columns:1fr; gap:22px;}
+    .team-grid{grid-template-columns:1fr 1fr; gap:32px;}
+    .timeline{grid-template-columns:repeat(2,1fr); gap:36px 24px;}
+    .why-grid{grid-template-columns:1fr; gap:40px;}
+    .why-visual{aspect-ratio:16/10;}
+    .contact-grid{grid-template-columns:1fr; gap:48px;}
+  }
+  @media (max-width:720px){
+    .nav-links{
+      position:fixed; top:72px; left:0; right:0; background:var(--pure);
+      flex-direction:column; padding:24px 32px; gap:20px;
+      transform:translateY(-120%); transition:transform .3s ease;
+      border-bottom:1px solid rgba(23,59,97,.08);
+    }
+    .nav-links.open{transform:translateY(0);}
+    .nav-cta{align-self:flex-start;}
+    .menu-toggle{display:flex;}
+    section{padding:70px 0;}
+    .team-grid{grid-template-columns:1fr; gap:40px;}
+    .timeline{grid-template-columns:1fr; gap:30px;}
+    .floating-tag{flex-direction:column; align-items:flex-start; gap:8px;}
+    .btt-btn{bottom:20px; right:20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="logo-mark">
+      <img src="assets/icon-n.png" alt="Brandor icon">
+      <span>Brandor</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#why">Why Brandor</a>
+      <a href="#team">Team</a>
+      <a href="#clients">Clients</a>
+      <a href="#contact" class="nav-cta">Book a Project</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Kano · Creative Media Agency</p>
+      <h1>Every program has a story. We open the <span class="accent">door</span> to tell it.</h1>
+      <p class="lead">Brandor is a creative media and branding team helping NGOs, institutions, and businesses across Africa document their work, capture their impact, and build a brand worth remembering.</p>
+      <div class="btn-row">
+        <a href="#contact" class="btn btn-primary">Book a Project</a>
+        <a href="#services" class="btn btn-outline">Explore Services</a>
+      </div>
+    </div>
+    <div class="door-frame">
+      <div class="arch-outer"></div>
+      <div class="arch-inner">
+        <div style="width:100%;height:100%;background:linear-gradient(160deg, #FD8916, #173b61); display:flex; align-items:center; justify-content:center;">
+          <img src="assets/icon-n.png" alt="" style="width:55%; opacity:.18; mix-blend-mode:overlay;">
+        </div>
+      </div>
+      <div class="door-dot"></div>
+      <div class="floating-tag">
+        <div><strong>Now documenting</strong>Capacity-building workshop · Kano</div>
+        <div>EST. BRANDOR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Event Coverage</span><span>Media Production</span><span>Brand Identity</span><span>Documentary Storytelling</span><span>Social Media Branding</span>
+    <span>Event Coverage</span><span>Media Production</span><span>Brand Identity</span><span>Documentary Storytelling</span><span>Social Media Branding</span>
+  </div>
+</div>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">What We Do</p>
+      <h2>Core services</h2>
+      <p>Three doors into the same goal helping your organization show its work clearly, professionally, and memorably.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal stagger-1">
+        <div class="service-arch"></div>
+        <h3>Corporate Event Coverage</h3>
+        <p class="desc">Full documentation for trainings, workshops, conferences, and community programs so your impact reaches stakeholders and donors.</p>
+        <ul>
+          <li>Professional photography</li>
+          <li>Full event video recording</li>
+          <li>Speaker &amp; participant interviews</li>
+          <li>Behind-the-scenes footage</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal stagger-2">
+        <div class="service-arch"></div>
+        <h3>Media Production</h3>
+        <p class="desc">We turn raw footage into content that tells the full story built for reports, social channels, and program archives.</p>
+        <ul>
+          <li>Documentary-style coverage</li>
+          <li>Interview recordings</li>
+          <li>Promotional videos</li>
+          <li>Highlight reels</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal stagger-3">
+        <div class="service-arch"></div>
+        <h3>Branding &amp; Creative</h3>
+        <p class="desc">A strong, recognizable identity for your organization designed to carry your mission across every platform.</p>
+        <ul>
+          <li>Brand identity development</li>
+          <li>Logo design</li>
+          <li>Visual storytelling</li>
+          <li>Social media branding</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APPROACH ===================== -->
+<section id="approach" class="approach">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">How We Work</p>
+      <h2>Our approach</h2>
+      <p>Every event and every brand has a story worth telling. Here's how we find it and bring it through.</p>
+    </div>
+    <div class="timeline">
+      <div class="step reveal stagger-1">
+        <div class="step-arch"></div>
+        <h4>Understand the program</h4>
+        <p>We study the objectives and goals of your event or organization before a single frame is shot.</p>
+      </div>
+      <div class="step reveal stagger-2">
+        <div class="step-arch"></div>
+        <h4>Strategic documentation</h4>
+        <p>We capture key moments, speakers, and participant engagement with intention.</p>
+      </div>
+      <div class="step reveal stagger-3">
+        <div class="step-arch"></div>
+        <h4>Creative storytelling</h4>
+        <p>Footage and images become meaningful visual narratives — not just raw clips.</p>
+      </div>
+      <div class="step reveal stagger-4">
+        <div class="step-arch"></div>
+        <h4>Professional delivery</h4>
+        <p>High-quality media ready for reports, social media, and organizational documentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section id="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-visual reveal">
+        <img src="assets/icon-n.png" alt="Brandor icon">
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Why Organizations Choose Us</p>
+        <h2 style="margin-bottom:32px;">We don't just record events we capture impact.</h2>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-icon">P</div>
+            <div><h4>Professional documentation</h4><p>Every shoot is planned, executed, and delivered to a professional standard.</p></div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">Q</div>
+            <div><h4>High-quality production</h4><p>From raw footage to final cut, quality is non-negotiable.</p></div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">S</div>
+            <div><h4>Strong storytelling</h4><p>We frame your work as a narrative, not just a record of an event.</p></div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">N</div>
+            <div><h4>NGO &amp; development expertise</h4><p>We understand how programs run — and what donors and partners want to see.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TEAM ===================== -->
+<section id="team" class="team">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Our People</p>
+      <h2>Meet the team behind the lens</h2>
+      <p>A collective of storytellers, strategists, and creatives dedicated to elevating your brand's narrative.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-member reveal stagger-1">
+        <div class="team-photo">
+          <div style="width:100%;height:100%;background:linear-gradient(160deg, #FD8916, #173b61); display:flex; align-items:center; justify-content:center;">
+             <img src="assets/icon-n.png" alt="" style="width:40%; opacity:.2; mix-blend-mode:overlay;">
+          </div>
+        </div>
+        <h4>Abdullahi Kano</h4>
+        <p>Creative Director</p>
+      </div>
+      <div class="team-member reveal stagger-2">
+        <div class="team-photo">
+          <div style="width:100%;height:100%;background:linear-gradient(160deg, #17616E, #173b61); display:flex; align-items:center; justify-content:center;">
+             <img src="assets/icon-n.png" alt="" style="width:40%; opacity:.2; mix-blend-mode:overlay;">
+          </div>
+        </div>
+        <h4>Amina Yusuf</h4>
+        <p>Head of Production</p>
+      </div>
+      <div class="team-member reveal stagger-3">
+        <div class="team-photo">
+          <div style="width:100%;height:100%;background:linear-gradient(160deg, #7697A0, #0e2840); display:flex; align-items:center; justify-content:center;">
+             <img src="assets/icon-n.png" alt="" style="width:40%; opacity:.2; mix-blend-mode:overlay;">
+          </div>
+        </div>
+        <h4>Ibrahim Ali</h4>
+        <p>Brand Strategist</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLIENTS ===================== -->
+<section id="clients" class="clients">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Who We Work With</p>
+      <h2>Built for organizations doing real work</h2>
+      <p>From grassroots initiatives to large institutions, Brandor partners with teams who need their work seen and understood.</p>
+    </div>
+    <div class="client-pills reveal">
+      <div class="client-pill">NGOs</div>
+      <div class="client-pill">Development Programs</div>
+      <div class="client-pill">Businesses &amp; Entrepreneurs</div>
+      <div class="client-pill">Institutions &amp; Training Orgs</div>
+      <div class="client-pill">Community Initiatives</div>
+    </div>
+    <div class="partner-logos reveal">
+      <img src="assets/icon-n.png" alt="Partner logo" class="partner-logo">
+      <img src="assets/icon-n.png" alt="Partner logo" class="partner-logo">
+      <img src="assets/icon-n.png" alt="Partner logo" class="partner-logo">
+      <img src="assets/icon-n.png" alt="Partner logo" class="partner-logo">
+      <img src="assets/icon-n.png" alt="Partner logo" class="partner-logo">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="eyebrow">Get In Touch</p>
+        <h2>Let's open the door to your next project</h2>
+        <p class="lead">Tell us about your event or organization, and we'll get back to you with how Brandor can help document and tell your story.</p>
+
+        <div class="contact-detail">
+          <div class="dot">@</div>
+          <div><strong>Email</strong><span>brandorcreativeagency@gmail.com</span></div>
+        </div>
+        <div class="contact-detail">
+          <div class="dot">L</div>
+          <div><strong>Location</strong><span>No 1A Asma'u Yakubu Street, Off Lamido Crescent, Giginyu Junction, Kano State</span></div>
+        </div>
+      </div>
+
+      <div class="contact-arch reveal">
+        <h3>Start a conversation</h3>
+        <form id="contactForm" onsubmit="event.preventDefault(); alert('Thanks — we will get back to you shortly.');">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-row">
+            <label for="org">Organization</label>
+            <input type="text" id="org" name="org" placeholder="Organization name">
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-row">
+            <label for="service">Service needed</label>
+            <select id="service" name="service">
+              <option>Event Coverage</option>
+              <option>Media Production</option>
+              <option>Branding &amp; Creative</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="3" placeholder="Tell us about your project"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <a href="#" class="logo-mark">
+        <img src="assets/icon-n.png" alt="Brandor icon">
+        <span>Brandor</span>
+      </a>
+      <div class="footer-links">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#why">Why Brandor</a>
+        <a href="#team">Team</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Brandor Your Ultimate Branding Door</span>
+      <span>Kano State, Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button class="btt-btn" id="bttBtn" aria-label="Back to top">↑</button>
+
+<script>
+  // Mobile menu
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  document.querySelectorAll('.reveal, .step').forEach(el => observer.observe(el));
+
+  // ScrollSpy for Navigation
+  const sections = document.querySelectorAll('section');
+  const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navItems.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === `#${current}`) {
+        a.classList.add('active');
+      }
+    });
+  });
+
+  // Form Validation & Submission
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let isValid = true;
+    const inputs = contactForm.querySelectorAll('input[required], textarea[required]');
+    
+    inputs.forEach(input => {
+      if (!input.value.trim()) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        isValid = false;
+      } else {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+      }
+    });
+
+    if (isValid) {
+      const btn = contactForm.querySelector('button[type="submit"]');
+      const originalText = btn.innerText;
+      btn.innerText = 'Sending...';
+      btn.style.opacity = '0.8';
+      
+      setTimeout(() => {
+        alert('Thanks, your message has been sent successfully. We will get back to you shortly.');
+        contactForm.reset();
+        inputs.forEach(input => input.classList.remove('is-valid'));
+        btn.innerText = originalText;
+        btn.style.opacity = '1';
+      }, 1200);
+    }
+  });
+
+  // Back to Top Button
+  const bttBtn = document.getElementById('bttBtn');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      bttBtn.classList.add('show');
+    } else {
+      bttBtn.classList.remove('show');
+    }
+  });
+  bttBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Parallax background on Approach section
+  const approachSection = document.querySelector('.approach');
+  window.addEventListener('scroll', () => {
+    if(approachSection) {
+      const scrolled = window.scrollY;
+      approachSection.style.backgroundPositionY = `center, ${scrolled * 0.15}px`;
+    }
+  });
+</script>
+
+</body>
+</html>
