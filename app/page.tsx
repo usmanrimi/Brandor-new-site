@@ -148,7 +148,7 @@ export default function Home() {
     <div className="why-grid">
       <div className="why-visual reveal">
         <img src="/assets/why-image.jpg" alt="Brandor abstract" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
-      </div></div>
+      </div>
       <div className="reveal">
         <p className="eyebrow">Why Organizations Choose Us</p>
         <h2 style={{ marginBottom: '32px' }} className="gsap-split">We don't just record events we capture impact.</h2>
