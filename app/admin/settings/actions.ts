@@ -32,6 +32,4 @@ export async function updateSettings(formData: FormData) {
   })
 
   revalidatePath('/admin/settings')
-  
-  return { success: true }
 }

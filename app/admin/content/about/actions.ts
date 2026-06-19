@@ -36,6 +36,4 @@ export async function updateAboutContent(formData: FormData) {
 
   revalidatePath('/about')
   revalidatePath('/admin/content/about')
-  
-  return { success: true }
 }

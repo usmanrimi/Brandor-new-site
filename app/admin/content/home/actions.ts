@@ -36,6 +36,4 @@ export async function updateHomeContent(formData: FormData) {
 
   revalidatePath('/')
   revalidatePath('/admin/content/home')
-  
-  return { success: true }
 }
