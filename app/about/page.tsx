@@ -12,9 +12,11 @@ export default async function About() {
     aboutContent = {
       id: 'global',
       aboutText: "Brandor is a creative branding, media production, and storytelling agency dedicated to helping organizations communicate their impact.",
-      missionText: "To empower brands, organizations, and communities through strategic branding, impactful storytelling, and professional media production.",
-      visionText: "To become Africa's leading creative agency for branding, storytelling, and impact documentation.",
-      valuesText: "Excellence. Creativity. Impact. Integrity. Collaboration.",
+      mission: "To empower brands, organizations, and communities through strategic branding, impactful storytelling, and professional media production.",
+      vision: "To become Africa's leading creative agency for branding, storytelling, and impact documentation.",
+      coreValues: "Excellence. Creativity. Impact. Integrity. Collaboration.",
+      process: "",
+      whyUs: "",
       updatedAt: new Date()
     }
   }
@@ -42,18 +44,18 @@ export default async function About() {
             
             <div className="admin-card reveal stagger-1" style={{ background: '#fff', border: '1px solid #e2e8f0' }}>
               <h3 style={{ color: 'var(--accent)', marginBottom: '16px' }}>Our Mission</h3>
-              <p style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>{aboutContent.missionText}</p>
+              <p style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>{aboutContent.mission}</p>
             </div>
             
             <div className="admin-card reveal stagger-2" style={{ background: '#fff', border: '1px solid #e2e8f0' }}>
               <h3 style={{ color: 'var(--accent)', marginBottom: '16px' }}>Our Vision</h3>
-              <p style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>{aboutContent.visionText}</p>
+              <p style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>{aboutContent.vision}</p>
             </div>
 
             <div className="admin-card reveal stagger-3" style={{ background: '#fff', border: '1px solid #e2e8f0' }}>
               <h3 style={{ color: 'var(--accent)', marginBottom: '16px' }}>Core Values</h3>
               <div style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>
-                {aboutContent.valuesText.split('\n').map((line, idx) => {
+                {aboutContent.coreValues.split('\n').map((line, idx) => {
                   if (!line.trim()) return null;
                   const parts = line.split(':');
                   if (parts.length > 1) {
