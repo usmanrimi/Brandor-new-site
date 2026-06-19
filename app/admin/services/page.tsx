@@ -1,15 +1,25 @@
 export const dynamic = "force-dynamic";
 import { PrismaClient } from '@prisma/client'
-import { createService, deleteService } from '../actions'
-import * as LucideIcons from 'lucide-react'
+import Link from 'next/link'
+import * as Icons from 'lucide-react'
+import { revalidatePath } from 'next/cache'
 
 const prisma = new PrismaClient()
+
+async function deleteService(formData: FormData) {
+  'use server'
+  const id = formData.get('id') as string
+  if (id) {
+    await prisma.service.delete({ where: { id } })
+    revalidatePath('/admin/services')
+    revalidatePath('/services')
+  }
+}
 
 export default async function AdminServicesPage() {
   const services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
 
   return (
-    <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', fontFamily: 'sans-serif' }}>
     <div>
       <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>

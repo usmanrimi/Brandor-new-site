@@ -1,17 +1,25 @@
 export const dynamic = "force-dynamic";
 import { PrismaClient } from '@prisma/client'
-import { createProject, deleteProject } from '../actions'
+import Link from 'next/link'
+import * as Icons from 'lucide-react'
+import { revalidatePath } from 'next/cache'
 
 const prisma = new PrismaClient()
+
+async function deleteProject(formData: FormData) {
+  'use server'
+  const id = formData.get('id') as string
+  if (id) {
+    await prisma.project.delete({ where: { id } })
+    revalidatePath('/admin/projects')
+    revalidatePath('/projects')
+  }
+}
 
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({ orderBy: { createdAt: 'desc' } })
 
   return (
-    <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>Manage Projects</h1>
-      <a href="/admin" style={{ color: 'blue', textDecoration: 'underline', marginBottom: '20px', display: 'inline-block' }}>&larr; Back to Dashboard</a>
-      
     <div>
       <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
@@ -60,7 +68,10 @@ export default async function AdminProjectsPage() {
                 </td>
                 <td style={{ paddingRight: '24px', textAlign: 'right' }}>
                   <Link href={`/admin/projects/${project.id}`} style={{ color: 'var(--admin-text-light)', marginRight: '16px' }}><Icons.Edit size={18} /></Link>
-                  <button style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><Icons.Trash2 size={18} /></button>
+                  <form action={deleteProject} style={{ display: 'inline' }}>
+                    <input type="hidden" name="id" value={project.id} />
+                    <button type="submit" style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><Icons.Trash2 size={18} /></button>
+                  </form>
                 </td>
               </tr>
             ))}

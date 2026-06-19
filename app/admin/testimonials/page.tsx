@@ -1,14 +1,25 @@
 export const dynamic = "force-dynamic";
 import { PrismaClient } from '@prisma/client'
-import { createTestimonial, deleteTestimonial } from '../actions'
+import Link from 'next/link'
+import * as Icons from 'lucide-react'
+import { revalidatePath } from 'next/cache'
 
 const prisma = new PrismaClient()
+
+async function deleteTestimonial(formData: FormData) {
+  'use server'
+  const id = formData.get('id') as string
+  if (id) {
+    await prisma.testimonial.delete({ where: { id } })
+    revalidatePath('/admin/testimonials')
+    revalidatePath('/testimonials')
+  }
+}
 
 export default async function AdminTestimonialsPage() {
   const testimonials = await prisma.testimonial.findMany({ orderBy: { createdAt: 'desc' } })
 
   return (
-    <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', fontFamily: 'sans-serif' }}>
     <div>
       <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>

@@ -1,14 +1,25 @@
 export const dynamic = "force-dynamic";
 import { PrismaClient } from '@prisma/client'
-import { createTeamMember, deleteTeamMember } from '../actions'
+import Link from 'next/link'
+import * as Icons from 'lucide-react'
+import { revalidatePath } from 'next/cache'
 
 const prisma = new PrismaClient()
 
+async function deleteTeamMember(formData: FormData) {
+  'use server'
+  const id = formData.get('id') as string
+  if (id) {
+    await prisma.teamMember.delete({ where: { id } })
+    revalidatePath('/admin/team')
+    revalidatePath('/team')
+  }
+}
+
 export default async function AdminTeamPage() {
-  const team = await prisma.teamMember.findMany()
+  const members = await prisma.teamMember.findMany({ orderBy: { createdAt: 'asc' } })
 
   return (
-    <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', fontFamily: 'sans-serif' }}>
     <div>
       <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
@@ -41,8 +52,8 @@ export default async function AdminTeamPage() {
                 <td style={{ color: 'var(--admin-text-light)' }}>{member.role}</td>
                 <td>
                   <div style={{ display: 'flex', gap: '8px' }}>
-                    {member.linkedinUrl ? <Icons.Linkedin size={16} color="#0077b5" /> : null}
-                    {member.twitterUrl ? <Icons.Twitter size={16} color="#1da1f2" /> : null}
+                    {member.linkedinUrl ? <span style={{fontSize: '0.8rem', color: '#0077b5'}}><Icons.Link size={14}/> LinkedIn</span> : null}
+                    {member.twitterUrl ? <span style={{fontSize: '0.8rem', color: '#1da1f2'}}><Icons.Link size={14}/> Twitter</span> : null}
                     {!member.linkedinUrl && !member.twitterUrl && <span style={{ color: '#cbd5e1', fontSize: '0.8rem' }}>None</span>}
                   </div>
                 </td>
