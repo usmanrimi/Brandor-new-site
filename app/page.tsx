@@ -40,9 +40,10 @@ export default function Home() {
         <a href="#contact" className="btn btn-primary">Book a Project</a>
         <a href="#services" className="btn btn-outline">Explore Services</a>
       </div>
-    </div>      <div className="hero-visual">
-        <img src="/assets/hero-image.jpg" alt="Brandor Media Production" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }} />
-      </div>
+    </div>
+    
+    <div className="hero-visual">
+      <img src="/assets/hero-image.jpg" alt="Brandor Media Production" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }} />
     </div>
   </div>
 </section>
