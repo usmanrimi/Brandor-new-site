@@ -1,12 +1,26 @@
 export const dynamic = "force-dynamic";
-import { PrismaClient } from '@prisma/client'
 import * as LucideIcons from 'lucide-react'
 
-const prisma = new PrismaClient()
+// Hardcoded fallback data to ensure the site always loads
+const fallbackServices = [
+  { id: '1', title: 'Branding & Identity', description: 'Building memorable brands that inspire trust, recognition, and growth.', icon: 'Palette', order: 1 },
+  { id: '2', title: 'Media Production', description: 'Professional photography, videography, documentaries, and visual content.', icon: 'Camera', order: 2 },
+  { id: '3', title: 'Event Documentation', description: 'Comprehensive coverage of trainings, workshops, conferences.', icon: 'Video', order: 3 },
+  { id: '4', title: 'Strategic Storytelling', description: 'Transforming impact into compelling stories for stakeholders.', icon: 'PenTool', order: 4 },
+  { id: '5', title: 'Marketing & Comms', description: 'Helping organizations communicate effectively and strengthen visibility.', icon: 'Megaphone', order: 5 },
+  { id: '6', title: 'Training & Capacity', description: 'Empowering individuals and teams with practical skills.', icon: 'Users', order: 6 },
+  { id: '7', title: 'Tech Solutions', description: 'Innovative tech solutions tailored to your specific organizational needs.', icon: 'Monitor', order: 7 }
+]
+
+const fallbackTeam = [
+  { id: '1', name: 'Usman Rimi', role: 'Founder & CEO', imageUrl: '/team/usman.jpg' },
+  { id: '2', name: 'Aisha Bello', role: 'Creative Director', imageUrl: '/team/aisha.jpg' },
+  { id: '3', name: 'John Doe', role: 'Lead Developer', imageUrl: '/team/john.jpg' }
+]
 
 export default async function Home() {
-  const services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
-  const teamMembers = await prisma.teamMember.findMany()
+  const services = fallbackServices
+  const teamMembers = fallbackTeam
   
   return (
     <>

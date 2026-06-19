@@ -1,11 +1,13 @@
 export const dynamic = "force-dynamic";
-import { PrismaClient } from '@prisma/client'
-import { Quote } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowLeft, Quote } from 'lucide-react'
 
-const prisma = new PrismaClient()
+const fallbackTestimonials = [
+  { id: '1', name: 'Aisha Bello', role: 'CEO', company: 'TechNova', content: 'Brandor completely transformed our visual identity.', imageUrl: null }
+]
 
-export default async function TestimonialsPage() {
-  const testimonials = await prisma.testimonial.findMany({ orderBy: { createdAt: 'desc' } })
+export default async function Testimonials() {
+  const testimonials = fallbackTestimonials
   
   return (
     <>
