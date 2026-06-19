@@ -15,9 +15,13 @@ export default function Navigation() {
 
   const isActive = (path: string) => pathname === path ? 'active' : ''
 
+  if (pathname && pathname.startsWith('/admin')) {
+    return null;
+  }
+
   return (
-    <header>
-      <nav>
+    <header className="site-header">
+      <nav className="site-nav">
         <Link href="/" className="logo-mark">
           <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
         </Link>

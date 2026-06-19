@@ -27,14 +27,14 @@
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
 
   /* ===================== NAV ===================== */
-  header{
+  .site-header{
     position:fixed; top:0; left:0; right:0; z-index:100;
     background:rgba(255,235,208,0.86);
     backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(23,59,97,0.08);
     transition:background .3s ease;
   }
-  nav{
+  .site-nav{
     display:flex; align-items:center; justify-content:space-between;
     padding:16px 32px; max-width:1180px; margin:0 auto;
   }
@@ -345,7 +345,7 @@
   .contact-arch .btn-primary:hover{background:var(--turquoise);}
 
   /* ===================== FOOTER ===================== */
-  footer{
+  .site-footer{
     background:var(--denim); color:var(--pure); padding:50px 0 30px;
     border-top:1px solid rgba(255,235,208,.1);
   }
