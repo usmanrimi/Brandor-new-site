@@ -12,37 +12,25 @@ export default function AdminDashboard() {
         <div className="admin-card">
           <h2>Portfolio Projects</h2>
           <p>Manage your case studies, event coverage, and documentaries.</p>
-          <button className="admin-btn">Manage Projects</button>
+          <a href="/admin/projects" className="admin-btn" style={{ display: 'inline-block', textDecoration: 'none', textAlign: 'center' }}>Manage Projects</a>
         </div>
         
         <div className="admin-card">
           <h2>Services</h2>
-          <p>Update your 8 core documentation and storytelling services.</p>
-          <button className="admin-btn">Manage Services</button>
+          <p>Update your core documentation and storytelling services.</p>
+          <a href="/admin/services" className="admin-btn" style={{ display: 'inline-block', textDecoration: 'none', textAlign: 'center' }}>Manage Services</a>
         </div>
         
         <div className="admin-card">
-          <h2>Partner Logos</h2>
-          <p>Add new logos to the animated partner showcase marquee.</p>
-          <button className="admin-btn">Manage Partners</button>
-        </div>
-
-        <div className="admin-card">
-          <h2>Blog & Insights</h2>
-          <p>Publish impact stories and project updates.</p>
-          <button className="admin-btn">Manage Posts</button>
+          <h2>Team Members</h2>
+          <p>Add new team members and edit their profiles.</p>
+          <a href="/admin/team" className="admin-btn" style={{ display: 'inline-block', textDecoration: 'none', textAlign: 'center' }}>Manage Team</a>
         </div>
         
         <div className="admin-card">
           <h2>Testimonials</h2>
           <p>Manage client success stories and reviews.</p>
-          <button className="admin-btn">Manage Testimonials</button>
-        </div>
-        
-        <div className="admin-card">
-          <h2>Global Settings</h2>
-          <p>Update SEO, WhatsApp contact, and core site info.</p>
-          <button className="admin-btn">Edit Settings</button>
+          <a href="/admin/testimonials" className="admin-btn" style={{ display: 'inline-block', textDecoration: 'none', textAlign: 'center' }}>Manage Testimonials</a>
         </div>
       </div>
     </div>

@@ -1,6 +1,12 @@
-'use client';
+import { PrismaClient } from '@prisma/client'
+import * as LucideIcons from 'lucide-react'
 
-export default function Home() {
+const prisma = new PrismaClient()
+
+export default async function Home() {
+  const services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
+  const teamMembers = await prisma.teamMember.findMany()
+  
   return (
     <>
       {/* Header/Nav will be moved to a component later, keeping it here for now */}
@@ -16,11 +22,12 @@ export default function Home() {
       <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
     </a>
     <div className="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#approach">Approach</a>
-      <a href="#why">Why Brandor</a>
+      <a href="/projects">Projects</a>
+      <a href="/testimonials">Testimonials</a>
       <a href="#team">Team</a>
-      <a href="#clients">Clients</a>
       <a href="#contact" className="nav-cta">Book a Project</a>
     </div>
     <button className="menu-toggle" id="menuToggle" aria-label="Toggle menu">
@@ -75,36 +82,18 @@ export default function Home() {
       <p>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
     </div>
     <div className="services-grid">
-      <div className="service-card reveal stagger-1">
-        <div className="service-arch"></div>
-        <h3>Corporate Branding</h3>
-        <p className="desc">Building strong, memorable brand identities from the ground up.</p>
-        <ul>
-          <li>Logo & Identity Systems</li>
-          <li>Brand Guidelines</li>
-          <li>Corporate Profiles</li>
-        </ul>
-      </div>
-      <div className="service-card reveal stagger-2">
-        <div className="service-arch"></div>
-        <h3>Event Documentation</h3>
-        <p className="desc">Capturing the essence of your workshops, conferences, and community programs.</p>
-        <ul>
-          <li>Professional Photography</li>
-          <li>Highlight Video Reels</li>
-          <li>Live Streaming Setup</li>
-        </ul>
-      </div>
-      <div className="service-card reveal stagger-3">
-        <div className="service-arch"></div>
-        <h3>Strategic Storytelling</h3>
-        <p className="desc">Translating your impact into compelling narratives for donors and stakeholders.</p>
-        <ul>
-          <li>Impact Reports</li>
-          <li>Documentary Films</li>
-          <li>Social Media Content</li>
-        </ul>
-      </div>
+      {services.map((service, i) => {
+        const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.CheckCircle;
+        return (
+          <div key={service.id} className={`service-card reveal stagger-${(i % 4) + 1}`}>
+            <div className="service-arch">
+              <IconComponent size={32} strokeWidth={1.5} color="var(--orange)" />
+            </div>
+            <h3>{service.title}</h3>
+            <p className="desc">{service.description}</p>
+          </div>
+        );
+      })}
     </div>
   </div>
 </section>
@@ -183,35 +172,16 @@ export default function Home() {
       <h2 className="gsap-split">Meet the team behind the lens</h2>
       <p>A collective of storytellers, strategists, and creatives dedicated to elevating your brand's narrative.</p>
     </div>
-    <div className="team-grid">
-      <div className="team-member reveal stagger-1">
-        <div className="team-photo">
-          <img src="/assets/team/1.png" alt="Usman Auwal" />
+    <div className="team-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
+      {teamMembers.map((member, i) => (
+        <div key={member.id} className={`team-member reveal stagger-${(i % 4) + 1}`} style={{ textAlign: 'center' }}>
+          <div className="team-photo" style={{ width: '200px', height: '200px', margin: '0 auto 16px', borderRadius: '50%', overflow: 'hidden', border: '4px solid #fff', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
+            <img src={member.imageUrl} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+          <h4 style={{ fontSize: '1.25rem', marginBottom: '4px' }}>{member.name}</h4>
+          <p style={{ color: 'var(--orange)', fontWeight: '600', fontSize: '0.9rem' }}>{member.role}</p>
         </div>
-        <h4>Usman Auwal</h4>
-        <p>Founder</p>
-      </div>
-      <div className="team-member reveal stagger-2">
-        <div className="team-photo">
-          <img src="/assets/team/2.jpg" alt="Muhammad Usman Sani" />
-        </div>
-        <h4>Muhammad Usman Sani</h4>
-        <p>Creative Director</p>
-      </div>
-      <div className="team-member reveal stagger-3">
-        <div className="team-photo">
-          <img src="/assets/team/3.jpg" alt="Ahmad Muhd Dantata" />
-        </div>
-        <h4>Ahmad Muhd Dantata</h4>
-        <p>Media Producer</p>
-      </div>
-      <div className="team-member reveal stagger-4">
-        <div className="team-photo">
-          <img src="/assets/team/4.jpg" alt="Ahmad Ahmad Falaki" />
-        </div>
-        <h4>Ahmad Ahmad Falaki</h4>
-        <p>Video Editor</p>
-      </div>
+      ))}
     </div>
   </div>
 </section>
@@ -293,11 +263,12 @@ export default function Home() {
         <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
       </a>
       <div className="footer-links">
+        <a href="/">Home</a>
+        <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#approach">Approach</a>
-        <a href="#why">Why Brandor</a>
+        <a href="/projects">Projects</a>
+        <a href="/testimonials">Testimonials</a>
         <a href="#team">Team</a>
-        <a href="#clients">Clients</a>
         <a href="#contact">Contact</a>
       </div>
     </div>

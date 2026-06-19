@@ -4,6 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Project {
@@ -67,5 +68,15 @@ model Setting {
   email       String   @default("hello@brandor.com")
   whatsapp    String   @default("+1234567890")
   address     String   @default("Kano State, Nigeria")
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  icon        String   // Icon name for lucide-react
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
