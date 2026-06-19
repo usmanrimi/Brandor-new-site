@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  client      String
+  category    String
+  date        String
+  location    String
+  description String
+  images      String   // Stored as JSON string or comma-separated URLs
+  videoUrl    String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  author      String
+  imageUrl    String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  company     String
+  content     String
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  logoUrl     String
+  websiteUrl  String?
+  createdAt   DateTime @default(now())
+}
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  bio         String?
+  imageUrl    String
+  createdAt   DateTime @default(now())
+}
+
+model Setting {
+  id          String   @id @default("global")
+  siteName    String   @default("Brandor")
+  siteDesc    String   @default("Premium Media Documentation")
+  email       String   @default("hello@brandor.com")
+  whatsapp    String   @default("+1234567890")
+  address     String   @default("Kano State, Nigeria")
+  updatedAt   DateTime @updatedAt
+}

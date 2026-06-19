@@ -1,0 +1,78 @@
+.admin-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+  color: #111;
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+
+.admin-header {
+  margin-bottom: 40px;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 20px;
+}
+
+.admin-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: var(--denim, #173B61);
+}
+
+.admin-header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.admin-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #eaeaea;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  border-color: var(--orange, #FD8916);
+}
+
+.admin-card h2 {
+  font-size: 1.5rem;
+  margin: 0 0 15px 0;
+  font-weight: 600;
+}
+
+.admin-card p {
+  color: #666;
+  margin: 0 0 25px 0;
+  line-height: 1.5;
+}
+
+.admin-btn {
+  background: var(--denim, #173B61);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.admin-btn:hover {
+  background: var(--orange, #FD8916);
+}
