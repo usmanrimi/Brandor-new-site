@@ -222,7 +222,7 @@ export default async function Home() {
 
       <div className="contact-arch reveal">
         <h3>Start a conversation</h3>
-        <form id="contactForm" onSubmit={(e) => { e.preventDefault(); alert('Thanks — we will get back to you shortly.'); }}>
+        <form id="contactForm" action="#contact">
           <div className="form-row">
             <label htmlFor="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required />
