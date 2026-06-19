@@ -324,8 +324,9 @@
   .contact-detail span{font-size:.9rem; opacity:.7;}
 
   .contact-arch{
-    position:relative; background:var(--orange); border-radius:40% 40% 16% 16% / 60% 60% 16% 16%;
-    padding:80px 48px 48px; color:var(--denim);
+    position:relative; background:var(--orange); border-radius: 24px;
+    padding:48px 48px; color:var(--denim);
+    box-shadow: 0 10px 30px rgba(253,137,22,0.2);
   }
   .contact-arch h3{font-family:var(--display); font-size:1.5rem; font-weight:800; margin-bottom:24px;}
   .form-row{margin-bottom:18px; display:flex; flex-direction:column; gap:6px;}

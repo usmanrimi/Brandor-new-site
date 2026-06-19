@@ -40,19 +40,8 @@ export default function Home() {
         <a href="#contact" className="btn btn-primary">Book a Project</a>
         <a href="#services" className="btn btn-outline">Explore Services</a>
       </div>
-    </div>
-    <div className="door-frame">
-      <div className="arch-outer"></div>
-      <div className="arch-inner">
-        <img src="/assets/hero-pattern.png" alt="Brandor dynamic pattern" />
-      </div>
-      <div className="door-dot"></div>
-      <div className="floating-tag">
-        <div className="tag-icon">⚡</div>
-        <div>
-          <strong>Now Documenting</strong>
-          <span>Capacity-building workshop · Kano</span>
-        </div>
+    </div>      <div className="hero-visual">
+        <img src="/assets/hero-image.jpg" alt="Brandor Media Production" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }} />
       </div>
     </div>
   </div>
@@ -140,13 +129,13 @@ export default function Home() {
       </div>
       <div className="step reveal stagger-3">
         <div className="step-arch"></div>
-        <h4>Creative storytelling</h4>
-        <p>Footage and images become meaningful visual narratives — not just raw clips.</p>
+        <h4>Production</h4>
+        <p>Executing the creative work—from filming on location to drafting brand guidelines.</p>
       </div>
       <div className="step reveal stagger-4">
         <div className="step-arch"></div>
-        <h4>Professional delivery</h4>
-        <p>High-quality media ready for reports, social media, and organizational documentation.</p>
+        <h4>Delivery</h4>
+        <p>Polishing, refining, and handing over the final high-quality assets ready for the world.</p>
       </div>
     </div>
   </div>
@@ -157,8 +146,8 @@ export default function Home() {
   <div className="wrap">
     <div className="why-grid">
       <div className="why-visual reveal">
-        <img src="/assets/icon-n.png" alt="Brandor icon" />
-      </div>
+        <img src="/assets/why-image.jpg" alt="Brandor abstract" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+      </div></div>
       <div className="reveal">
         <p className="eyebrow">Why Organizations Choose Us</p>
         <h2 style={{ marginBottom: '32px' }} className="gsap-split">We don't just record events we capture impact.</h2>

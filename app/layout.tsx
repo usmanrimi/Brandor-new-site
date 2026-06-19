@@ -2,8 +2,15 @@ import './globals.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Brandor | Premium Media Documentation Agency',
-  description: 'A leading media documentation and storytelling agency specializing in development projects, NGO programs, and community initiatives.',
+  title: "Brandor | Your Ultimate Branding Door",
+  description: "Brandor is a creative media and branding team helping NGOs, institutions, and businesses across Africa document their work, capture their impact, and build a brand worth remembering.",
+  keywords: ["branding", "creative agency", "media production", "NGO documentation", "Kano", "Nigeria"],
+  openGraph: {
+    title: "Brandor | Your Ultimate Branding Door",
+    description: "Creative media and branding team in Kano, Nigeria.",
+    type: "website",
+    locale: "en_US",
+  },
 }
 
 export default function RootLayout({
