@@ -291,7 +291,7 @@ export default function Home() {
           </div>
           <div className="form-row">
             <label htmlFor="message">Message</label>
-            <textarea id="message" name="message" rows="3" placeholder="Tell us about your project"></textarea>
+            <textarea id="message" name="message" rows={3} placeholder="Tell us about your project"></textarea>
           </div>
           <button type="submit" className="btn btn-primary">Send Message</button>
         </form>
