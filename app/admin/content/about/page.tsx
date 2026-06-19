@@ -2,6 +2,9 @@ import React from 'react'
 import { PrismaClient } from '@prisma/client'
 import { updateAboutContent } from './actions'
 
+export const dynamic = "force-dynamic";
+
+
 const prisma = new PrismaClient()
 
 export default async function AboutCMS() {

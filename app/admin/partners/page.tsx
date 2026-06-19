@@ -4,6 +4,9 @@ import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { revalidatePath } from 'next/cache'
 
+export const dynamic = "force-dynamic";
+
+
 const prisma = new PrismaClient()
 
 async function deletePartner(formData: FormData) {
