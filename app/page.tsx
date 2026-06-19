@@ -44,12 +44,15 @@ export default function Home() {
     <div className="door-frame">
       <div className="arch-outer"></div>
       <div className="arch-inner">
-        <div style={{ width: '100%', height: '100%', background: 'linear-gradient(180deg, #FD8916 30%, rgba(23,59,97,0.5))' }}></div>
+        <img src="/assets/hero-pattern.png" alt="Brandor dynamic pattern" />
       </div>
       <div className="door-dot"></div>
       <div className="floating-tag">
-        <div><strong>Now documenting</strong>Capacity-building workshop · Kano</div>
-        <div>EST. BRANDOR</div>
+        <div className="tag-icon">⚡</div>
+        <div>
+          <strong>Now Documenting</strong>
+          <span>Capacity-building workshop · Kano</span>
+        </div>
       </div>
     </div>
   </div>
@@ -58,8 +61,18 @@ export default function Home() {
 {/* ===================== MARQUEE ===================== */}
 <div className="marquee">
   <div className="marquee-track">
-    <span>Event Coverage</span><span>Media Production</span><span>Brand Identity</span><span>Documentary Storytelling</span><span>Social Media Branding</span>
-    <span>Event Coverage</span><span>Media Production</span><span>Brand Identity</span><span>Documentary Storytelling</span><span>Social Media Branding</span>
+    <span>Branding</span>
+    <span>Storytelling</span>
+    <span>Documentation</span>
+    <span>Media Production</span>
+    <span>Creative Direction</span>
+    <span>Strategy</span>
+    <span>Branding</span>
+    <span>Storytelling</span>
+    <span>Documentation</span>
+    <span>Media Production</span>
+    <span>Creative Direction</span>
+    <span>Strategy</span>
   </div>
 </div>
 
@@ -67,48 +80,41 @@ export default function Home() {
 <section id="services">
   <div className="wrap">
     <div className="section-head reveal">
-      <p className="eyebrow">What We Do</p>
-      <h2 className="gsap-split">Core services</h2>
-      <p>Three doors into the same goal helping your organization show its work clearly, professionally, and memorably.</p>
+      <span className="eyebrow">Our Services</span>
+      <h2>Crafting narratives that leave a mark.</h2>
+      <p>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
     </div>
     <div className="services-grid">
-
       <div className="service-card reveal stagger-1">
         <div className="service-arch"></div>
-        <h3>Corporate Event Coverage</h3>
-        <p className="desc">Full documentation for trainings, workshops, conferences, and community programs so your impact reaches stakeholders and donors.</p>
+        <h3>Corporate Branding</h3>
+        <p className="desc">Building strong, memorable brand identities from the ground up.</p>
         <ul>
-          <li>Professional photography</li>
-          <li>Full event video recording</li>
-          <li>Speaker &amp; participant interviews</li>
-          <li>Behind-the-scenes footage</li>
+          <li>Logo & Identity Systems</li>
+          <li>Brand Guidelines</li>
+          <li>Corporate Profiles</li>
         </ul>
       </div>
-
       <div className="service-card reveal stagger-2">
         <div className="service-arch"></div>
-        <h3>Media Production</h3>
-        <p className="desc">We turn raw footage into content that tells the full story built for reports, social channels, and program archives.</p>
+        <h3>Event Documentation</h3>
+        <p className="desc">Capturing the essence of your workshops, conferences, and community programs.</p>
         <ul>
-          <li>Documentary-style coverage</li>
-          <li>Interview recordings</li>
-          <li>Promotional videos</li>
-          <li>Highlight reels</li>
+          <li>Professional Photography</li>
+          <li>Highlight Video Reels</li>
+          <li>Live Streaming Setup</li>
         </ul>
       </div>
-
       <div className="service-card reveal stagger-3">
         <div className="service-arch"></div>
-        <h3>Branding &amp; Creative</h3>
-        <p className="desc">A strong, recognizable identity for your organization designed to carry your mission across every platform.</p>
+        <h3>Strategic Storytelling</h3>
+        <p className="desc">Translating your impact into compelling narratives for donors and stakeholders.</p>
         <ul>
-          <li>Brand identity development</li>
-          <li>Logo design</li>
-          <li>Visual storytelling</li>
-          <li>Social media branding</li>
+          <li>Impact Reports</li>
+          <li>Documentary Films</li>
+          <li>Social Media Content</li>
         </ul>
       </div>
-
     </div>
   </div>
 </section>
@@ -117,20 +123,20 @@ export default function Home() {
 <section id="approach" className="approach">
   <div className="wrap">
     <div className="section-head reveal">
-      <p className="eyebrow">How We Work</p>
-      <h2 className="gsap-split">Our approach</h2>
-      <p>Every event and every brand has a story worth telling. Here's how we find it and bring it through.</p>
+      <span className="eyebrow">The Process</span>
+      <h2>How we bring your vision to life.</h2>
+      <p>A systematic, collaborative approach to ensure every deliverable hits the mark and exceeds expectations.</p>
     </div>
     <div className="timeline">
       <div className="step reveal stagger-1">
         <div className="step-arch"></div>
-        <h4>Understand the program</h4>
-        <p>We study the objectives and goals of your event or organization before a single frame is shot.</p>
+        <h4>Discovery</h4>
+        <p>Deep-dive into your goals, audience, and the core message you need to communicate.</p>
       </div>
       <div className="step reveal stagger-2">
         <div className="step-arch"></div>
-        <h4>Strategic documentation</h4>
-        <p>We capture key moments, speakers, and participant engagement with intention.</p>
+        <h4>Strategy</h4>
+        <p>Developing a comprehensive plan, storyboard, or moodboard tailored to your project.</p>
       </div>
       <div className="step reveal stagger-3">
         <div className="step-arch"></div>
@@ -224,23 +230,13 @@ export default function Home() {
 <section id="clients" className="clients">
   <div className="wrap">
     <div className="section-head reveal">
-      <p className="eyebrow">Who We Work With</p>
-      <h2 className="gsap-split">Built for organizations doing real work</h2>
-      <p>From grassroots initiatives to large institutions, Brandor partners with teams who need their work seen and understood.</p>
+      <span className="eyebrow">Trusted By</span>
+      <h2>Organizations we've partnered with.</h2>
     </div>
-    <div className="client-pills reveal">
-      <div className="client-pill">NGOs</div>
-      <div className="client-pill">Development Programs</div>
-      <div className="client-pill">Businesses &amp; Entrepreneurs</div>
-      <div className="client-pill">Institutions &amp; Training Orgs</div>
-      <div className="client-pill">Community Initiatives</div>
-    </div>
-    <div className="partner-logos reveal">
-      <img src="/assets/icon-n.png" alt="Partner logo" className="partner-logo" />
-      <img src="/assets/icon-n.png" alt="Partner logo" className="partner-logo" />
-      <img src="/assets/icon-n.png" alt="Partner logo" className="partner-logo" />
-      <img src="/assets/icon-n.png" alt="Partner logo" className="partner-logo" />
-      <img src="/assets/icon-n.png" alt="Partner logo" className="partner-logo" />
+    <div className="partner-logos reveal stagger-2">
+      <img src="/assets/partners/p1.png" alt="Partner Logo" className="partner-logo" />
+      <img src="/assets/partners/p2.png" alt="Partner Logo" className="partner-logo" />
+      <img src="/assets/partners/p3.png" alt="Partner Logo" className="partner-logo" />
     </div>
   </div>
 </section>
