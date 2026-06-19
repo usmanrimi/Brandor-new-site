@@ -13,8 +13,7 @@ export default function Home() {
 <header>
   <nav>
     <a href="#" className="logo-mark">
-      <img src="/assets/icon-n.png" alt="Brandor icon" />
-      <span>Brandor</span>
+      <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
     </a>
     <div className="nav-links" id="navLinks">
       <a href="#services">Services</a>
@@ -305,8 +304,7 @@ export default function Home() {
   <div className="wrap">
     <div className="footer-grid">
       <a href="#" className="logo-mark">
-        <img src="/assets/icon-n.png" alt="Brandor icon" />
-        <span>Brandor</span>
+        <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
       </a>
       <div className="footer-links">
         <a href="#services">Services</a>
