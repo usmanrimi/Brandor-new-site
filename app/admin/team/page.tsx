@@ -9,45 +9,58 @@ export default async function AdminTeamPage() {
 
   return (
     <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>Manage Team Members</h1>
-      <a href="/admin" style={{ color: 'blue', textDecoration: 'underline', marginBottom: '20px', display: 'inline-block' }}>&larr; Back to Dashboard</a>
-      
-      <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', marginBottom: '40px' }}>
-        <h3>Add New Team Member</h3>
-        <form action={createTeamMember} style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-          <input type="text" name="name" placeholder="Name (e.g. Maryam Ado Wada)" required style={{ padding: '8px' }} />
-          <input type="text" name="role" placeholder="Position (e.g. Communications Officer)" required style={{ padding: '8px' }} />
-          <input type="text" name="imageUrl" placeholder="Image URL (e.g. /assets/team/5.jpg)" required style={{ padding: '8px' }} />
-          <textarea name="bio" placeholder="Short Bio (Optional)" style={{ padding: '8px' }}></textarea>
-          <button type="submit" style={{ padding: '10px', background: 'var(--orange)', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Add Member</button>
-        </form>
-      </div>
+    <div>
+      <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1>Team Management</h1>
+          <p>Add, edit, or remove members from your agency roster.</p>
+        </div>
+        <Link href="/admin/team/new" className="btn-admin">
+          <Icons.Plus size={18} /> Add Team Member
+        </Link>
+      </header>
 
-      <h3>Current Team Members</h3>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-        <thead>
-          <tr style={{ background: '#e2e8f0', textAlign: 'left' }}>
-            <th style={{ padding: '10px' }}>Image</th>
-            <th style={{ padding: '10px' }}>Name</th>
-            <th style={{ padding: '10px' }}>Role</th>
-            <th style={{ padding: '10px' }}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {team.map(member => (
-            <tr key={member.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
-              <td style={{ padding: '10px' }}><img src={member.imageUrl} width="40" style={{ borderRadius: '50%' }} /></td>
-              <td style={{ padding: '10px' }}>{member.name}</td>
-              <td style={{ padding: '10px' }}>{member.role}</td>
-              <td style={{ padding: '10px' }}>
-                <form action={async () => { 'use server'; await deleteTeamMember(member.id) }}>
-                  <button type="submit" style={{ padding: '5px 10px', background: 'red', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>
-                </form>
-              </td>
+      <div className="admin-card" style={{ padding: '0' }}>
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th style={{ paddingLeft: '24px', width: '80px' }}>Profile</th>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Social</th>
+              <th style={{ paddingRight: '24px', textAlign: 'right' }}>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {members.map(member => (
+              <tr key={member.id}>
+                <td style={{ paddingLeft: '24px' }}>
+                  <img src={member.imageUrl} alt={member.name} style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--admin-border)' }} />
+                </td>
+                <td style={{ fontWeight: '500', color: 'var(--admin-primary)' }}>{member.name}</td>
+                <td style={{ color: 'var(--admin-text-light)' }}>{member.role}</td>
+                <td>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    {member.linkedinUrl ? <Icons.Linkedin size={16} color="#0077b5" /> : null}
+                    {member.twitterUrl ? <Icons.Twitter size={16} color="#1da1f2" /> : null}
+                    {!member.linkedinUrl && !member.twitterUrl && <span style={{ color: '#cbd5e1', fontSize: '0.8rem' }}>None</span>}
+                  </div>
+                </td>
+                <td style={{ paddingRight: '24px', textAlign: 'right' }}>
+                  <Link href={`/admin/team/${member.id}`} style={{ color: 'var(--admin-text-light)', marginRight: '16px' }}><Icons.Edit size={18} /></Link>
+                  <form action={deleteTeamMember} style={{ display: 'inline' }}>
+                    <input type="hidden" name="id" value={member.id} />
+                    <button type="submit" style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><Icons.Trash2 size={18} /></button>
+                  </form>
+                </td>
+              </tr>
+            ))}
+            {members.length === 0 && (
+              <tr><td colSpan={5} style={{ textAlign: 'center', padding: '40px', color: 'var(--admin-text-light)' }}>No team members found.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

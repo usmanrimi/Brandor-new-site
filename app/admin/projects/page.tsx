@@ -12,45 +12,72 @@ export default async function AdminProjectsPage() {
       <h1>Manage Projects</h1>
       <a href="/admin" style={{ color: 'blue', textDecoration: 'underline', marginBottom: '20px', display: 'inline-block' }}>&larr; Back to Dashboard</a>
       
-      <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', marginBottom: '40px' }}>
-        <h3>Add New Project</h3>
-        <form action={createProject} style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-          <input type="text" name="title" placeholder="Project Title" required style={{ padding: '8px' }} />
-          <input type="text" name="client" placeholder="Client Name" required style={{ padding: '8px' }} />
-          <input type="text" name="category" placeholder="Category (e.g. Event Documentation)" required style={{ padding: '8px' }} />
-          <input type="text" name="date" placeholder="Date (e.g. Oct 2023)" required style={{ padding: '8px' }} />
-          <input type="text" name="location" placeholder="Location" required style={{ padding: '8px' }} />
-          <input type="text" name="images" placeholder="Image URL (e.g. /assets/portfolio/1.jpg)" required style={{ padding: '8px' }} />
-          <textarea name="description" placeholder="Project Description" required style={{ padding: '8px' }}></textarea>
-          <button type="submit" style={{ padding: '10px', background: 'var(--orange)', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Add Project</button>
-        </form>
-      </div>
+    <div>
+      <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1>Projects Portfolio</h1>
+          <p>Manage your case studies, documentaries, and branding projects.</p>
+        </div>
+        <Link href="/admin/projects/new" className="btn-admin">
+          <Icons.Plus size={18} /> Add New Project
+        </Link>
+      </header>
 
-      <h3>Current Projects</h3>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-        <thead>
-          <tr style={{ background: '#e2e8f0', textAlign: 'left' }}>
-            <th style={{ padding: '10px' }}>Image</th>
-            <th style={{ padding: '10px' }}>Title</th>
-            <th style={{ padding: '10px' }}>Client</th>
-            <th style={{ padding: '10px' }}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects.map(project => (
-            <tr key={project.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
-              <td style={{ padding: '10px' }}><img src={project.images} width="40" style={{ borderRadius: '4px' }} /></td>
-              <td style={{ padding: '10px' }}>{project.title}</td>
-              <td style={{ padding: '10px' }}>{project.client}</td>
-              <td style={{ padding: '10px' }}>
-                <form action={async () => { 'use server'; await deleteProject(project.id) }}>
-                  <button type="submit" style={{ padding: '5px 10px', background: 'red', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>
-                </form>
-              </td>
+      <div className="admin-card" style={{ padding: '0' }}>
+        <div style={{ padding: '24px', borderBottom: '1px solid var(--admin-border)', display: 'flex', gap: '16px' }}>
+          <div style={{ position: 'relative', flexGrow: 1, maxWidth: '400px' }}>
+            <Icons.Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--admin-text-light)' }} />
+            <input type="text" placeholder="Search projects..." className="form-control" style={{ paddingLeft: '48px' }} />
+          </div>
+          <button className="btn-admin" style={{ background: '#f1f5f9', color: 'var(--admin-text)' }}>
+            <Icons.Filter size={18} /> Filter
+          </button>
+        </div>
+
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th style={{ paddingLeft: '24px' }}>Project Title</th>
+              <th>Client</th>
+              <th>Category</th>
+              <th>Date</th>
+              <th>Featured</th>
+              <th style={{ paddingRight: '24px', textAlign: 'right' }}>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {projects.map(project => (
+              <tr key={project.id}>
+                <td style={{ paddingLeft: '24px', fontWeight: '500', color: 'var(--admin-primary)' }}>{project.title}</td>
+                <td>{project.client}</td>
+                <td><span style={{ background: '#f1f5f9', padding: '4px 12px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: '600' }}>{project.category}</span></td>
+                <td>{project.date}</td>
+                <td>
+                  {project.featured ? 
+                    <Icons.Star size={18} color="var(--admin-accent)" fill="var(--admin-accent)" /> : 
+                    <Icons.Star size={18} color="#cbd5e1" />
+                  }
+                </td>
+                <td style={{ paddingRight: '24px', textAlign: 'right' }}>
+                  <Link href={`/admin/projects/${project.id}`} style={{ color: 'var(--admin-text-light)', marginRight: '16px' }}><Icons.Edit size={18} /></Link>
+                  <button style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><Icons.Trash2 size={18} /></button>
+                </td>
+              </tr>
+            ))}
+            {projects.length === 0 && (
+              <tr><td colSpan={6} style={{ textAlign: 'center', padding: '40px', color: 'var(--admin-text-light)' }}>No projects found. Add your first project!</td></tr>
+            )}
+          </tbody>
+        </table>
+        
+        <div style={{ padding: '16px 24px', borderTop: '1px solid var(--admin-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.9rem', color: 'var(--admin-text-light)' }}>
+          <span>Showing {projects.length} results</span>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button style={{ padding: '6px 12px', border: '1px solid var(--admin-border)', borderRadius: '6px', background: '#fff', cursor: 'pointer' }}>Previous</button>
+            <button style={{ padding: '6px 12px', border: '1px solid var(--admin-border)', borderRadius: '6px', background: '#fff', cursor: 'pointer' }}>Next</button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

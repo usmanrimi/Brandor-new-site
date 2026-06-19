@@ -15,7 +15,7 @@ model Project {
   date        String
   location    String
   description String
-  images      String   // Stored as JSON string or comma-separated URLs
+  images      String   // Stored as JSON string array of URLs
   videoUrl    String?
   featured    Boolean  @default(false)
   createdAt   DateTime @default(now())
@@ -41,6 +41,7 @@ model Testimonial {
   company     String
   content     String
   imageUrl    String?
+  featured    Boolean  @default(false)
   createdAt   DateTime @default(now())
 }
 
@@ -49,6 +50,7 @@ model Partner {
   name        String
   logoUrl     String
   websiteUrl  String?
+  order       Int      @default(0)
   createdAt   DateTime @default(now())
 }
 
@@ -58,6 +60,8 @@ model TeamMember {
   role        String
   bio         String?
   imageUrl    String
+  twitterUrl  String?
+  linkedinUrl String?
   createdAt   DateTime @default(now())
 }
 
@@ -78,5 +82,39 @@ model Service {
   icon        String   // Icon name for lucide-react
   order       Int      @default(0)
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MediaAsset {
+  id          String   @id @default(cuid())
+  name        String
+  url         String
+  type        String   @default("image") // image, video, document
+  size        Int      @default(0)
+  category    String?
+  createdAt   DateTime @default(now())
+}
+
+model AboutContent {
+  id          String   @id @default("global")
+  aboutText   String   @default("Brandor is a creative branding, media production, and storytelling agency...")
+  mission     String   @default("To empower brands, organizations, and communities...")
+  vision      String   @default("To become Africa's leading creative agency...")
+  coreValues  String   // JSON string of {title, description} objects
+  process     String   // JSON string of {step, title, description} objects
+  whyUs       String   // JSON string of {title, description} objects
+  updatedAt   DateTime @updatedAt
+}
+
+model HomeContent {
+  id          String   @id @default("global")
+  heroEyebrow String   @default("Kano · Creative Media Agency")
+  heroHeadline String  @default("Every program has a story. We open the door to tell it.")
+  heroLead    String   @default("Brandor is a creative media and branding team helping NGOs...")
+  ctaText1    String   @default("Book a Project")
+  ctaLink1    String   @default("/contact")
+  ctaText2    String   @default("Explore Services")
+  ctaLink2    String   @default("/services")
+  marqueeText String   @default("Branding, Storytelling, Documentation, Media Production, Creative Direction, Strategy")
   updatedAt   DateTime @updatedAt
 }

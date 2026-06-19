@@ -9,46 +9,73 @@ export default async function AdminTestimonialsPage() {
 
   return (
     <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>Manage Testimonials</h1>
-      <a href="/admin" style={{ color: 'blue', textDecoration: 'underline', marginBottom: '20px', display: 'inline-block' }}>&larr; Back to Dashboard</a>
-      
-      <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', marginBottom: '40px' }}>
-        <h3>Add New Testimonial</h3>
-        <form action={createTestimonial} style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-          <input type="text" name="name" placeholder="Client Name" required style={{ padding: '8px' }} />
-          <input type="text" name="role" placeholder="Client Role" required style={{ padding: '8px' }} />
-          <input type="text" name="company" placeholder="Company Name" required style={{ padding: '8px' }} />
-          <input type="text" name="imageUrl" placeholder="Image URL (Optional)" style={{ padding: '8px' }} />
-          <textarea name="content" placeholder="Testimonial Quote" required style={{ padding: '8px' }}></textarea>
-          <button type="submit" style={{ padding: '10px', background: 'var(--orange)', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Add Testimonial</button>
-        </form>
-      </div>
+    <div>
+      <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1>Client Testimonials</h1>
+          <p>Manage success stories and quotes from your clients.</p>
+        </div>
+        <Link href="/admin/testimonials/new" className="btn-admin">
+          <Icons.Plus size={18} /> Add Testimonial
+        </Link>
+      </header>
 
-      <h3>Current Testimonials</h3>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-        <thead>
-          <tr style={{ background: '#e2e8f0', textAlign: 'left' }}>
-            <th style={{ padding: '10px' }}>Name</th>
-            <th style={{ padding: '10px' }}>Company</th>
-            <th style={{ padding: '10px' }}>Quote</th>
-            <th style={{ padding: '10px' }}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {testimonials.map(testimonial => (
-            <tr key={testimonial.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
-              <td style={{ padding: '10px' }}>{testimonial.name}</td>
-              <td style={{ padding: '10px' }}>{testimonial.company}</td>
-              <td style={{ padding: '10px' }}>{testimonial.content.substring(0, 50)}...</td>
-              <td style={{ padding: '10px' }}>
-                <form action={async () => { 'use server'; await deleteTestimonial(testimonial.id) }}>
-                  <button type="submit" style={{ padding: '5px 10px', background: 'red', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>
-                </form>
-              </td>
+      <div className="admin-card" style={{ padding: '0' }}>
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th style={{ paddingLeft: '24px' }}>Client</th>
+              <th>Organization</th>
+              <th>Content Snippet</th>
+              <th>Featured</th>
+              <th style={{ paddingRight: '24px', textAlign: 'right' }}>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {testimonials.map(testimonial => (
+              <tr key={testimonial.id}>
+                <td style={{ paddingLeft: '24px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    {testimonial.imageUrl ? (
+                      <img src={testimonial.imageUrl} alt={testimonial.name} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                    ) : (
+                      <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--admin-accent)', color: '#fff', display: 'flex', alignItems: 'center', justifyItems: 'center', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                        {testimonial.name.charAt(0)}
+                      </div>
+                    )}
+                    <span style={{ fontWeight: '500', color: 'var(--admin-primary)' }}>{testimonial.name}</span>
+                  </div>
+                </td>
+                <td>
+                  <span style={{ display: 'block', fontWeight: '500' }}>{testimonial.company}</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>{testimonial.role}</span>
+                </td>
+                <td style={{ maxWidth: '300px' }}>
+                  <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'var(--admin-text-light)' }}>
+                    "{testimonial.content}"
+                  </div>
+                </td>
+                <td>
+                  {testimonial.featured ? 
+                    <Icons.Star size={18} color="var(--admin-accent)" fill="var(--admin-accent)" /> : 
+                    <Icons.Star size={18} color="#cbd5e1" />
+                  }
+                </td>
+                <td style={{ paddingRight: '24px', textAlign: 'right' }}>
+                  <Link href={`/admin/testimonials/${testimonial.id}`} style={{ color: 'var(--admin-text-light)', marginRight: '16px' }}><Icons.Edit size={18} /></Link>
+                  <form action={deleteTestimonial} style={{ display: 'inline' }}>
+                    <input type="hidden" name="id" value={testimonial.id} />
+                    <button type="submit" style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><Icons.Trash2 size={18} /></button>
+                  </form>
+                </td>
+              </tr>
+            ))}
+            {testimonials.length === 0 && (
+              <tr><td colSpan={5} style={{ textAlign: 'center', padding: '40px', color: 'var(--admin-text-light)' }}>No testimonials found.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

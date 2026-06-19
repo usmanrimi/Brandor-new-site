@@ -10,48 +10,62 @@ export default async function AdminServicesPage() {
 
   return (
     <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>Manage Services</h1>
-      <a href="/admin" style={{ color: 'blue', textDecoration: 'underline', marginBottom: '20px', display: 'inline-block' }}>&larr; Back to Dashboard</a>
-      
-      <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', marginBottom: '40px' }}>
-        <h3>Add New Service</h3>
-        <form action={createService} style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
-          <input type="text" name="title" placeholder="Service Title" required style={{ padding: '8px' }} />
-          <textarea name="description" placeholder="Service Description" required style={{ padding: '8px' }}></textarea>
-          <input type="text" name="icon" placeholder="Lucide Icon Name (e.g. Shield, Camera)" required style={{ padding: '8px' }} />
-          <input type="number" name="order" placeholder="Display Order (e.g. 1)" required style={{ padding: '8px' }} />
-          <button type="submit" style={{ padding: '10px', background: 'var(--orange)', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Add Service</button>
-        </form>
-      </div>
+    <div>
+      <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1>Services Management</h1>
+          <p>Define the core capabilities and offerings of your agency.</p>
+        </div>
+        <Link href="/admin/services/new" className="btn-admin">
+          <Icons.Plus size={18} /> Add Service
+        </Link>
+      </header>
 
-      <h3>Current Services</h3>
-      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '10px' }}>
-        <thead>
-          <tr style={{ background: '#e2e8f0', textAlign: 'left' }}>
-            <th style={{ padding: '10px' }}>Icon</th>
-            <th style={{ padding: '10px' }}>Title</th>
-            <th style={{ padding: '10px' }}>Order</th>
-            <th style={{ padding: '10px' }}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {services.map(service => {
-            const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.CheckCircle;
-            return (
-              <tr key={service.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
-                <td style={{ padding: '10px' }}><IconComponent size={24} /></td>
-                <td style={{ padding: '10px' }}>{service.title}</td>
-                <td style={{ padding: '10px' }}>{service.order}</td>
-                <td style={{ padding: '10px' }}>
-                  <form action={async () => { 'use server'; await deleteService(service.id) }}>
-                    <button type="submit" style={{ padding: '5px 10px', background: 'red', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>
-                  </form>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="admin-card" style={{ padding: '0' }}>
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th style={{ paddingLeft: '24px', width: '60px' }}>Icon</th>
+              <th>Service Name</th>
+              <th>Description Snippet</th>
+              <th>Order</th>
+              <th style={{ paddingRight: '24px', textAlign: 'right' }}>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {services.map(service => {
+              // Dynamically render icon if it exists in lucide
+              const IconComponent = (Icons as any)[service.icon] || Icons.HelpCircle
+              return (
+                <tr key={service.id}>
+                  <td style={{ paddingLeft: '24px' }}>
+                    <div style={{ width: '40px', height: '40px', borderRadius: '8px', background: '#f1f5f9', color: 'var(--admin-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <IconComponent size={20} />
+                    </div>
+                  </td>
+                  <td style={{ fontWeight: '600', color: 'var(--admin-primary)' }}>{service.title}</td>
+                  <td style={{ maxWidth: '300px' }}>
+                    <div style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'var(--admin-text-light)' }}>
+                      {service.description}
+                    </div>
+                  </td>
+                  <td><span style={{ background: '#f8fafc', border: '1px solid var(--admin-border)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 'bold' }}>{service.order}</span></td>
+                  <td style={{ paddingRight: '24px', textAlign: 'right' }}>
+                    <Link href={`/admin/services/${service.id}`} style={{ color: 'var(--admin-text-light)', marginRight: '16px' }}><Icons.Edit size={18} /></Link>
+                    <form action={deleteService} style={{ display: 'inline' }}>
+                      <input type="hidden" name="id" value={service.id} />
+                      <button type="submit" style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><Icons.Trash2 size={18} /></button>
+                    </form>
+                  </td>
+                </tr>
+              )
+            })}
+            {services.length === 0 && (
+              <tr><td colSpan={5} style={{ textAlign: 'center', padding: '40px', color: 'var(--admin-text-light)' }}>No services defined.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
