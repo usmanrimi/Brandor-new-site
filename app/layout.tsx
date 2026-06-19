@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   },
 }
 
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
+import CustomCursor from '@/components/CustomCursor'
+
 export default function RootLayout({
   children,
 }: {
@@ -30,7 +34,10 @@ export default function RootLayout({
         <script src="https://unpkg.com/split-type" async></script>
       </head>
       <body>
-        {children}
+        <CustomCursor />
+        <Navigation />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )

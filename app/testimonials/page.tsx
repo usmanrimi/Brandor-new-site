@@ -1,63 +1,53 @@
 export const dynamic = "force-dynamic";
+import { PrismaClient } from '@prisma/client'
 import Link from 'next/link'
-import { ArrowLeft, Quote } from 'lucide-react'
+import { Quote } from 'lucide-react'
 
-const fallbackTestimonials = [
-  { id: '1', name: 'Aisha Bello', role: 'CEO', company: 'TechNova', content: 'Brandor completely transformed our visual identity.', imageUrl: null }
-]
+const prisma = new PrismaClient()
 
 export default async function Testimonials() {
-  const testimonials = fallbackTestimonials
+  let testimonials: any[] = []
+
+  try {
+    testimonials = await prisma.testimonial.findMany({ orderBy: { createdAt: 'desc' } })
+  } catch(error) {
+    testimonials = [
+      { id: '1', name: 'Aisha Bello', role: 'CEO', company: 'TechNova', content: 'Brandor completely transformed our visual identity.', imageUrl: null }
+    ]
+  }
   
   return (
-    <>
-      <header>
-        <nav>
-          <a href="/" className="logo-mark">
-            <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
-          </a>
-          <div className="nav-links">
-            <a href="/">Home</a>
-            <a href="/#about">About</a>
-            <a href="/#services">Services</a>
-            <a href="/projects">Projects</a>
-            <a href="/testimonials">Testimonials</a>
-            <a href="/#team">Team</a>
-            <a href="/#contact" className="nav-cta">Book a Project</a>
-          </div>
-        </nav>
-      </header>
-
-      <section style={{ paddingTop: '160px', paddingBottom: '80px', background: 'var(--blue)' }}>
+    <div style={{ paddingTop: '80px' }}>
+      <section style={{ paddingTop: '80px', paddingBottom: '80px', background: 'var(--blue)' }}>
         <div className="wrap">
           <div className="section-head reveal" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
             <span className="eyebrow" style={{ color: 'var(--orange)' }}>Client Stories</span>
-            <h1 className="gsap-split" style={{ color: '#fff', fontSize: '3rem', marginBottom: '24px' }}>Words from our partners.</h1>
-            <p style={{ color: '#cbd5e1', fontSize: '1.1rem' }}>See what NGOs, development agencies, and corporate organizations have to say about working with Brandor.</p>
+            <h1 className="gsap-split" style={{ color: 'var(--denim)', fontSize: '3rem', marginBottom: '24px' }}>Words from our partners.</h1>
+            <p style={{ color: 'var(--ink)', fontSize: '1.1rem' }}>See what NGOs, development agencies, and corporate organizations have to say about working with Brandor.</p>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: '80px 0', background: '#f8fafc' }}>
+      <section style={{ padding: '80px 0', background: 'var(--pure)' }}>
         <div className="wrap">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '32px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '32px' }}>
             {testimonials.map((testimonial, i) => (
-              <div key={testimonial.id} className={`reveal stagger-${(i % 4) + 1}`} style={{ background: '#fff', padding: '40px', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', position: 'relative' }}>
-                <Quote size={48} color="var(--orange)" style={{ opacity: 0.2, position: 'absolute', top: '32px', right: '32px' }} />
-                <p style={{ color: '#334155', fontSize: '1.1rem', lineHeight: '1.7', fontStyle: 'italic', marginBottom: '32px', position: 'relative', zIndex: 1 }}>
+              <div key={testimonial.id} className={`reveal stagger-${(i % 4) + 1}`} style={{ background: 'var(--denim)', padding: '48px', borderRadius: '24px', position: 'relative', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }}>
+                <Quote size={56} color="var(--orange)" style={{ opacity: 0.15, position: 'absolute', top: '32px', right: '32px' }} />
+                <p style={{ color: 'var(--pure)', fontSize: '1.15rem', lineHeight: '1.8', fontStyle: 'italic', marginBottom: '40px', position: 'relative', zIndex: 1, fontWeight: '400' }}>
                   "{testimonial.content}"
                 </p>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', borderTop: '1px solid rgba(255,235,208,0.1)', paddingTop: '24px' }}>
                   {testimonial.imageUrl ? (
-                    <img src={testimonial.imageUrl} alt={testimonial.name} style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
+                    <img src={testimonial.imageUrl} alt={testimonial.name} style={{ width: '56px', height: '56px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--orange)' }} />
                   ) : (
-                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--denim)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                    <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--orange)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.4rem' }}>
                       {testimonial.name.charAt(0)}
                     </div>
                   )}
                   <div>
-                    <h4 style={{ color: 'var(--denim)', fontSize: '1.1rem', marginBottom: '2px' }}>{testimonial.name}</h4>
-                    <p style={{ color: '#64748b', fontSize: '0.85rem' }}>{testimonial.role}, {testimonial.company}</p>
+                    <h4 style={{ color: 'var(--pure)', fontSize: '1.2rem', marginBottom: '2px', fontFamily: 'var(--display)', letterSpacing: '0.5px' }}>{testimonial.name}</h4>
+                    <p style={{ color: 'var(--greyblue)', fontSize: '0.9rem', fontWeight: '600', letterSpacing: '0.02em' }}>{testimonial.role}, {testimonial.company}</p>
                   </div>
                 </div>
               </div>
@@ -65,29 +55,6 @@ export default async function Testimonials() {
           </div>
         </div>
       </section>
-
-      <footer style={{ marginTop: '0' }}>
-        <div className="wrap">
-          <div className="footer-grid">
-            <a href="/" className="logo-mark">
-              <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
-            </a>
-            <div className="footer-links">
-              <a href="/">Home</a>
-              <a href="/#about">About</a>
-              <a href="/#services">Services</a>
-              <a href="/projects">Projects</a>
-              <a href="/testimonials">Testimonials</a>
-              <a href="/#team">Team</a>
-              <a href="/#contact">Contact</a>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <span>© 2026 Brandor Your Ultimate Branding Door</span>
-            <span>Kano State, Nigeria</span>
-          </div>
-        </div>
-      </footer>
-    </>
+    </div>
   )
 }
