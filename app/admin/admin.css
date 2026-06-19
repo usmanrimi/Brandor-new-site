@@ -50,6 +50,8 @@ body {
   padding: 24px 16px;
   flex-grow: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-group-label {
