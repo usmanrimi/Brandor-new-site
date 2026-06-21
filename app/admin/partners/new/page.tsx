@@ -2,6 +2,7 @@ import React from 'react'
 import { createPartner } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import MediaPicker from '../../components/MediaPicker'
 
 export default function NewPartner() {
   return (
@@ -22,15 +23,7 @@ export default function NewPartner() {
               <input type="text" id="name" name="name" className="form-control" placeholder="e.g. World Health Organization" required />
             </div>
             
-            <div className="form-group">
-              <label htmlFor="logoUrl">Logo Image URL</label>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <input type="text" id="logoUrl" name="logoUrl" className="form-control" placeholder="/assets/partners/who.png" required />
-                <button type="button" className="btn-admin" style={{ background: '#f1f5f9', color: 'var(--admin-text)', whiteSpace: 'nowrap' }}>
-                  <Icons.Image size={18} /> Library
-                </button>
-              </div>
-            </div>
+            <MediaPicker name="logoUrl" label="Logo Image" />
             
             <div className="form-group">
               <label htmlFor="websiteUrl">Website URL (Optional)</label>

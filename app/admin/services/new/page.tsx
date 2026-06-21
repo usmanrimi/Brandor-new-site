@@ -2,6 +2,7 @@ import React from 'react'
 import { createService } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import MediaPicker from '../../components/MediaPicker'
 
 export default function NewService() {
   return (
@@ -22,11 +23,7 @@ export default function NewService() {
               <input type="text" id="title" name="title" className="form-control" placeholder="e.g. Media Production" required />
             </div>
             
-            <div className="form-group">
-              <label htmlFor="icon">Lucide Icon Name</label>
-              <input type="text" id="icon" name="icon" className="form-control" placeholder="e.g. Video, Camera, PenTool" required />
-              <p style={{ fontSize: '0.8rem', color: 'var(--admin-text-light)', marginTop: '4px' }}>Find icon names at lucide.dev/icons</p>
-            </div>
+            <MediaPicker name="imageUrl" label="Service Featured Image" />
           </div>
           
           <div className="form-group">

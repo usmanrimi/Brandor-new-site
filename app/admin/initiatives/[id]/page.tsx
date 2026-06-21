@@ -4,6 +4,7 @@ import { updateInitiative } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
+import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
@@ -57,10 +58,7 @@ export default async function EditInitiative({ params }: { params: { id: string 
               <input type="text" id="date" name="date" className="form-control" defaultValue={item.date || ''} />
             </div>
             
-            <div className="form-group">
-              <label htmlFor="imageUrl">Cover Image URL</label>
-              <input type="text" id="imageUrl" name="imageUrl" className="form-control" defaultValue={item.imageUrl || ''} />
-            </div>
+            <MediaPicker name="imageUrl" defaultValue={item.imageUrl || ''} label="Cover Image" />
           </div>
 
           <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '16px' }}>

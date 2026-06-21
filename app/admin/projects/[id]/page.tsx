@@ -4,6 +4,7 @@ import { updateProject } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
+import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
@@ -70,10 +71,7 @@ export default async function EditProject({ params }: { params: { id: string } }
                 </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="images">Featured Image URL</label>
-                <input type="text" id="images" name="images" className="form-control" defaultValue={project.images} placeholder="/assets/project1.jpg" required />
-              </div>
+              <MediaPicker name="images" defaultValue={project.images} label="Featured Image" />
 
               <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '32px' }}>
                 <input type="checkbox" id="featured" name="featured" defaultChecked={project.featured} style={{ width: '20px', height: '20px' }} />

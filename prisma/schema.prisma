@@ -73,6 +73,8 @@ model Setting {
   email       String   @default("hello@brandor.com")
   whatsapp    String   @default("+1234567890")
   address     String   @default("Kano State, Nigeria")
+  logoUrl     String?
+  faviconUrl  String?
   updatedAt   DateTime @updatedAt
 }
 
@@ -80,7 +82,7 @@ model Service {
   id          String   @id @default(cuid())
   title       String
   description String
-  icon        String   // Icon name for lucide-react
+  imageUrl    String?
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -90,6 +92,7 @@ model MediaAsset {
   id          String   @id @default(cuid())
   name        String
   url         String
+  data        String?  @db.Text // Base64 encoding of the file
   type        String   @default("image") // image, video, document
   size        Int      @default(0)
   category    String?

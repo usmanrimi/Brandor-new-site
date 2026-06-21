@@ -4,6 +4,7 @@ import { updateTeamMember } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
+import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
@@ -41,15 +42,7 @@ export default async function EditTeamMember({ params }: { params: { id: string 
               <input type="text" id="role" name="role" className="form-control" defaultValue={member.role} required />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="imageUrl">Profile Image URL</label>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <input type="text" id="imageUrl" name="imageUrl" className="form-control" defaultValue={member.imageUrl} required />
-                <button type="button" className="btn-admin" style={{ background: '#f1f5f9', color: 'var(--admin-text)', whiteSpace: 'nowrap' }}>
-                  <Icons.Image size={18} /> Upload
-                </button>
-              </div>
-            </div>
+            <MediaPicker name="imageUrl" defaultValue={member.imageUrl} label="Profile Image" />
           </div>
           
           <div className="form-group">

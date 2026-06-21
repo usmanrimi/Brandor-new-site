@@ -2,6 +2,7 @@ import React from 'react'
 import { createTestimonial } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import MediaPicker from '../../components/MediaPicker'
 
 export default function NewTestimonial() {
   return (
@@ -32,15 +33,7 @@ export default function NewTestimonial() {
               <input type="text" id="company" name="company" className="form-control" placeholder="e.g. TechNova" required />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="imageUrl">Profile Image URL (Optional)</label>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <input type="text" id="imageUrl" name="imageUrl" className="form-control" placeholder="/assets/team/aisha.jpg" />
-                <button type="button" className="btn-admin" style={{ background: '#f1f5f9', color: 'var(--admin-text)', whiteSpace: 'nowrap' }}>
-                  <Icons.Image size={18} /> Upload
-                </button>
-              </div>
-            </div>
+            <MediaPicker name="imageUrl" label="Profile Image (Optional)" />
           </div>
           
           <div className="form-group">

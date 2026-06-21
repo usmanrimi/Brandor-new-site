@@ -4,6 +4,7 @@ import { updateTestimonial } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
+import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
@@ -52,10 +53,7 @@ export default async function EditTestimonial({ params }: { params: { id: string
             <textarea id="content" name="content" className="form-control" rows={4} defaultValue={item.content} required></textarea>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="imageUrl">Profile Image URL</label>
-            <input type="text" id="imageUrl" name="imageUrl" className="form-control" defaultValue={item.imageUrl || ''} />
-          </div>
+          <MediaPicker name="imageUrl" defaultValue={item.imageUrl || ''} label="Profile Image" />
 
           <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '16px' }}>
             <input type="checkbox" id="featured" name="featured" defaultChecked={item.featured} style={{ width: '20px', height: '20px' }} />

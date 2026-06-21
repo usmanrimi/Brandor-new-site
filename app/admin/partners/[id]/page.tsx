@@ -4,6 +4,7 @@ import { updatePartner } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
+import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
@@ -36,10 +37,7 @@ export default async function EditPartner({ params }: { params: { id: string } }
               <input type="text" id="name" name="name" className="form-control" defaultValue={item.name} required />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="logoUrl">Logo URL</label>
-              <input type="text" id="logoUrl" name="logoUrl" className="form-control" defaultValue={item.logoUrl} required />
-            </div>
+            <MediaPicker name="logoUrl" defaultValue={item.logoUrl} label="Logo Image" />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>

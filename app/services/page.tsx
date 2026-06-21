@@ -11,13 +11,13 @@ export default async function Services() {
     services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
   } catch (error) {
     console.error("Database fallback")
-    services = [
-      { id: '1', title: 'Branding & Identity', description: 'Building memorable brands that inspire trust, recognition, and growth.', icon: 'Palette', order: 1 },
-      { id: '2', title: 'Media Production', description: 'Professional photography, videography, documentaries, and visual content.', icon: 'Camera', order: 2 },
-      { id: '3', title: 'Event Documentation', description: 'Comprehensive coverage of trainings, workshops, conferences.', icon: 'Video', order: 3 },
-      { id: '4', title: 'Strategic Storytelling', description: 'Transforming impact into compelling stories for stakeholders.', icon: 'PenTool', order: 4 },
-      { id: '5', title: 'Marketing & Comms', description: 'Helping organizations communicate effectively and strengthen visibility.', icon: 'Megaphone', order: 5 },
-      { id: '6', title: 'Training & Capacity', description: 'Empowering individuals and teams with practical skills.', icon: 'Users', order: 6 }
+      { id: '1', title: 'Branding & Identity', description: 'Building memorable brands that inspire trust, recognition, and growth.', imageUrl: '/assets/why-image.jpg', order: 1 },
+      { id: '2', title: 'Media Production', description: 'Professional photography, videography, documentaries, and visual content production.', imageUrl: '/assets/hero-image.jpg', order: 2 },
+      { id: '3', title: 'Event & Training Documentation', description: 'Comprehensive coverage of trainings, workshops, conferences, and community programs.', imageUrl: '/assets/why-image.jpg', order: 3 },
+      { id: '4', title: 'Strategic Storytelling', description: 'Transforming impact into compelling stories for stakeholders, donors, and audiences.', imageUrl: '/assets/hero-image.jpg', order: 4 },
+      { id: '5', title: 'Marketing & Communications', description: 'Helping organizations communicate effectively and strengthen their visibility.', imageUrl: '/assets/why-image.jpg', order: 5 },
+      { id: '6', title: 'Training & Capacity Building', description: 'Empowering individuals, businesses, and organizations through practical training and workshops.', imageUrl: '/assets/hero-image.jpg', order: 6 },
+      { id: '7', title: 'Community Engagement & Development', description: 'Supporting community-focused initiatives, outreach programs, and social impact projects.', imageUrl: '/assets/why-image.jpg', order: 7 }
     ]
   }
 
@@ -32,13 +32,12 @@ export default async function Services() {
           </div>
           <div className="services-grid">
             {services.map((service, i) => {
-              const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.CheckCircle;
               return (
                 <div key={service.id} className={`service-card reveal stagger-${(i % 4) + 1}`}>
-                  <div className="service-arch">
-                    <IconComponent size={32} strokeWidth={1.5} color="var(--orange)" />
+                  <div style={{ width: '100%', height: '240px', borderRadius: '12px', overflow: 'hidden', marginBottom: '24px' }}>
+                    <img src={service.imageUrl || '/assets/why-image.jpg'} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
-                  <h3>{service.title}</h3>
+                  <h3 style={{ marginTop: 0 }}>{service.title}</h3>
                   <p className="desc">{service.description}</p>
                 </div>
               );

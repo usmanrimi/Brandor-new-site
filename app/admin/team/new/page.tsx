@@ -2,6 +2,7 @@ import React from 'react'
 import { createTeamMember } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import MediaPicker from '../../components/MediaPicker'
 
 export default function NewTeamMember() {
   return (
@@ -27,15 +28,7 @@ export default function NewTeamMember() {
               <input type="text" id="role" name="role" className="form-control" placeholder="e.g. Communications Officer" required />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="imageUrl">Profile Image URL</label>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <input type="text" id="imageUrl" name="imageUrl" className="form-control" placeholder="/assets/team/maryam.jpg" required />
-                <button type="button" className="btn-admin" style={{ background: '#f1f5f9', color: 'var(--admin-text)', whiteSpace: 'nowrap' }}>
-                  <Icons.Image size={18} /> Upload
-                </button>
-              </div>
-            </div>
+            <MediaPicker name="imageUrl" label="Profile Image" />
           </div>
           
           <div className="form-group">

@@ -2,6 +2,7 @@ import React from 'react'
 import { createProject } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import MediaPicker from '../../components/MediaPicker'
 
 export default function NewProject() {
   return (
@@ -47,16 +48,7 @@ export default function NewProject() {
               <input type="text" id="location" name="location" className="form-control" placeholder="e.g. Kano, Nigeria" required />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="images">Featured Image URL</label>
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <input type="text" id="images" name="images" className="form-control" placeholder="/assets/portfolio/1.jpg" required />
-                {/* We can trigger a modal here to select from Media Library later */}
-                <button type="button" className="btn-admin" style={{ background: '#f1f5f9', color: 'var(--admin-text)', whiteSpace: 'nowrap' }}>
-                  <Icons.Image size={18} /> Library
-                </button>
-              </div>
-            </div>
+            <MediaPicker name="images" label="Featured Image" />
           </div>
           
           <div className="form-group">

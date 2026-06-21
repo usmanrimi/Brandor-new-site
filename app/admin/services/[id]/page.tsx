@@ -4,6 +4,7 @@ import { updateService } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
+import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
@@ -41,10 +42,7 @@ export default async function EditService({ params }: { params: { id: string } }
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-            <div className="form-group">
-              <label htmlFor="icon">Lucide Icon Name</label>
-              <input type="text" id="icon" name="icon" className="form-control" defaultValue={service.icon} placeholder="e.g. Camera, PenTool, Video" required />
-            </div>
+            <MediaPicker name="imageUrl" defaultValue={service.imageUrl || ''} label="Service Featured Image" />
             
             <div className="form-group">
               <label htmlFor="order">Display Order</label>

@@ -18,7 +18,7 @@ export default function AdminLayout({
       {/* Sidebar Navigation */}
       <aside className="admin-sidebar">
         <div className="sidebar-brand">
-          <img src="/assets/brandor-logo-full.png" alt="Brandor" />
+          <img src="/assets/brandor-logo-full.png" alt="Brandor" style={{ maxWidth: '140px' }} />
         </div>
         
         <nav className="sidebar-nav">
@@ -27,7 +27,7 @@ export default function AdminLayout({
             <Icons.LayoutDashboard size={18} /> Dashboard
           </Link>
           
-          <p className="nav-group-label">Content Management</p>
+          <p className="nav-group-label">Pages & Content</p>
           <Link href="/admin/content/home" className="nav-item">
             <Icons.Home size={18} /> Homepage
           </Link>
@@ -41,28 +41,33 @@ export default function AdminLayout({
             <Icons.Target size={18} /> Initiatives
           </Link>
           
-          <p className="nav-group-label">Portfolio & Media</p>
+          <p className="nav-group-label">Portfolio</p>
           <Link href="/admin/projects" className="nav-item">
             <Icons.Briefcase size={18} /> Projects
           </Link>
+          
+          <p className="nav-group-label">Relations</p>
+          <Link href="/admin/testimonials" className="nav-item">
+            <Icons.MessageSquare size={18} /> Testimonials
+          </Link>
+          <Link href="/admin/team" className="nav-item">
+            <Icons.Users size={18} /> Team Management
+          </Link>
+          <Link href="/admin/partners" className="nav-item">
+            <Icons.Handshake size={18} /> Partners & Clients
+          </Link>
+
+          <p className="nav-group-label">Assets</p>
           <Link href="/admin/media" className="nav-item">
             <Icons.Image size={18} /> Media Library
           </Link>
           
-          <p className="nav-group-label">People & Relations</p>
-          <Link href="/admin/team" className="nav-item">
-            <Icons.Users size={18} /> Team Management
-          </Link>
-          <Link href="/admin/testimonials" className="nav-item">
-            <Icons.MessageSquare size={18} /> Testimonials
-          </Link>
-          <Link href="/admin/partners" className="nav-item">
-            <Icons.Handshake size={18} /> Clients & Partners
-          </Link>
-          
           <p className="nav-group-label">Configuration</p>
+          <Link href="/admin/branding" className="nav-item">
+            <Icons.Palette size={18} /> Website Branding
+          </Link>
           <Link href="/admin/settings" className="nav-item">
-            <Icons.Settings size={18} /> Website Settings
+            <Icons.Settings size={18} /> Settings & Social
           </Link>
           <Link href="/admin/users" className="nav-item">
             <Icons.UserCog size={18} /> User Management
@@ -71,9 +76,9 @@ export default function AdminLayout({
         
         <div className="sidebar-footer">
           <div className="user-profile">
-            <div className="avatar">A</div>
+            <div className="avatar">B</div>
             <div>
-              <p className="name">Admin User</p>
+              <p className="name">Brandor Admin</p>
               <p className="role">Superadmin</p>
             </div>
           </div>
