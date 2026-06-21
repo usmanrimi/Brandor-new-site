@@ -11,6 +11,7 @@ export default async function Services() {
     services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
   } catch (error) {
     console.error("Database fallback")
+    services = [
       { id: '1', title: 'Branding & Identity', description: 'Building memorable brands that inspire trust, recognition, and growth.', imageUrl: '/assets/why-image.jpg', order: 1 },
       { id: '2', title: 'Media Production', description: 'Professional photography, videography, documentaries, and visual content production.', imageUrl: '/assets/hero-image.jpg', order: 2 },
       { id: '3', title: 'Event & Training Documentation', description: 'Comprehensive coverage of trainings, workshops, conferences, and community programs.', imageUrl: '/assets/why-image.jpg', order: 3 },
