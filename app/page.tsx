@@ -21,6 +21,18 @@ export default async function Home() {
     ]
   }
 
+  let partners: any[] = []
+  try {
+    partners = await prisma.partner.findMany({ orderBy: { order: 'asc' } })
+  } catch (error) {
+    console.error("Partner fallback")
+    partners = [
+      { id: '1', logoUrl: '/assets/partners/p1.png' },
+      { id: '2', logoUrl: '/assets/partners/p2.png' },
+      { id: '3', logoUrl: '/assets/partners/p3.png' }
+    ]
+  }
+
   return (
     <>
       {/* ===================== HERO ===================== */}
@@ -61,7 +73,7 @@ export default async function Home() {
       </div>
 
       {/* ===================== SERVICES ===================== */}
-      <section id="services" style={{ background: '#f8fafc' }}>
+      <section id="services">
         <div className="wrap">
           <div className="section-head reveal">
             <span className="eyebrow">Our Services</span>
@@ -117,9 +129,9 @@ export default async function Home() {
             <h2>Organizations we've partnered with.</h2>
           </div>
           <div className="partner-logos reveal stagger-2">
-            <img src="/assets/partners/p1.png" alt="Partner Logo" className="partner-logo" />
-            <img src="/assets/partners/p2.png" alt="Partner Logo" className="partner-logo" />
-            <img src="/assets/partners/p3.png" alt="Partner Logo" className="partner-logo" />
+            {partners.map(p => (
+              <img key={p.id} src={p.logoUrl} alt="Partner Logo" className="partner-logo" />
+            ))}
           </div>
         </div>
       </section>
