@@ -1,6 +1,25 @@
 export const dynamic = "force-dynamic";
+import { PrismaClient } from '@prisma/client'
+import * as LucideIcons from 'lucide-react'
 
-export default function Home() {
+const prisma = new PrismaClient()
+
+export default async function Home() {
+  let services: any[] = []
+  try {
+    services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
+  } catch (error) {
+    console.error("Database fallback")
+    services = [
+      { id: '1', title: 'Branding & Identity', description: 'Building memorable brands that inspire trust, recognition, and growth.', icon: 'Palette', order: 1 },
+      { id: '2', title: 'Media Production', description: 'Professional photography, videography, documentaries, and visual content.', icon: 'Camera', order: 2 },
+      { id: '3', title: 'Event Documentation', description: 'Comprehensive coverage of trainings, workshops, conferences.', icon: 'Video', order: 3 },
+      { id: '4', title: 'Strategic Storytelling', description: 'Transforming impact into compelling stories for stakeholders.', icon: 'PenTool', order: 4 },
+      { id: '5', title: 'Marketing & Comms', description: 'Helping organizations communicate effectively and strengthen visibility.', icon: 'Megaphone', order: 5 },
+      { id: '6', title: 'Training & Capacity', description: 'Empowering individuals and teams with practical skills.', icon: 'Users', order: 6 }
+    ]
+  }
+
   return (
     <>
       {/* ===================== HERO ===================== */}
@@ -40,22 +59,50 @@ export default function Home() {
         </div>
       </div>
 
+      {/* ===================== SERVICES ===================== */}
+      <section id="services" style={{ background: '#f8fafc' }}>
+        <div className="wrap">
+          <div className="section-head reveal">
+            <span className="eyebrow">Our Services</span>
+            <h2>Crafting narratives that leave a mark.</h2>
+            <p>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
+          </div>
+          <div className="services-grid">
+            {services.slice(0, 6).map((service, i) => {
+              const IconComponent = (LucideIcons as any)[service.icon] || LucideIcons.CheckCircle;
+              return (
+                <div key={service.id} className={`service-card reveal stagger-${(i % 4) + 1}`}>
+                  <div className="service-arch">
+                    <IconComponent size={32} strokeWidth={1.5} color="var(--orange)" />
+                  </div>
+                  <h3>{service.title}</h3>
+                  <p className="desc">{service.description}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '48px' }} className="reveal">
+            <a href="/services" className="btn btn-primary">View All Services</a>
+          </div>
+        </div>
+      </section>
+
       {/* ===================== WHY US / GATEWAY ===================== */}
-      <section id="why" style={{ paddingBottom: '60px' }}>
+      <section id="why" style={{ background: 'var(--denim)', color: 'var(--pure)', paddingBottom: '100px' }}>
         <div className="wrap">
           <div className="why-grid">
             <div className="why-visual reveal">
               <img src="/assets/why-image.jpg" alt="Brandor abstract" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div className="reveal">
-              <p className="eyebrow">Why Organizations Choose Us</p>
-              <h2 style={{ marginBottom: '32px' }} className="gsap-split">We don't just record events we capture impact.</h2>
-              <p style={{ color: 'var(--ink)', fontSize: '1.05rem', lineHeight: '1.7', marginBottom: '24px' }}>
+              <p className="eyebrow" style={{ color: 'var(--orange)' }}>Why Organizations Choose Us</p>
+              <h2 style={{ marginBottom: '32px', color: 'var(--pure)' }} className="gsap-split">We don't just record events we capture impact.</h2>
+              <p style={{ color: 'var(--pure)', opacity: 0.8, fontSize: '1.05rem', lineHeight: '1.7', marginBottom: '24px' }}>
                 At Brandor, we specialize in high-end media production, strategic storytelling, and event documentation tailored for the unique needs of NGOs, development agencies, and corporate institutions. 
               </p>
               <div className="btn-row">
-                <a href="/about" className="btn btn-outline">Read Our Story</a>
-                <a href="/projects" className="btn btn-primary">View Our Portfolio</a>
+                <a href="/about" className="btn btn-outline" style={{ borderColor: 'var(--pure)', color: 'var(--pure)' }}>Read Our Story</a>
+                <a href="/projects" className="btn btn-primary" style={{ background: 'var(--orange)', color: 'var(--pure)' }}>View Our Portfolio</a>
               </div>
             </div>
           </div>

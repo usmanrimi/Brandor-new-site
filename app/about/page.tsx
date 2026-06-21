@@ -38,28 +38,28 @@ export default async function About() {
       </section>
 
       {/* ===================== MISSION, VISION, VALUES ===================== */}
-      <section id="mission-vision" style={{ background: '#f8fafc', padding: '100px 0' }}>
+      <section id="mission-vision" style={{ background: 'var(--denim)', padding: '110px 0', color: 'var(--pure)' }}>
         <div className="wrap">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
             
-            <div className="admin-card reveal stagger-1" style={{ background: '#fff', border: '1px solid #e2e8f0' }}>
-              <h3 style={{ color: 'var(--accent)', marginBottom: '16px' }}>Our Mission</h3>
-              <p style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>{aboutContent.mission}</p>
+            <div className="service-card reveal stagger-1" style={{ background: 'rgba(255, 235, 208, 0.03)', borderColor: 'rgba(255, 235, 208, 0.1)', color: 'var(--pure)' }}>
+              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '1.8rem' }}>Our Mission</h3>
+              <p style={{ lineHeight: '1.7', opacity: '0.9', fontSize: '1.05rem' }}>{aboutContent.mission}</p>
             </div>
             
-            <div className="admin-card reveal stagger-2" style={{ background: '#fff', border: '1px solid #e2e8f0' }}>
-              <h3 style={{ color: 'var(--accent)', marginBottom: '16px' }}>Our Vision</h3>
-              <p style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>{aboutContent.vision}</p>
+            <div className="service-card reveal stagger-2" style={{ background: 'rgba(255, 235, 208, 0.03)', borderColor: 'rgba(255, 235, 208, 0.1)', color: 'var(--pure)' }}>
+              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '1.8rem' }}>Our Vision</h3>
+              <p style={{ lineHeight: '1.7', opacity: '0.9', fontSize: '1.05rem' }}>{aboutContent.vision}</p>
             </div>
 
-            <div className="admin-card reveal stagger-3" style={{ background: '#fff', border: '1px solid #e2e8f0' }}>
-              <h3 style={{ color: 'var(--accent)', marginBottom: '16px' }}>Core Values</h3>
-              <div style={{ lineHeight: '1.7', color: 'var(--text-light)' }}>
+            <div className="service-card reveal stagger-3" style={{ background: 'rgba(255, 235, 208, 0.03)', borderColor: 'rgba(255, 235, 208, 0.1)', color: 'var(--pure)' }}>
+              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '1.8rem' }}>Core Values</h3>
+              <div style={{ lineHeight: '1.7', opacity: '0.9', fontSize: '1.05rem' }}>
                 {aboutContent.coreValues.split('\n').map((line, idx) => {
                   if (!line.trim()) return null;
                   const parts = line.split(':');
                   if (parts.length > 1) {
-                    return <p key={idx} style={{ marginBottom: '12px' }}><strong style={{ color: 'var(--primary)' }}>{parts[0]}:</strong>{parts[1]}</p>
+                    return <p key={idx} style={{ marginBottom: '12px' }}><strong style={{ color: 'var(--pure)', display: 'block', fontSize: '1.15rem', fontFamily: 'var(--display)', marginBottom: '4px' }}>{parts[0]}</strong>{parts[1]}</p>
                   }
                   return <p key={idx} style={{ marginBottom: '12px' }}>{line}</p>
                 })}
@@ -104,31 +104,31 @@ export default async function About() {
       </section>
       
       {/* ===================== WHY CHOOSE US ===================== */}
-      <section id="why" style={{ background: '#fff' }}>
+      <section id="why" style={{ background: 'var(--denim)', color: 'var(--pure)' }}>
         <div className="wrap">
           <div className="why-grid">
             <div className="why-visual reveal">
               <img src="/assets/why-image.jpg" alt="Brandor abstract" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div className="reveal">
-              <p className="eyebrow">Why Organizations Choose Us</p>
-              <h2 style={{ marginBottom: '32px' }} className="gsap-split">We don't just record events we capture impact.</h2>
+              <p className="eyebrow" style={{ color: 'var(--orange)' }}>Why Organizations Choose Us</p>
+              <h2 style={{ marginBottom: '32px', color: 'var(--pure)' }} className="gsap-split">We don't just record events we capture impact.</h2>
               <div className="why-list">
                 <div className="why-item">
-                  <div className="why-icon">P</div>
-                  <div><h4>Professional Documentation</h4><p>Every project is planned, executed, and delivered to the highest professional standards.</p></div>
+                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>P</div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>Professional Documentation</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>Every project is planned, executed, and delivered to the highest professional standards.</p></div>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon">Q</div>
-                  <div><h4>High-Quality Production</h4><p>We prioritize quality at every stage, from concept development to final delivery.</p></div>
+                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>Q</div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>High-Quality Production</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We prioritize quality at every stage, from concept development to final delivery.</p></div>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon">S</div>
-                  <div><h4>Strategic Storytelling</h4><p>We transform activities, projects, and events into stories that resonate with audiences.</p></div>
+                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>S</div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>Strategic Storytelling</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We transform activities, projects, and events into stories that resonate with audiences.</p></div>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon">N</div>
-                  <div><h4>NGO &amp; Development Expertise</h4><p>We understand development programs, donor expectations, and impact communication.</p></div>
+                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>N</div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>NGO &amp; Development Expertise</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We understand development programs, donor expectations, and impact communication.</p></div>
                 </div>
               </div>
             </div>

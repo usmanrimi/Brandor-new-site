@@ -119,3 +119,16 @@ model HomeContent {
   marqueeText String   @default("Branding, Storytelling, Documentation, Media Production, Creative Direction, Strategy")
   updatedAt   DateTime @updatedAt
 }
+
+model Initiative {
+  id          String   @id @default(cuid())
+  type        String   // "Program", "Workshop", "Community Service"
+  title       String
+  description String
+  imageUrl    String?
+  date        String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+

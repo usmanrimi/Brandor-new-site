@@ -37,6 +37,9 @@ export default function AdminLayout({
           <Link href="/admin/services" className="nav-item">
             <Icons.Layers size={18} /> Services
           </Link>
+          <Link href="/admin/initiatives" className="nav-item">
+            <Icons.Target size={18} /> Initiatives
+          </Link>
           
           <p className="nav-group-label">Portfolio & Media</p>
           <Link href="/admin/projects" className="nav-item">
