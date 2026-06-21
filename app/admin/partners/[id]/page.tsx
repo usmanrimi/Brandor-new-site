@@ -8,9 +8,10 @@ import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
-export default async function EditPartner({ params }: { params: { id: string } }) {
+export default async function EditPartner({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const item = await prisma.partner.findUnique({
-    where: { id: params.id }
+    where: { id }
   })
 
   if (!item) {

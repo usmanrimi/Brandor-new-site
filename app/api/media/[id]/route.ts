@@ -3,10 +3,11 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const asset = await prisma.mediaAsset.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!asset || !asset.data) {
