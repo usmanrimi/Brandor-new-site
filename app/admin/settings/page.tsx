@@ -18,6 +18,8 @@ export default async function AdminSettings() {
       email: "hello@brandor.com",
       whatsapp: "+1234567890",
       address: "Kano State, Nigeria",
+      logoUrl: null,
+      faviconUrl: null,
       updatedAt: new Date()
     }
   }
