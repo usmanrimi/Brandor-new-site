@@ -8,12 +8,12 @@ import MediaPicker from '../components/MediaPicker'
 const prisma = new PrismaClient()
 
 export default async function BrandingSettingsPage() {
-  const settings = await prisma.setting.findMany({
-    where: { key: { in: ['websiteLogo', 'websiteFavicon'] } }
+  const settings = await prisma.setting.findUnique({
+    where: { id: 'global' }
   })
 
-  const logoUrl = settings.find(s => s.key === 'websiteLogo')?.value || ''
-  const faviconUrl = settings.find(s => s.key === 'websiteFavicon')?.value || ''
+  const logoUrl = settings?.logoUrl || ''
+  const faviconUrl = settings?.faviconUrl || ''
 
   return (
     <div>
