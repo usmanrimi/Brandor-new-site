@@ -7,7 +7,7 @@ export default async function Team() {
   let teamMembers: any[] = []
   
   try {
-    teamMembers = await prisma.teamMember.findMany({ orderBy: { createdAt: 'asc' } })
+    teamMembers = await prisma.teamMember.findMany({ orderBy: { order: 'asc' } })
   } catch (error) {
     console.error("Database fallback")
     teamMembers = [

@@ -49,7 +49,7 @@ export default async function Home() {
           </div>
           
           <div className="hero-visual">
-            <img src="/assets/hero-image.jpg" alt="Brandor Media Production" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }} />
+            <img src="/assets/hero-image.jpg" alt="Brandor Media Production" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }} />
           </div>
         </div>
       </section>
@@ -73,19 +73,19 @@ export default async function Home() {
       </div>
 
       {/* ===================== SERVICES ===================== */}
-      <section id="services">
+      <section id="services" style={{ background: 'var(--denim)', color: 'var(--pure)' }}>
         <div className="wrap">
           <div className="section-head reveal">
-            <span className="eyebrow">Our Services</span>
-            <h2>Crafting narratives that leave a mark.</h2>
-            <p>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
+            <span className="eyebrow" style={{ color: 'var(--orange)' }}>Our Services</span>
+            <h2 style={{ color: 'var(--pure)' }}>Crafting narratives that leave a mark.</h2>
+            <p style={{ color: 'var(--pure)', opacity: 0.8 }}>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
           </div>
           <div className="services-grid">
             {services.slice(0, 6).map((service, i) => {
               return (
                 <div key={service.id} className={`service-card reveal stagger-${(i % 4) + 1}`}>
                   <div style={{ width: '100%', height: '200px', borderRadius: '12px', overflow: 'hidden', marginBottom: '24px' }}>
-                    <img src={service.imageUrl || '/assets/why-image.jpg'} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={service.imageUrl || '/assets/why-image.jpg'} alt={service.title} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <h3 style={{ marginTop: 0 }}>{service.title}</h3>
                   <p className="desc">{service.description}</p>
@@ -104,7 +104,7 @@ export default async function Home() {
         <div className="wrap">
           <div className="why-grid">
             <div className="why-visual reveal">
-              <img src="/assets/why-image.jpg" alt="Brandor abstract" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              <img src="/assets/why-image.jpg" alt="Brandor abstract" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div className="reveal">
               <p className="eyebrow" style={{ color: 'var(--orange)' }}>Why Organizations Choose Us</p>
@@ -128,10 +128,12 @@ export default async function Home() {
             <span className="eyebrow">Trusted By</span>
             <h2>Organizations we've partnered with.</h2>
           </div>
-          <div className="partner-logos reveal stagger-2">
-            {partners.map(p => (
-              <img key={p.id} src={p.logoUrl} alt="Partner Logo" className="partner-logo" />
-            ))}
+          <div className="partner-carousel-wrapper reveal">
+            <div className="partner-logos">
+              {[...partners, ...partners].map((p, index) => (
+                <img key={`${p.id}-${index}`} src={p.logoUrl} alt="Partner Logo" className="partner-logo" loading="lazy" decoding="async" />
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -24,19 +24,19 @@ export default async function Services() {
 
   return (
     <div style={{ paddingTop: '120px' }}>
-      <section id="services">
+      <section id="services" style={{ background: 'var(--denim)', color: 'var(--pure)' }}>
         <div className="wrap">
           <div className="section-head reveal">
-            <span className="eyebrow">Our Services</span>
-            <h2>Crafting narratives that leave a mark.</h2>
-            <p>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
+            <span className="eyebrow" style={{ color: 'var(--orange)' }}>Our Services</span>
+            <h2 style={{ color: 'var(--pure)' }}>Crafting narratives that leave a mark.</h2>
+            <p style={{ color: 'var(--pure)', opacity: 0.8 }}>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
           </div>
           <div className="services-grid">
             {services.map((service, i) => {
               return (
                 <div key={service.id} className={`service-card reveal stagger-${(i % 4) + 1}`}>
                   <div style={{ width: '100%', height: '240px', borderRadius: '12px', overflow: 'hidden', marginBottom: '24px' }}>
-                    <img src={service.imageUrl || '/assets/why-image.jpg'} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={service.imageUrl || '/assets/why-image.jpg'} alt={service.title} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <h3 style={{ marginTop: 0 }}>{service.title}</h3>
                   <p className="desc">{service.description}</p>

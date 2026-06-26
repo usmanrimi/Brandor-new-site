@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
+import AnimationProvider from '@/components/AnimationProvider'
 
 export default function RootLayout({
   children,
@@ -36,7 +37,9 @@ export default function RootLayout({
       <body>
         <CustomCursor />
         <Navigation />
-        <main>{children}</main>
+        <AnimationProvider>
+          <main>{children}</main>
+        </AnimationProvider>
         <Footer />
       </body>
     </html>

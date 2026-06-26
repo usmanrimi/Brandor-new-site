@@ -316,3 +316,59 @@ body {
 .admin-table tr:hover {
   background: #f1f5f9;
 }
+
+/* RESPONSIVENESS */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+  .admin-main {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--admin-border);
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 16px;
+    gap: 8px;
+    border-bottom: 1px solid var(--admin-border);
+  }
+  .nav-group-label {
+    display: none;
+  }
+  .nav-item {
+    white-space: nowrap;
+    margin-bottom: 0;
+  }
+  .admin-main {
+    margin-left: 0;
+    padding: 16px;
+  }
+  .dashboard-widgets {
+    grid-template-columns: 1fr;
+  }
+  .sidebar-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .user-profile {
+    margin-bottom: 0;
+  }
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

@@ -2,6 +2,7 @@ import './admin.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
+import LogoutButton from './components/LogoutButton'
 
 export const metadata: Metadata = {
   title: 'Brandor Super Admin Dashboard',
@@ -82,9 +83,7 @@ export default function AdminLayout({
               <p className="role">Superadmin</p>
             </div>
           </div>
-          <Link href="/" className="logout-btn">
-            <Icons.LogOut size={16} /> Exit to Site
-          </Link>
+          <LogoutButton />
         </div>
       </aside>
 

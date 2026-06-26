@@ -108,7 +108,7 @@ export default async function About() {
         <div className="wrap">
           <div className="why-grid">
             <div className="why-visual reveal">
-              <img src="/assets/why-image.jpg" alt="Brandor abstract" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              <img src="/assets/why-image.jpg" alt="Brandor abstract" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div className="reveal">
               <p className="eyebrow" style={{ color: 'var(--orange)' }}>Why Organizations Choose Us</p>
