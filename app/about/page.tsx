@@ -26,10 +26,10 @@ export default async function About() {
       
       {/* ===================== ABOUT HERO ===================== */}
       <section id="about-hero" className="wrap" style={{ paddingBottom: '60px' }}>
-        <div className="section-head reveal" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+        <div className="section-head reveal" style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
           <span className="eyebrow">Your Ultimate Branding Door</span>
           <h1 className="gsap-split" style={{ fontSize: '3rem', marginBottom: '32px' }}>About Brandor</h1>
-          <div style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-light)', textAlign: 'left' }}>
+          <div style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-light)' }}>
             {aboutContent.aboutText.split('\n').map((paragraph, idx) => (
               paragraph.trim() ? <p key={idx} style={{ marginBottom: '24px' }}>{paragraph}</p> : null
             ))}
