@@ -1,0 +1,289 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-09-16T21:13:46.165Z",
+  "site": {
+    "id": "global",
+    "siteName": "Brandor",
+    "siteDesc": "Premium Media Documentation",
+    "email": "hello@brandor.com",
+    "whatsapp": "+1234567890",
+    "address": "Kano State, Nigeria",
+    "logoUrl": "/api/media/cmqp6sb970000t98wpm9hzj4z",
+    "faviconUrl": "/api/media/cmqnlgsqk0000h18dxg28xmp1",
+    "updatedAt": "2026-06-22T12:23:29.592Z"
+  },
+  "home": {
+    "id": "global",
+    "heroEyebrow": "",
+    "heroHeadline": "Every program has a story. We open the door to tell it.",
+    "heroLead": "Brandor is a creative media and branding team helping NGOs, institutions, and businesses across Africa document their work, capture their impact, and build a brand worth remembering.",
+    "heroImage": "/assets/hero-image.jpg",
+    "ctaText1": "Book a Project",
+    "ctaLink1": "/contact",
+    "ctaText2": "Explore Services",
+    "ctaLink2": "/services",
+    "marqueeText": "Branding, Storytelling, Documentation, Media Production, Creative Direction, Strategy",
+    "updatedAt": "2026-06-20T07:46:17.323Z"
+  },
+  "about": {
+    "id": "global",
+    "aboutText": "Brandor is a creative branding, media production, and storytelling agency dedicated to helping organizations, businesses, institutions, and development partners communicate their impact with clarity, creativity, and purpose.\r\n\r\nWe believe every project, every event, and every initiative has a story worth telling. Our role is to transform moments, achievements, and ideas into compelling visual experiences that inspire trust, engagement, and action.\r\n\r\nFrom corporate branding and media production to event documentation, strategic storytelling, and capacity building, we help our clients showcase their work professionally while creating meaningful connections with their audiences.",
+    "mission": "To empower brands, organizations, and communities through strategic branding, impactful storytelling, professional media production, and capacity-building initiatives that drive visibility, growth, and lasting impact.",
+    "vision": "To become Africa's leading creative agency for branding, storytelling, and impact documentation, helping organizations communicate their value, amplify their achievements, and inspire positive change.",
+    "coreValues": "[]",
+    "process": "[]",
+    "whyUs": "[]",
+    "whyUsImage": "/assets/why-image.jpg",
+    "aboutHeroImage": "/assets/hero-image.jpg",
+    "updatedAt": "2026-06-22T12:24:55.579Z"
+  },
+  "services": [
+    {
+      "id": "cmqnkdthp00008muzhpivlhvs",
+      "title": "Branding & Identity",
+      "description": "Building memorable brands that inspire trust, recognition, and growth.",
+      "imageUrl": "/api/media/cmqnlgsqk0000h18dxg28xmp1",
+      "order": 1,
+      "createdAt": "2026-06-21T09:08:29.965Z",
+      "updatedAt": "2026-06-21T09:39:55.455Z"
+    },
+    {
+      "id": "cmqnkdu2z00018muzhilfhk2b",
+      "title": "Media Production",
+      "description": "Professional photography, videography, documentaries, and visual content production.",
+      "imageUrl": "/assets/hero-image.jpg",
+      "order": 2,
+      "createdAt": "2026-06-21T09:08:30.732Z",
+      "updatedAt": "2026-06-21T09:08:30.732Z"
+    },
+    {
+      "id": "cmqnkdunv00028muz2amgindp",
+      "title": "Event & Training Documentation",
+      "description": "Comprehensive coverage of trainings, workshops, conferences, and community programs.",
+      "imageUrl": "/api/media/cmqnlpigv0000qjkm8xj2clu4",
+      "order": 3,
+      "createdAt": "2026-06-21T09:08:31.483Z",
+      "updatedAt": "2026-06-22T10:26:40.884Z"
+    },
+    {
+      "id": "cmqnkdv8700038muz2ssl8d8q",
+      "title": "Strategic Storytelling",
+      "description": "Transforming impact into compelling stories for stakeholders, donors, and audiences.",
+      "imageUrl": "/assets/hero-image.jpg",
+      "order": 4,
+      "createdAt": "2026-06-21T09:08:32.216Z",
+      "updatedAt": "2026-06-21T09:08:32.216Z"
+    },
+    {
+      "id": "cmqnkdvsn00048muzp5kc1ist",
+      "title": "Marketing & Communications",
+      "description": "Helping organizations communicate effectively and strengthen their visibility.",
+      "imageUrl": "/assets/why-image.jpg",
+      "order": 5,
+      "createdAt": "2026-06-21T09:08:32.952Z",
+      "updatedAt": "2026-06-21T09:08:32.952Z"
+    },
+    {
+      "id": "cmqnkdwdf00058muzkf2olwje",
+      "title": "Training & Capacity Building",
+      "description": "Empowering individuals, businesses, and organizations through practical training and workshops.",
+      "imageUrl": "/assets/hero-image.jpg",
+      "order": 6,
+      "createdAt": "2026-06-21T09:08:33.700Z",
+      "updatedAt": "2026-06-21T09:08:33.700Z"
+    },
+    {
+      "id": "cmqnkdwy000068muzowg89ky5",
+      "title": "Community Engagement & Development",
+      "description": "Supporting community-focused initiatives, outreach programs, and social impact projects.",
+      "imageUrl": "/assets/why-image.jpg",
+      "order": 7,
+      "createdAt": "2026-06-21T09:08:34.440Z",
+      "updatedAt": "2026-06-21T09:08:34.440Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "cmu4iss3b00038lmm3nwlt0x3",
+      "title": "BUILDATHON",
+      "client": "NCC ",
+      "category": "Event Documentation",
+      "date": "2026",
+      "location": "KANO",
+      "description": "NCC BUILDATHON Three-Day Event\r\n\r\nBrandor provided media documentation for the three-day NCC Buildathon, capturing the energy, creativity, and collaboration throughout the event.\r\n\r\nThrough photography, video coverage, and interviews, we documented participants at work, project presentations, and key highlights creating visual content for event reporting, storytelling, and future promotion.\r\n",
+      "images": "/assets/why-image.jpg",
+      "videoUrl": null,
+      "pdfUrl": null,
+      "isPdfPublished": true
+    },
+    {
+      "id": "cmu4ionvg00028lmmphci3py1",
+      "title": "Business Communication Masterclass ",
+      "client": "FALCONMAX ",
+      "category": "Event Documentation",
+      "date": "2026",
+      "location": "Kano State, Nigeria.",
+      "description": "Business Communication Masterclass\r\n\r\nBrandor delivered professional media coverage for the two-day Business Communication Masterclass organised by Falconmax Training and Consulting Nigeria Limited.\r\n\r\nOur coverage included photography, video highlights, participant interviews, training sessions, networking moments, and award ceremonies. We captured the learning experience and key celebrations, creating engaging content for documentation, storytelling, and future promotion.",
+      "images": "/assets/why-image.jpg",
+      "videoUrl": null,
+      "pdfUrl": "/api/media/cmu4inkn400018lmmmrfbjr9w",
+      "isPdfPublished": true
+    },
+    {
+      "id": "cmqp33v270000l0na92bwo443",
+      "title": "Inclusive Digital Empowerment For Youths With Disabilities",
+      "client": "The Ability First Tech Hub",
+      "category": "Media Production",
+      "date": "20th June 2026",
+      "location": "Kano State.",
+      "description": "Inclusive Digital Empowerment for Youths with Disabilities is a flagship program under The Ability First Tech Hub, sponsored by Plan International, aimed at equipping 50 youths with disabilities with essential digital skills and knowledge to enhance their employability, entrepreneurship, and participation in the digital economy.\r\n\r\nBrandor provided comprehensive media, branding, and documentation support throughout the entire project lifecycle. Our involvement covered every stage of the program, from the Inception Meeting and Training Manual Review to the Digital Skills Training Sessions and Graduation Ceremony.\r\n\r\nOur scope of work included:\r\n\r\n• Designing promotional and event flyers.\r\n• Capturing high-quality photographs of all project activities.\r\n• Developing compelling photo stories that highlighted participants' experiences, achievements, and impact.\r\n• Producing videos that documented key moments of the project.\r\n• Conducting and recording interviews with participants, facilitators, and stakeholders to showcase success stories and project outcomes.\r\n\r\nThrough strategic storytelling and visual documentation, Brandor helped amplify the impact of the program, ensuring that the voices, journeys, and achievements of the participants were effectively communicated to stakeholders and the wider community.",
+      "images": "/api/media/cmqp2qzfu0000m6c1512kpob8",
+      "videoUrl": null,
+      "pdfUrl": "/api/media/cmu4icsiu00008lmm5584q156",
+      "isPdfPublished": true
+    }
+  ],
+  "team": [
+    {
+      "id": "cmqm1cwfg00007mz81oqt8l1e",
+      "name": "Usman Auwal",
+      "role": "Founder & CEO",
+      "bio": "Leading Brandor's creative vision, brand strategy, media production, and storytelling initiatives. Passionate about helping organizations communicate impact through branding, documentation, and strategic content.",
+      "imageUrl": "/assets/team/usman-auwal.png",
+      "twitterUrl": null,
+      "linkedinUrl": null,
+      "order": 0,
+      "createdAt": "2026-06-20T07:28:08.236Z"
+    },
+    {
+      "id": "cmqp1la7y00018cph0ad20egp",
+      "name": "Aisha Kwaku",
+      "role": "Chairwomen",
+      "bio": "",
+      "imageUrl": "/api/media/cmqp2jn4100001otf0l48g3a2",
+      "twitterUrl": "",
+      "linkedinUrl": "",
+      "order": 1,
+      "createdAt": "2026-06-22T09:57:57.887Z"
+    },
+    {
+      "id": "cmu4ivdfk00058lmm7e6r8dsr",
+      "name": "Zanira Yahya Satatima",
+      "role": "Strategic Advisor",
+      "bio": "",
+      "imageUrl": "/assets/why-image.jpg",
+      "twitterUrl": "",
+      "linkedinUrl": "",
+      "order": 2,
+      "createdAt": "2026-09-16T19:57:21.729Z"
+    },
+    {
+      "id": "cmqm1cwsm00027mz8nzdu3omb",
+      "name": "Maryam Ado Wada",
+      "role": "Communications Officer",
+      "bio": "A communications professional dedicated to managing brand communication, content development, stakeholder engagement, and strategic messaging. Passionate about helping organizations communicate their impact effectively through compelling content, storytelling, and audience engagement.",
+      "imageUrl": "/assets/team/maryam-ado-wada.jpg",
+      "twitterUrl": null,
+      "linkedinUrl": null,
+      "order": 3,
+      "createdAt": "2026-06-20T07:28:08.711Z"
+    },
+    {
+      "id": "cmqp3jq390000tl3z9e4wtyms",
+      "name": "Hamza Isa Baffa ",
+      "role": "GENDER EQUALITY & SOCIAL INCLUSION OFFICER",
+      "bio": "",
+      "imageUrl": "/api/media/cmqtwnv9p0000vg3prmozun14",
+      "twitterUrl": "",
+      "linkedinUrl": "",
+      "order": 4,
+      "createdAt": "2026-06-22T10:52:44.372Z"
+    },
+    {
+      "id": "cmqm1cwob00017mz85rkklfuh",
+      "name": "Ahmad Muhd Dantata",
+      "role": "Media Producer",
+      "bio": "A dedicated media professional responsible for capturing, producing, and delivering high-quality visual content. Passionate about storytelling through photography, videography, and creative media production that helps organizations showcase their impact professionally.",
+      "imageUrl": "/assets/team/ahmad-muhd-dantata.jpg",
+      "twitterUrl": null,
+      "linkedinUrl": null,
+      "order": 5,
+      "createdAt": "2026-06-20T07:28:08.555Z"
+    },
+    {
+      "id": "cmqm1cwws00037mz8oe7d2j4r",
+      "name": "Ahmad Ahmad Falaki",
+      "role": "Video Editor",
+      "bio": "A creative video editor specializing in transforming raw footage into compelling visual stories. Skilled in editing, color correction, motion graphics integration, and post-production workflows that deliver engaging and professional content for organizations, brands, and events.",
+      "imageUrl": "/assets/team/ahmad-ahmad-falaki.jpg",
+      "twitterUrl": null,
+      "linkedinUrl": null,
+      "order": 6,
+      "createdAt": "2026-06-20T07:28:08.860Z"
+    },
+    {
+      "id": "cmqp1gueg00036t7i4xtnlfau",
+      "name": "Faysal Umar Muhammad",
+      "role": "Publicity Manager",
+      "bio": "",
+      "imageUrl": "/api/media/cmqp1gk1q00026t7ie9mcr7w2",
+      "twitterUrl": "",
+      "linkedinUrl": "",
+      "order": 7,
+      "createdAt": "2026-06-22T09:54:30.761Z"
+    },
+    {
+      "id": "cmqm1cx1300047mz8muqs6eao",
+      "name": "Muhammad Sani Usman",
+      "role": "Creative Director",
+      "bio": "A creative leader responsible for overseeing concepts, visual direction, and creative execution across Brandor's projects. Passionate about transforming ideas into impactful brand experiences through innovation, strategic thinking, and compelling storytelling.",
+      "imageUrl": "/assets/team/muhammad-sani-usman.jpg",
+      "twitterUrl": null,
+      "linkedinUrl": null,
+      "order": 8,
+      "createdAt": "2026-06-20T07:28:09.015Z"
+    }
+  ],
+  "partners": [
+    {
+      "id": "cmqnlv82h0000bciwf9rsfruk",
+      "name": "The Ability First Tech Hub",
+      "logoUrl": "/api/media/cmqnlnmdt0000wlm0q82vub71",
+      "websiteUrl": null,
+      "order": 0,
+      "createdAt": "2026-06-21T09:50:01.626Z"
+    },
+    {
+      "id": "cmqnlwte30002wlm0392yjwbz",
+      "name": "British Council",
+      "logoUrl": "/api/media/cmqnlwd680001wlm0nan7rzp2",
+      "websiteUrl": null,
+      "order": 0,
+      "createdAt": "2026-06-21T09:51:15.915Z"
+    },
+    {
+      "id": "cmqnlytl60001h18dbtfkduv9",
+      "name": "ElevateHER Innovation Space",
+      "logoUrl": "/api/media/cmqnlvpgq0001qjkmvdg0k9hh",
+      "websiteUrl": null,
+      "order": 0,
+      "createdAt": "2026-06-21T09:52:49.482Z"
+    },
+    {
+      "id": "cmqp1ajjh0001cdielbcmtsoq",
+      "name": "Rimi Photography",
+      "logoUrl": "/api/media/cmqp1a6f60000cdie83rsszkm",
+      "websiteUrl": null,
+      "order": 0,
+      "createdAt": "2026-06-22T09:49:36.749Z"
+    },
+    {
+      "id": "cmqp3oeon0002tl3zleq47cwz",
+      "name": "Aisha Kwaku and Associates",
+      "logoUrl": "/api/media/cmqp3nktm0001tl3zod273jn1",
+      "websiteUrl": null,
+      "order": 0,
+      "createdAt": "2026-06-22T10:56:22.872Z"
+    }
+  ]
+}
