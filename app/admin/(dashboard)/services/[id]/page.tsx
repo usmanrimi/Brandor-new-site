@@ -4,7 +4,7 @@ import { updateService } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
-import MediaPicker from '../../components/MediaPicker'
+import MediaPicker from '../../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 

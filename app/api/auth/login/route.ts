@@ -8,24 +8,31 @@ const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'brandor-s
 
 export async function POST(request: Request) {
   try {
+    console.log('Login attempt started');
     const { username, password } = await request.json()
+    console.log('Parsed JSON', username);
     
     const admin = await prisma.adminUser.findUnique({ where: { username } })
+    console.log('Found admin:', !!admin);
     if (!admin) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
     
-    const isValid = await bcrypt.compare(password, admin.password)
+    console.log('Comparing passwords');
+    const isValid = bcrypt.compareSync(password, admin.password)
+    console.log('Password valid:', isValid);
     if (!isValid) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }
     
+    console.log('Signing JWT');
     // Create token
     const token = await new SignJWT({ sub: admin.id, username: admin.username })
       .setProtectedHeader({ alg: 'HS256' })
       .setExpirationTime('24h')
       .sign(JWT_SECRET)
       
+    console.log('JWT signed');
     const response = NextResponse.json({ success: true })
     response.cookies.set({
       name: 'admin_token',

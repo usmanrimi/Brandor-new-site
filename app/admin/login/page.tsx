@@ -17,17 +17,24 @@ export default function AdminLogin() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username: username.trim(), password })
       })
       
       if (res.ok) {
-        window.location.href = '/admin' // Force full reload to bypass router cache and hit middleware
+        window.location.href = '/admin'
       } else {
-        const data = await res.json()
-        setError(data.error || 'Login failed')
+        let errorMsg = 'Login failed'
+        try {
+          const data = await res.json()
+          errorMsg = data.error || errorMsg
+        } catch (parseErr) {
+          errorMsg = `Server error (${res.status})`
+        }
+        setError(errorMsg)
       }
-    } catch (err) {
-      setError('An error occurred. Please try again.')
+    } catch (err: any) {
+      console.error("Login fetch error:", err);
+      setError(`Network error: ${err.message || 'Please try again'}`)
     } finally {
       setLoading(false)
     }

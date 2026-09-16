@@ -3,7 +3,7 @@ import React from 'react'
 import { PrismaClient } from '@prisma/client'
 import { updateBranding } from './actions'
 import * as Icons from 'lucide-react'
-import MediaPicker from '../components/MediaPicker'
+import MediaPicker from '../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 

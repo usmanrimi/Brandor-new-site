@@ -4,7 +4,7 @@ import { updateProject } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { PrismaClient } from '@prisma/client'
-import MediaPicker from '../../components/MediaPicker'
+import MediaPicker from '../../../components/MediaPicker'
 
 const prisma = new PrismaClient()
 
@@ -44,18 +44,23 @@ export default async function EditProject({ params }: { params: Promise<{ id: st
                 <textarea id="description" name="description" className="form-control" rows={8} defaultValue={project.description} required></textarea>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '24px', background: '#f8fafc', padding: '16px', borderRadius: '8px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', marginTop: '24px', background: '#f8fafc', padding: '16px', borderRadius: '8px' }}>
                 <div className="form-group">
-                  <label htmlFor="pdfUrl">PDF Report URL (Optional)</label>
-                  <input type="text" id="pdfUrl" name="pdfUrl" className="form-control" placeholder="https://... or upload in Media Library" defaultValue={project.pdfUrl || ''} />
-                  <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Link to a PDF report for this project.</p>
+                  <MediaPicker name="pdfUrl" defaultValue={project.pdfUrl || ''} label="PDF Report (Optional)" accept="application/pdf" />
+                  <p style={{ margin: '0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Select a PDF report or paste an external link.</p>
                 </div>
                 
-                <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', alignSelf: 'center', marginTop: '16px' }}>
+                <div className="form-group">
+                  <label htmlFor="videoUrl">Video Link (Optional)</label>
+                  <input type="text" id="videoUrl" name="videoUrl" className="form-control" placeholder="https://youtube.com/..." defaultValue={project.videoUrl || ''} />
+                  <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Link to an external video for this project.</p>
+                </div>
+
+                <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
                   <input type="checkbox" id="isPdfPublished" name="isPdfPublished" style={{ width: '20px', height: '20px', accentColor: 'var(--admin-primary)' }} defaultChecked={project.isPdfPublished} />
                   <div>
-                    <label htmlFor="isPdfPublished" style={{ margin: 0, fontSize: '1rem' }}>Publish PDF Report</label>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Allow visitors to view/download.</p>
+                    <label htmlFor="isPdfPublished" style={{ margin: 0, fontSize: '1rem' }}>Publish Report & Video</label>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Allow visitors to view the PDF/Video on the public site.</p>
                   </div>
                 </div>
               </div>

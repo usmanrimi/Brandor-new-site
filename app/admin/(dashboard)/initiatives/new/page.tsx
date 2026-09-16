@@ -3,7 +3,7 @@ import React from 'react'
 import { createInitiative } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import MediaPicker from '../../components/MediaPicker'
+import MediaPicker from '../../../components/MediaPicker'
 
 export default function NewInitiative() {
   return (

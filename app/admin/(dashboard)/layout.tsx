@@ -23,39 +23,33 @@ export default function AdminLayout({
         </div>
         
         <nav className="sidebar-nav">
-          <p className="nav-group-label">Overview</p>
           <Link href="/admin" className="nav-item">
-            <Icons.LayoutDashboard size={18} /> Dashboard
+            <Icons.LayoutDashboard size={18} /> Overview
           </Link>
           
-          <p className="nav-group-label">Pages & Content</p>
+          <p className="nav-group-label">Pages & Sections</p>
           <Link href="/admin/content/home" className="nav-item">
-            <Icons.Home size={18} /> Homepage
+            <Icons.Home size={18} /> Home Page
           </Link>
           <Link href="/admin/content/about" className="nav-item">
             <Icons.Info size={18} /> About Us
           </Link>
+          <Link href="/admin/branding" className="nav-item">
+            <Icons.Palette size={18} /> Website Branding
+          </Link>
+          
+          <p className="nav-group-label">Management</p>
           <Link href="/admin/services" className="nav-item">
             <Icons.Layers size={18} /> Services
           </Link>
-          <Link href="/admin/initiatives" className="nav-item">
-            <Icons.Target size={18} /> Initiatives
-          </Link>
-          
-          <p className="nav-group-label">Portfolio</p>
           <Link href="/admin/projects" className="nav-item">
-            <Icons.Briefcase size={18} /> Projects
-          </Link>
-          
-          <p className="nav-group-label">Relations</p>
-          <Link href="/admin/testimonials" className="nav-item">
-            <Icons.MessageSquare size={18} /> Testimonials
+            <Icons.Briefcase size={18} /> Projects & Reports
           </Link>
           <Link href="/admin/team" className="nav-item">
-            <Icons.Users size={18} /> Team Management
+            <Icons.Users size={18} /> Team
           </Link>
           <Link href="/admin/partners" className="nav-item">
-            <Icons.Handshake size={18} /> Partners & Clients
+            <Icons.Handshake size={18} /> Partners & Logos
           </Link>
 
           <p className="nav-group-label">Assets</p>
@@ -63,15 +57,12 @@ export default function AdminLayout({
             <Icons.Image size={18} /> Media Library
           </Link>
           
-          <p className="nav-group-label">Configuration</p>
-          <Link href="/admin/branding" className="nav-item">
-            <Icons.Palette size={18} /> Website Branding
+          <p className="nav-group-label">System</p>
+          <Link href="/admin/publish" className="nav-item">
+            <Icons.UploadCloud size={18} /> Publish to GitHub
           </Link>
-          <Link href="/admin/settings" className="nav-item">
-            <Icons.Settings size={18} /> Settings & Social
-          </Link>
-          <Link href="/admin/users" className="nav-item">
-            <Icons.UserCog size={18} /> User Management
+          <Link href="/admin/account" className="nav-item">
+            <Icons.Settings size={18} /> Account Settings
           </Link>
         </nav>
         

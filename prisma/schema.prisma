@@ -118,6 +118,8 @@ model AboutContent {
   coreValues  String   // JSON string of {title, description} objects
   process     String   // JSON string of {step, title, description} objects
   whyUs       String   // JSON string of {title, description} objects
+  whyUsImage  String?  @default("/assets/why-image.jpg")
+  aboutHeroImage String? @default("/assets/hero-image.jpg")
   updatedAt   DateTime @updatedAt
 }
 
@@ -126,6 +128,7 @@ model HomeContent {
   heroEyebrow String   @default("Kano · Creative Media Agency")
   heroHeadline String  @default("Every program has a story. We open the door to tell it.")
   heroLead    String   @default("Brandor is a creative media and branding team helping NGOs...")
+  heroImage   String?  @default("/assets/hero-image.jpg")
   ctaText1    String   @default("Book a Project")
   ctaLink1    String   @default("/contact")
   ctaText2    String   @default("Explore Services")

@@ -7,7 +7,7 @@ export default function TeamCard({ member, index }: { member: any, index: number
 
   return (
     <div 
-      className={	eam-member-card reveal stagger- }
+      className={`team-member-card reveal stagger-${(index % 4) + 1} ${expanded ? 'expanded' : ''}`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="team-portrait">

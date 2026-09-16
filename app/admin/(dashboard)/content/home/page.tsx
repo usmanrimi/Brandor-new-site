@@ -1,6 +1,7 @@
 import React from 'react'
 import { PrismaClient } from '@prisma/client'
 import { updateHomeContent } from './actions'
+import MediaPicker from '../../../components/MediaPicker'
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,7 @@ export default async function HomeCMS() {
       ctaText2: "Explore Services",
       ctaLink2: "/services",
       marqueeText: "Branding, Storytelling, Documentation, Media Production, Creative Direction, Strategy",
+      heroImage: "/assets/hero-image.jpg",
       updatedAt: new Date()
     }
   }
@@ -67,7 +69,9 @@ export default async function HomeCMS() {
             ></textarea>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <MediaPicker name="heroImage" defaultValue={content.heroImage || ''} label="Hero Image" />
+          
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '24px' }}>
             <div className="form-group">
               <label htmlFor="ctaText1">Primary Button Text</label>
               <input 

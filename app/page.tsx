@@ -1,10 +1,22 @@
 export const dynamic = "force-dynamic";
 import { PrismaClient } from '@prisma/client'
 import * as LucideIcons from 'lucide-react'
+import ProjectList from '@/components/ProjectList'
+import ServicesList from '@/components/ServicesList'
 
 const prisma = new PrismaClient()
 
 export default async function Home() {
+  let content = null
+  try {
+    content = await prisma.homeContent.findUnique({ where: { id: 'global' } })
+  } catch(e) {}
+  
+  let aboutContent = null
+  try {
+    aboutContent = await prisma.aboutContent.findUnique({ where: { id: 'global' } })
+  } catch(e) {}
+  
   let services: any[] = []
   try {
     services = await prisma.service.findMany({ orderBy: { order: 'asc' } })
@@ -45,18 +57,27 @@ export default async function Home() {
       {/* ===================== HERO ===================== */}
       <section className="hero">
         <div className="wrap">
-          <div>
-            <p className="eyebrow">Kano · Creative Media Agency</p>
-            <h1 className="gsap-split">Every program has a story. We open the <span className="accent">door</span> to tell it.</h1>
-            <p className="lead">Brandor is a creative media and branding team helping NGOs, institutions, and businesses across Africa document their work, capture their impact, and build a brand worth remembering.</p>
-            <div className="btn-row">
+          <div className="hero-content animate-hero">
+            <div className="hero-header-block" style={{ textAlign: 'center', marginBottom: '16px' }}>
+              <p className="eyebrow" style={{ justifyContent: 'center', marginBottom: '14px', letterSpacing: '0.14em' }}>
+                This is Brandor Creative Media Agency
+              </p>
+              <h1 style={{ textAlign: 'center', fontSize: 'clamp(2.5rem, 5.2vw, 4.4rem)', lineHeight: 1.1, marginBottom: '20px' }}>
+                Your Ultimate <br />
+                <span className="accent" style={{ color: 'var(--orange)' }}>Branding Door</span>
+              </h1>
+            </div>
+            <p className="lead" style={{ textAlign: 'center', margin: '0 auto 32px', maxWidth: '500px' }}>
+              Brandor is a creative media and branding team helping NGOs, institutions, and businesses across Africa document their work, capture their impact, and build a brand worth remembering.
+            </p>
+            <div className="btn-row" style={{ justifyContent: 'center' }}>
               <a href="/contact" className="btn btn-primary">Book a Project</a>
               <a href="/services" className="btn btn-outline">Explore Services</a>
             </div>
           </div>
           
-          <div className="hero-visual">
-            <img src="/assets/hero-image.jpg" alt="Brandor Media Production" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }} />
+          <div className="hero-visual animate-hero-visual">
+            <img src={content?.heroImage || "/assets/hero-image.jpg"} alt="Brandor Media Production" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px', boxShadow: '0 20px 40px rgba(23,59,97,0.1)' }} />
           </div>
         </div>
       </section>
@@ -64,44 +85,48 @@ export default async function Home() {
       {/* ===================== MARQUEE ===================== */}
       <div className="marquee">
         <div className="marquee-track">
-          <span>Branding</span>
-          <span>Storytelling</span>
-          <span>Documentation</span>
           <span>Media Production</span>
+          <span>Photography</span>
+          <span>Videography</span>
           <span>Creative Direction</span>
+          <span>Creative Design</span>
           <span>Strategy</span>
           <span>Branding</span>
           <span>Storytelling</span>
-          <span>Documentation</span>
-          <span>Media Production</span>
-          <span>Creative Direction</span>
-          <span>Strategy</span>
+          <div aria-hidden="true" style={{ display: 'flex', gap: '48px' }}>
+            <span>Media Production</span>
+            <span>Photography</span>
+            <span>Videography</span>
+            <span>Creative Direction</span>
+            <span>Creative Design</span>
+            <span>Strategy</span>
+            <span>Branding</span>
+            <span>Storytelling</span>
+          </div>
         </div>
       </div>
 
       {/* ===================== SERVICES ===================== */}
-      <section id="services" style={{ background: 'var(--denim)', color: 'var(--pure)' }}>
+      <section id="services" style={{ background: 'var(--denim)', color: 'var(--pure)', padding: '110px 0' }}>
         <div className="wrap">
-          <div className="section-head reveal">
-            <span className="eyebrow" style={{ color: 'var(--orange)' }}>Our Services</span>
-            <h2 style={{ color: 'var(--pure)' }}>Crafting narratives that leave a mark.</h2>
-            <p style={{ color: 'var(--pure)', opacity: 0.8 }}>We blend strategy, design, and media production to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.</p>
+          <div className="section-head reveal" style={{ textAlign: 'center', maxWidth: '880px', margin: '0 auto 60px' }}>
+            <span className="eyebrow" style={{ color: 'var(--orange)', justifyContent: 'center', fontSize: '0.95rem', letterSpacing: '0.16em', marginBottom: '14px' }}>
+              Our Services
+            </span>
+            <h2 style={{ color: 'var(--pure)', fontSize: 'clamp(2.4rem, 5.2vw, 3.8rem)', lineHeight: 1.15, marginBottom: '22px' }}>
+              Crafting narratives that leave a mark.
+            </h2>
+            <p style={{ color: 'var(--pure)', opacity: 0.88, fontSize: '1.15rem', lineHeight: 1.8, maxWidth: '740px', margin: '0 auto' }}>
+              We blend <span style={{ color: 'var(--orange)', fontWeight: 600 }}>strategy</span>, <span style={{ color: 'var(--orange)', fontWeight: 600 }}>design</span>, and <span style={{ color: 'var(--orange)', fontWeight: 600 }}>media production</span> to deliver comprehensive branding solutions for agencies, non-profits, and corporate organizations.
+            </p>
           </div>
-          <div className="services-grid">
-            {services.slice(0, 6).map((service, i) => {
-              return (
-                <div key={service.id} className={`service-card reveal stagger-${(i % 4) + 1}`}>
-                  <div style={{ width: '100%', height: '200px', borderRadius: '12px', overflow: 'hidden', marginBottom: '24px' }}>
-                    <img src={service.imageUrl || '/assets/why-image.jpg'} alt={service.title} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
-                  <h3 style={{ marginTop: 0 }}>{service.title}</h3>
-                  <p className="desc">{service.description}</p>
-                </div>
-              );
-            })}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '48px' }} className="reveal">
-            <a href="/services" className="btn btn-primary">View All Services</a>
+
+          <ServicesList services={services.slice(0, 6)} />
+
+          <div style={{ textAlign: 'center', marginTop: '56px' }} className="reveal">
+            <a href="/services" className="btn btn-primary" style={{ backgroundColor: 'var(--orange)', color: '#ffffff' }}>
+              View All Services
+            </a>
           </div>
         </div>
       </section>
@@ -111,11 +136,14 @@ export default async function Home() {
         <div className="wrap">
           <div className="why-grid">
             <div className="why-visual reveal">
-              <img src="/assets/why-image.jpg" alt="Brandor abstract" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+              <img src={aboutContent?.whyUsImage || "/assets/why-image.jpg"} alt="Brandor abstract" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
             </div>
             <div className="reveal">
-              <p className="eyebrow" style={{ color: 'var(--orange)' }}>Why Organizations Choose Us</p>
-              <h2 style={{ marginBottom: '32px', color: 'var(--pure)' }} className="gsap-split">We don't just record events we capture impact.</h2>
+              <h2 style={{ marginBottom: '16px', color: 'var(--pure)', fontSize: '2.8rem', position: 'relative', display: 'inline-block' }} className="gsap-split">
+                Why Organizations Choose Us
+                <div style={{ position: 'absolute', bottom: '-8px', left: '0', width: '60px', height: '4px', background: 'var(--orange)', borderRadius: '2px' }}></div>
+              </h2>
+              <p style={{ fontSize: '1.2rem', color: 'var(--pure)', opacity: 0.9, marginBottom: '24px', marginTop: '24px' }}>We don't just record events we capture impact.</p>
               <p style={{ color: 'var(--pure)', opacity: 0.8, fontSize: '1.05rem', lineHeight: '1.7', marginBottom: '24px' }}>
                 At Brandor, we specialize in high-end media production, strategic storytelling, and event documentation tailored for the unique needs of NGOs, development agencies, and corporate institutions. 
               </p>
@@ -131,38 +159,12 @@ export default async function Home() {
       {/* ===================== PROJECTS ===================== */}
       <section id="projects" style={{ background: '#f8fafc', padding: '100px 0' }}>
         <div className="wrap">
-          <div className="section-head reveal">
-            <span className="eyebrow" style={{ color: 'var(--orange)' }}>Our Portfolio</span>
+          <div className="section-head reveal" style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 50px' }}>
+            <span className="eyebrow" style={{ color: 'var(--orange)', justifyContent: 'center' }}>Our Projects</span>
             <h2>Captured impact.</h2>
-            <p>Explore our recent event documentation, branding projects, and strategic storytelling across Africa.</p>
+            <p style={{ color: 'var(--ink)', opacity: 0.82 }}>Explore our recent event documentation, branding projects, and strategic storytelling across Africa.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '32px' }}>
-            {projects.slice(0, 6).map((project, i) => (
-              <div key={project.id} className={`reveal stagger-${(i % 4) + 1} project-card`} style={{ background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(23,59,97,0.05)', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ width: '100%', height: '220px', background: '#e2e8f0', position: 'relative' }}>
-                  <img src={project.images} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <div style={{ position: 'absolute', top: '16px', left: '16px', background: 'var(--orange)', color: '#fff', padding: '4px 12px', borderRadius: '24px', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    {project.category}
-                  </div>
-                </div>
-                <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <div style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '12px', display: 'flex', gap: '8px', fontWeight: '600', flexWrap: 'wrap' }}>
-                    <span>{project.client}</span>
-                    <span style={{ color: 'var(--orange)' }}>•</span>
-                    <span>{project.date}</span>
-                  </div>
-                  <h3 style={{ fontSize: '1.4rem', color: 'var(--denim)', marginBottom: '12px', fontFamily: 'var(--display)', fontWeight: '700', lineHeight: '1.3' }}>{project.title}</h3>
-                  <p style={{ color: 'var(--ink)', fontSize: '0.95rem', lineHeight: '1.6', opacity: '0.8', marginBottom: '24px', flexGrow: 1 }}>{project.description.length > 120 ? project.description.substring(0, 120) + '...' : project.description}</p>
-                  
-                  {project.isPdfPublished && project.pdfUrl && (
-                    <a href={project.pdfUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', width: '100%', padding: '10px', fontSize: '0.9rem' }}>
-                      <LucideIcons.ExternalLink size={16} /> View PDF Report
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+          <ProjectList projects={projects.slice(0, 6)} />
           <div style={{ textAlign: 'center', marginTop: '48px' }} className="reveal">
             <a href="/projects" className="btn btn-primary">View All Projects</a>
           </div>

@@ -12,6 +12,7 @@ export async function updateHomeContent(formData: FormData) {
   const marqueeText = formData.get('marqueeText') as string
   const ctaText1 = formData.get('ctaText1') as string
   const ctaLink1 = formData.get('ctaLink1') as string
+  const heroImage = formData.get('heroImage') as string
   
   await prisma.homeContent.upsert({
     where: { id: 'global' },
@@ -19,6 +20,7 @@ export async function updateHomeContent(formData: FormData) {
       heroEyebrow,
       heroHeadline,
       heroLead,
+      heroImage: heroImage || '/assets/hero-image.jpg',
       marqueeText,
       ctaText1,
       ctaLink1
@@ -28,6 +30,7 @@ export async function updateHomeContent(formData: FormData) {
       heroEyebrow,
       heroHeadline,
       heroLead,
+      heroImage: heroImage || '/assets/hero-image.jpg',
       marqueeText,
       ctaText1,
       ctaLink1

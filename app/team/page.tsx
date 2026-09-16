@@ -23,7 +23,6 @@ export default async function Team() {
       <section id="team" className="team">
         <div className="wrap">
           <div className="section-head reveal" style={{ maxWidth: '800px', margin: '0 auto 64px', textAlign: 'center' }}>
-            <p className="eyebrow" style={{ color: 'var(--orange)' }}>Our People</p>
             <h1 className="gsap-split" style={{ color: 'var(--denim)', fontSize: '3rem', marginBottom: '24px' }}>Meet the team behind the lens</h1>
             <p style={{ color: 'var(--ink)', fontSize: '1.1rem' }}>A collective of storytellers, strategists, and creatives dedicated to elevating your brand's narrative.</p>
           </div>

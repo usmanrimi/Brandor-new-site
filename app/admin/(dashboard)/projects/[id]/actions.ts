@@ -17,6 +17,7 @@ export async function updateProject(formData: FormData) {
   const images = formData.get('images') as string 
   const featured = formData.get('featured') === 'on'
   const pdfUrl = formData.get('pdfUrl') as string
+  const videoUrl = formData.get('videoUrl') as string
   const isPdfPublished = formData.get('isPdfPublished') === 'on'
 
   if (id) {
@@ -32,6 +33,7 @@ export async function updateProject(formData: FormData) {
         images: images || '/assets/why-image.jpg',
         featured,
         pdfUrl: pdfUrl || null,
+        videoUrl: videoUrl || null,
         isPdfPublished
       }
     })

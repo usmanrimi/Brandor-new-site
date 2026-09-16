@@ -16,6 +16,7 @@ export async function createProject(formData: FormData) {
   const images = formData.get('images') as string // we assume they paste the URL or we build a media picker later
   const featured = formData.get('featured') === 'on'
   const pdfUrl = formData.get('pdfUrl') as string
+  const videoUrl = formData.get('videoUrl') as string
   const isPdfPublished = formData.get('isPdfPublished') === 'on'
 
   await prisma.project.create({
@@ -29,6 +30,7 @@ export async function createProject(formData: FormData) {
       images: images || '/assets/why-image.jpg',
       featured,
       pdfUrl: pdfUrl || null,
+      videoUrl: videoUrl || null,
       isPdfPublished
     }
   })

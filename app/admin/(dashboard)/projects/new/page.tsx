@@ -2,7 +2,7 @@ import React from 'react'
 import { createProject } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import MediaPicker from '../../components/MediaPicker'
+import MediaPicker from '../../../components/MediaPicker'
 
 export default function NewProject() {
   return (
@@ -64,18 +64,23 @@ export default function NewProject() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', marginTop: '24px', background: '#f8fafc', padding: '16px', borderRadius: '8px' }}>
             <div className="form-group">
-              <label htmlFor="pdfUrl">PDF Report URL (Optional)</label>
-              <input type="text" id="pdfUrl" name="pdfUrl" className="form-control" placeholder="https://... or upload in Media Library" />
-              <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>You can upload a PDF in the Media Library and paste the link here.</p>
+              <MediaPicker name="pdfUrl" label="PDF Report (Optional)" accept="application/pdf" />
+              <p style={{ margin: '0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Select a PDF report or paste an external link.</p>
             </div>
             
-            <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#f8fafc', padding: '16px', borderRadius: '8px' }}>
-              <input type="checkbox" id="isPdfPublished" name="isPdfPublished" style={{ width: '20px', height: '20px', accentColor: 'var(--admin-primary)' }} />
+            <div className="form-group">
+              <label htmlFor="videoUrl">Video Link (Optional)</label>
+              <input type="text" id="videoUrl" name="videoUrl" className="form-control" placeholder="https://youtube.com/..." />
+              <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Link to an external video for this project.</p>
+            </div>
+
+            <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
+              <input type="checkbox" id="isPdfPublished" name="isPdfPublished" style={{ width: '20px', height: '20px', accentColor: 'var(--admin-primary)' }} defaultChecked={true} />
               <div>
-                <label htmlFor="isPdfPublished" style={{ margin: 0, fontSize: '1rem' }}>Publish PDF Report</label>
-                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>If checked, visitors can view/download this report.</p>
+                <label htmlFor="isPdfPublished" style={{ margin: 0, fontSize: '1rem' }}>Publish Report & Video</label>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Allow visitors to view the PDF/Video on the public site.</p>
               </div>
             </div>
           </div>
