@@ -6,7 +6,7 @@ import { CSS } from '@dnd-kit/utilities';
 import * as Icons from 'lucide-react';
 import Link from 'next/link';
 
-function SortableItem({ member, onDelete }: { member: any, onDelete: (id: string) => void }) {
+function SortableItem({ member, onDelete, onMoveUp, onMoveDown, isFirst, isLast }: { member: any, onDelete: (id: string) => void, onMoveUp: (id: string) => void, onMoveDown: (id: string) => void, isFirst: boolean, isLast: boolean }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: member.id });
 
   const style = {
@@ -28,6 +28,8 @@ function SortableItem({ member, onDelete }: { member: any, onDelete: (id: string
       <td style={{ fontWeight: '500', color: 'var(--admin-primary)' }}>{member.name}</td>
       <td style={{ color: 'var(--admin-text-light)' }}>{member.role}</td>
       <td style={{ paddingRight: '24px', textAlign: 'right' }}>
+        <button disabled={isFirst} onClick={() => onMoveUp(member.id)} style={{ background: 'none', border: 'none', color: isFirst ? '#e2e8f0' : 'var(--admin-text-light)', cursor: isFirst ? 'default' : 'pointer', marginRight: '8px' }} aria-label="Move Up"><Icons.ArrowUp size={18} /></button>
+        <button disabled={isLast} onClick={() => onMoveDown(member.id)} style={{ background: 'none', border: 'none', color: isLast ? '#e2e8f0' : 'var(--admin-text-light)', cursor: isLast ? 'default' : 'pointer', marginRight: '16px' }} aria-label="Move Down"><Icons.ArrowDown size={18} /></button>
         <Link href={`/admin/team/${member.id}`} style={{ color: 'var(--admin-text-light)', marginRight: '16px' }}><Icons.Edit size={18} /></Link>
         <button onClick={() => onDelete(member.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><Icons.Trash2 size={18} /></button>
       </td>
@@ -56,6 +58,20 @@ export default function SortableTeamList({ initialMembers, reorderAction, delete
     }
   };
 
+  const handleMove = async (id: string, direction: 'up' | 'down') => {
+    setItems((currentItems) => {
+      const index = currentItems.findIndex(i => i.id === id);
+      if (index === -1) return currentItems;
+      if (direction === 'up' && index === 0) return currentItems;
+      if (direction === 'down' && index === currentItems.length - 1) return currentItems;
+      
+      const newIndex = direction === 'up' ? index - 1 : index + 1;
+      const newArray = arrayMove(currentItems, index, newIndex);
+      reorderAction(id, currentItems[newIndex].id, newArray);
+      return newArray;
+    });
+  };
+
   const handleDelete = async (id: string) => {
     if (window.confirm('Are you sure you want to remove this team member?')) {
       setItems(items.filter(i => i.id !== id));
@@ -81,8 +97,8 @@ export default function SortableTeamList({ initialMembers, reorderAction, delete
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={items.map(i => i.id)} strategy={verticalListSortingStrategy}>
           <tbody>
-            {items.map((member) => (
-              <SortableItem key={member.id} member={member} onDelete={handleDelete} />
+            {items.map((member, idx) => (
+              <SortableItem key={member.id} member={member} onDelete={handleDelete} onMoveUp={(id) => handleMove(id, 'up')} onMoveDown={(id) => handleMove(id, 'down')} isFirst={idx === 0} isLast={idx === items.length - 1} />
             ))}
           </tbody>
         </SortableContext>

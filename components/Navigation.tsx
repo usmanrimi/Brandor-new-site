@@ -23,7 +23,7 @@ export default function Navigation() {
     <header className="site-header">
       <nav className="site-nav">
         <Link href="/" className="logo-mark">
-          <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '48px', borderRadius: '4px' }} />
+          <img src="/assets/brandor-logo-full.png" alt="Brandor Logo" style={{ height: '38px', borderRadius: '4px' }} />
         </Link>
         
         <div className={`nav-links ${isOpen ? 'open' : ''}`}>
@@ -31,17 +31,21 @@ export default function Navigation() {
           <Link href="/about" className={isActive('/about')}>About</Link>
           <Link href="/services" className={isActive('/services')}>Services</Link>
           <Link href="/projects" className={isActive('/projects')}>Projects</Link>
-          <Link href="/testimonials" className={isActive('/testimonials')}>Testimonials</Link>
           <Link href="/team" className={isActive('/team')}>Team</Link>
           <Link href="/contact" className="nav-cta">Book a Project</Link>
         </div>
 
         <button 
           className="menu-toggle" 
-          aria-label="Toggle menu"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
           onClick={() => setIsOpen(!isOpen)}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          <span></span><span></span><span></span>
+          {isOpen ? (
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--denim)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          ) : (
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--denim)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          )}
         </button>
       </nav>
     </header>

@@ -12,7 +12,7 @@
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; scroll-padding-top: 100px;}
   body{
     font-family:var(--body);
     color:var(--denim);
@@ -564,3 +564,6 @@
     .team-grid{grid-template-columns:1fr;}
     .door-frame{min-height:300px;}
   }
+.project-card { transition: transform 0.3s ease; }
+.project-card:hover { transform: translateY(-5px); }
+@media (prefers-reduced-motion: reduce) { .project-card { transition: none; } .project-card:hover { transform: none; } }

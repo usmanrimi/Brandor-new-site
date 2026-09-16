@@ -64,6 +64,22 @@ export default function NewProject() {
             </div>
           </div>
 
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '24px' }}>
+            <div className="form-group">
+              <label htmlFor="pdfUrl">PDF Report URL (Optional)</label>
+              <input type="text" id="pdfUrl" name="pdfUrl" className="form-control" placeholder="https://... or upload in Media Library" />
+              <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>You can upload a PDF in the Media Library and paste the link here.</p>
+            </div>
+            
+            <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', background: '#f8fafc', padding: '16px', borderRadius: '8px' }}>
+              <input type="checkbox" id="isPdfPublished" name="isPdfPublished" style={{ width: '20px', height: '20px', accentColor: 'var(--admin-primary)' }} />
+              <div>
+                <label htmlFor="isPdfPublished" style={{ margin: 0, fontSize: '1rem' }}>Publish PDF Report</label>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>If checked, visitors can view/download this report.</p>
+              </div>
+            </div>
+          </div>
+
           <div style={{ marginTop: '32px', display: 'flex', gap: '16px', justifyContent: 'flex-end' }}>
             <Link href="/admin/projects" className="btn-admin" style={{ background: 'transparent', color: 'var(--admin-text-light)', border: '1px solid var(--admin-border)' }}>Cancel</Link>
             <button type="submit" className="btn-admin"><Icons.Save size={18} /> Save Project</button>

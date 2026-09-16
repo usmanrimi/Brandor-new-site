@@ -18,6 +18,8 @@ model Project {
   description String
   images      String   // Stored as JSON string array of URLs
   videoUrl    String?
+  pdfUrl      String?
+  isPdfPublished Boolean @default(false)
   featured    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

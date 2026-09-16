@@ -43,6 +43,22 @@ export default async function EditProject({ params }: { params: Promise<{ id: st
                 <label htmlFor="description">Project Description & Story</label>
                 <textarea id="description" name="description" className="form-control" rows={8} defaultValue={project.description} required></textarea>
               </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginTop: '24px', background: '#f8fafc', padding: '16px', borderRadius: '8px' }}>
+                <div className="form-group">
+                  <label htmlFor="pdfUrl">PDF Report URL (Optional)</label>
+                  <input type="text" id="pdfUrl" name="pdfUrl" className="form-control" placeholder="https://... or upload in Media Library" defaultValue={project.pdfUrl || ''} />
+                  <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Link to a PDF report for this project.</p>
+                </div>
+                
+                <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '10px', alignSelf: 'center', marginTop: '16px' }}>
+                  <input type="checkbox" id="isPdfPublished" name="isPdfPublished" style={{ width: '20px', height: '20px', accentColor: 'var(--admin-primary)' }} defaultChecked={project.isPdfPublished} />
+                  <div>
+                    <label htmlFor="isPdfPublished" style={{ margin: 0, fontSize: '1rem' }}>Publish PDF Report</label>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--admin-text-light)' }}>Allow visitors to view/download.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div>

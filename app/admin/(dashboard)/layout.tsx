@@ -1,8 +1,8 @@
-import './admin.css'
+import '../admin.css'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import LogoutButton from './components/LogoutButton'
+import LogoutButton from '../components/LogoutButton'
 
 export const metadata: Metadata = {
   title: 'Brandor Super Admin Dashboard',

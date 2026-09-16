@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { PrismaClient } from '@prisma/client'
+import * as LucideIcons from 'lucide-react'
 
 const prisma = new PrismaClient()
 
@@ -26,10 +27,10 @@ export default async function About() {
       
       {/* ===================== ABOUT HERO ===================== */}
       <section id="about-hero" className="wrap" style={{ paddingBottom: '60px' }}>
-        <div className="section-head reveal" style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-          <span className="eyebrow">Your Ultimate Branding Door</span>
+        <div className="section-head reveal" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          <span className="eyebrow" style={{ justifyContent: 'center' }}>Your Ultimate Branding Door</span>
           <h1 className="gsap-split" style={{ fontSize: '3rem', marginBottom: '32px' }}>About Brandor</h1>
-          <div style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-light)' }}>
+          <div style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--ink)', textAlign: 'left', opacity: 0.85 }}>
             {aboutContent.aboutText.split('\n').map((paragraph, idx) => (
               paragraph.trim() ? <p key={idx} style={{ marginBottom: '24px' }}>{paragraph}</p> : null
             ))}
@@ -40,32 +41,48 @@ export default async function About() {
       {/* ===================== MISSION, VISION, VALUES ===================== */}
       <section id="mission-vision" style={{ background: 'var(--denim)', padding: '110px 0', color: 'var(--pure)' }}>
         <div className="wrap">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '60px', marginBottom: '80px' }}>
             
-            <div className="service-card reveal stagger-1" style={{ background: 'rgba(255, 235, 208, 0.03)', borderColor: 'rgba(255, 235, 208, 0.1)', color: 'var(--pure)' }}>
-              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '1.8rem' }}>Our Mission</h3>
-              <p style={{ lineHeight: '1.7', opacity: '0.9', fontSize: '1.05rem' }}>{aboutContent.mission}</p>
+            <div className="reveal stagger-1" style={{ display: 'flex', flexDirection: 'column' }}>
+              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '2rem' }}>Our Mission</h3>
+              <p style={{ lineHeight: '1.8', opacity: '0.9', fontSize: '1.1rem' }}>{aboutContent.mission}</p>
             </div>
             
-            <div className="service-card reveal stagger-2" style={{ background: 'rgba(255, 235, 208, 0.03)', borderColor: 'rgba(255, 235, 208, 0.1)', color: 'var(--pure)' }}>
-              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '1.8rem' }}>Our Vision</h3>
-              <p style={{ lineHeight: '1.7', opacity: '0.9', fontSize: '1.05rem' }}>{aboutContent.vision}</p>
+            <div className="reveal stagger-2" style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
+              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '2rem' }}>Our Vision</h3>
+              <p style={{ lineHeight: '1.8', opacity: '0.9', fontSize: '1.1rem' }}>{aboutContent.vision}</p>
             </div>
+          </div>
 
-            <div className="service-card reveal stagger-3" style={{ background: 'rgba(255, 235, 208, 0.03)', borderColor: 'rgba(255, 235, 208, 0.1)', color: 'var(--pure)' }}>
-              <h3 style={{ color: 'var(--orange)', marginBottom: '16px', fontFamily: 'var(--display)', fontSize: '1.8rem' }}>Core Values</h3>
-              <div style={{ lineHeight: '1.7', opacity: '0.9', fontSize: '1.05rem' }}>
-                {aboutContent.coreValues.split('\n').map((line, idx) => {
-                  if (!line.trim()) return null;
-                  const parts = line.split(':');
-                  if (parts.length > 1) {
-                    return <p key={idx} style={{ marginBottom: '12px' }}><strong style={{ color: 'var(--pure)', display: 'block', fontSize: '1.15rem', fontFamily: 'var(--display)', marginBottom: '4px' }}>{parts[0]}</strong>{parts[1]}</p>
-                  }
-                  return <p key={idx} style={{ marginBottom: '12px' }}>{line}</p>
-                })}
-              </div>
+          <div className="reveal stagger-3" style={{ borderTop: '1px solid rgba(255,235,208,0.1)', paddingTop: '60px' }}>
+            <h3 style={{ color: 'var(--pure)', marginBottom: '32px', fontFamily: 'var(--display)', fontSize: '2rem', textAlign: 'center' }}>Core Values</h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '32px' }}>
+              {aboutContent.coreValues.split('\n').map((line, idx) => {
+                if (!line.trim()) return null;
+                const parts = line.split(':');
+                const title = parts[0];
+                const desc = parts[1] || '';
+                
+                let Icon = LucideIcons.CheckCircle;
+                if (title.toLowerCase().includes('excellence')) Icon = LucideIcons.Award;
+                else if (title.toLowerCase().includes('creativity')) Icon = LucideIcons.Lightbulb;
+                else if (title.toLowerCase().includes('impact')) Icon = LucideIcons.Target;
+                else if (title.toLowerCase().includes('integrity')) Icon = LucideIcons.ShieldCheck;
+                else if (title.toLowerCase().includes('collaboration')) Icon = LucideIcons.Users;
+
+                return (
+                  <div key={idx} style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                    <div style={{ background: 'var(--orange)', color: 'var(--pure)', padding: '12px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Icon size={24} />
+                    </div>
+                    <div>
+                      <h4 style={{ color: 'var(--orange)', fontSize: '1.2rem', fontFamily: 'var(--display)', marginBottom: '6px' }}>{title}</h4>
+                      {desc && <p style={{ fontSize: '0.95rem', opacity: '0.8', lineHeight: '1.5' }}>{desc}</p>}
+                    </div>
+                  </div>
+                )
+              })}
             </div>
-
           </div>
         </div>
       </section>
@@ -115,19 +132,19 @@ export default async function About() {
               <h2 style={{ marginBottom: '32px', color: 'var(--pure)' }} className="gsap-split">We don't just record events we capture impact.</h2>
               <div className="why-list">
                 <div className="why-item">
-                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>P</div>
+                  <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Camera size={36} strokeWidth={1.5} /></div>
                   <div><h4 style={{ color: 'var(--orange)' }}>Professional Documentation</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>Every project is planned, executed, and delivered to the highest professional standards.</p></div>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>Q</div>
+                  <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Award size={36} strokeWidth={1.5} /></div>
                   <div><h4 style={{ color: 'var(--orange)' }}>High-Quality Production</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We prioritize quality at every stage, from concept development to final delivery.</p></div>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>S</div>
+                  <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Megaphone size={36} strokeWidth={1.5} /></div>
                   <div><h4 style={{ color: 'var(--orange)' }}>Strategic Storytelling</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We transform activities, projects, and events into stories that resonate with audiences.</p></div>
                 </div>
                 <div className="why-item">
-                  <div className="why-icon" style={{ background: 'var(--turquoise)' }}>N</div>
+                  <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Globe size={36} strokeWidth={1.5} /></div>
                   <div><h4 style={{ color: 'var(--orange)' }}>NGO &amp; Development Expertise</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We understand development programs, donor expectations, and impact communication.</p></div>
                 </div>
               </div>
