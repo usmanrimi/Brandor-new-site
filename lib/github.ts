@@ -23,7 +23,7 @@ export async function getGitHubConfig() {
 
   let hasLocalGit = false
   try {
-    const remote = execSync('git remote get-url origin', { encoding: 'utf8', timeout: 3000 }).trim()
+    const remote = execSync('git remote get-url origin', { cwd: process.cwd(), encoding: 'utf8', timeout: 3000 }).trim()
     hasLocalGit = Boolean(remote && remote.includes('Brandor-new-site'))
   } catch {
     hasLocalGit = false
@@ -105,25 +105,28 @@ export async function publishSnapshotToGitHub(): Promise<GitHubPublishResult> {
   // Method 1: Local Authenticated Git CLI
   if (mode === 'git-cli' || !token) {
     try {
-      const dataDir = path.join(process.cwd(), 'data')
+      const projectRoot = process.cwd()
+      const dataDir = path.join(projectRoot, 'data')
       if (!fs.existsSync(dataDir)) {
         fs.mkdirSync(dataDir, { recursive: true })
       }
       const dataFilePath = path.join(dataDir, 'published-content.json')
       fs.writeFileSync(dataFilePath, contentString, 'utf8')
 
-      execSync('git add data/published-content.json', { encoding: 'utf8', timeout: 10000 })
+      execSync('git add data/published-content.json', { cwd: projectRoot, encoding: 'utf8', timeout: 10000 })
       
       // Check if there are changes to commit
-      const status = execSync('git status --porcelain data/published-content.json', { encoding: 'utf8', timeout: 5000 }).trim()
+      const status = execSync('git status --porcelain data/published-content.json', { cwd: projectRoot, encoding: 'utf8', timeout: 5000 }).trim()
       let commitSha = ''
+      let isNewCommit = false
       
       if (status) {
-        execSync(`git commit -m "${commitMessage}"`, { encoding: 'utf8', timeout: 15000 })
-        execSync(`git push origin ${branch}`, { encoding: 'utf8', timeout: 30000 })
-        commitSha = execSync('git rev-parse HEAD', { encoding: 'utf8', timeout: 5000 }).trim()
+        execSync(`git commit -m "${commitMessage}"`, { cwd: projectRoot, encoding: 'utf8', timeout: 15000 })
+        execSync(`git push origin ${branch}`, { cwd: projectRoot, encoding: 'utf8', timeout: 30000 })
+        commitSha = execSync('git rev-parse HEAD', { cwd: projectRoot, encoding: 'utf8', timeout: 5000 }).trim()
+        isNewCommit = true
       } else {
-        commitSha = execSync('git rev-parse HEAD', { encoding: 'utf8', timeout: 5000 }).trim()
+        commitSha = execSync('git rev-parse HEAD', { cwd: projectRoot, encoding: 'utf8', timeout: 5000 }).trim()
       }
 
       const shortSha = commitSha.substring(0, 7)
@@ -131,7 +134,9 @@ export async function publishSnapshotToGitHub(): Promise<GitHubPublishResult> {
 
       return {
         success: true,
-        message: 'Content snapshot successfully published and pushed to GitHub!',
+        message: isNewCommit 
+          ? 'Content snapshot successfully published and pushed to GitHub!' 
+          : 'Content snapshot is already up to date on GitHub main.',
         commitSha: shortSha,
         commitUrl,
         publishedAt: new Date().toLocaleString(),
