@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import * as Icons from 'lucide-react'
+import { parseImages, mediaSrc, getYouTubeId } from '@/lib/media'
+import VideoEmbed from './VideoEmbed'
 
 export interface ProjectData {
   id: string
@@ -27,24 +29,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const [activeImage, setActiveImage] = useState<string>('')
 
-  // Parse images: can be a JSON array string, comma-separated, or single URL
-  const getImages = (imagesStr?: string): string[] => {
-    if (!imagesStr) return ['/assets/why-image.jpg']
-    try {
-      if (imagesStr.startsWith('[')) {
-        const parsed = JSON.parse(imagesStr)
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed
-      }
-    } catch {
-      // Fall through
-    }
-    if (imagesStr.includes(',')) {
-      return imagesStr.split(',').map(s => s.trim()).filter(Boolean)
-    }
-    return [imagesStr]
-  }
-
-  const gallery = project ? getImages(project.images) : []
+  const gallery = project ? parseImages(project.images) : []
 
   useEffect(() => {
     if (gallery.length > 0) {
@@ -64,12 +49,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
       closeButtonRef.current?.focus()
     }, 50)
 
-    // Escape key listener
+    // Escape key listener & focus trap
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose()
       }
-      // Simple focus trap
       if (e.key === 'Tab' && modalRef.current) {
         const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -99,6 +83,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   if (!project) return null
 
+  const hasYouTube = !!getYouTubeId(project.videoUrl)
+
   return (
     <div 
       className="project-modal-backdrop" 
@@ -112,7 +98,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        backgroundColor: 'rgba(14, 40, 64, 0.75)',
+        backgroundColor: 'rgba(14, 40, 64, 0.8)',
         backdropFilter: 'blur(8px)',
         display: 'flex',
         alignItems: 'center',
@@ -127,13 +113,13 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         style={{
           backgroundColor: '#ffffff',
           width: '100%',
-          maxWidth: '840px',
+          maxWidth: '860px',
           maxHeight: '90vh',
           borderRadius: '20px',
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '0 25px 50px -12px rgba(23, 59, 97, 0.35)',
+          boxShadow: '0 25px 50px -12px rgba(23, 59, 97, 0.4)',
           position: 'relative'
         }}
       >
@@ -149,17 +135,17 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             onClick={onClose}
             aria-label="Close project details"
             style={{
-              width: '40px',
-              height: '40px',
+              width: '42px',
+              height: '42px',
               borderRadius: '50%',
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
-              border: '1px solid rgba(23, 59, 97, 0.1)',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
+              border: '1px solid rgba(23, 59, 97, 0.15)',
               color: 'var(--denim)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
               transition: 'transform 0.2s ease, background 0.2s ease'
             }}
             onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
@@ -171,7 +157,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         {/* Scrollable Content */}
         <div style={{ overflowY: 'auto', flexGrow: 1, padding: '0 0 32px 0' }}>
-          {/* Main Visual */}
+          {/* Main Visual or Video */}
           <div style={{
             width: '100%',
             height: '380px',
@@ -180,7 +166,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             overflow: 'hidden'
           }}>
             <img 
-              src={activeImage || gallery[0] || '/assets/why-image.jpg'} 
+              src={mediaSrc(activeImage || gallery[0], 1200)} 
               alt={project.title} 
               style={{
                 width: '100%',
@@ -199,13 +185,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               fontSize: '0.8rem',
               fontWeight: 700,
               textTransform: 'uppercase',
-              letterSpacing: '0.06em'
+              letterSpacing: '0.06em',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
             }}>
               {project.category}
             </div>
           </div>
 
-          {/* Gallery Thumbnails (if multiple) */}
+          {/* Gallery Thumbnails (if multiple images) */}
           {gallery.length > 1 && (
             <div style={{
               display: 'flex',
@@ -216,26 +203,29 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {gallery.map((img, idx) => (
                 <button
                   key={idx}
+                  type="button"
                   onClick={() => setActiveImage(img)}
+                  aria-label={`View photo ${idx + 1}`}
                   style={{
-                    width: '64px',
-                    height: '64px',
-                    borderRadius: '8px',
+                    width: '68px',
+                    height: '68px',
+                    borderRadius: '10px',
                     overflow: 'hidden',
-                    border: activeImage === img ? '2px solid var(--orange)' : '1px solid #e2e8f0',
+                    border: activeImage === img ? '2px solid var(--orange)' : '1px solid #cbd5e1',
                     cursor: 'pointer',
                     padding: 0,
-                    flexShrink: 0
+                    flexShrink: 0,
+                    transition: 'transform 0.2s ease'
                   }}
                 >
-                  <img src={img} alt={`Gallery ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={mediaSrc(img, 160)} alt={`Thumbnail ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </button>
               ))}
             </div>
           )}
 
           {/* Body Content */}
-          <div style={{ padding: '32px 32px 12px 32px' }}>
+          <div style={{ padding: '28px 32px 12px 32px' }}>
             {/* Meta Tags */}
             <div style={{
               display: 'flex',
@@ -291,10 +281,33 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               {project.description}
             </div>
 
+            {/* In-Modal Video Embed (if videoUrl is present) */}
+            {project.videoUrl && (
+              <div style={{ marginBottom: '32px' }}>
+                <h4 style={{
+                  fontSize: '1.15rem',
+                  fontFamily: 'var(--display)',
+                  color: 'var(--denim)',
+                  marginBottom: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  <Icons.Film size={20} color="var(--orange)" /> Project Video Documentation
+                </h4>
+                <VideoEmbed 
+                  url={project.videoUrl}
+                  title={`${project.title} — Video Documentation`}
+                  aspectRatio="16/9"
+                  customThumbnail={gallery[0]}
+                />
+              </div>
+            )}
+
             {/* Action Row */}
             <div style={{
               display: 'flex',
-              gap: '16px',
+              gap: '14px',
               flexWrap: 'wrap',
               paddingTop: '20px',
               borderTop: '1px solid rgba(23, 59, 97, 0.08)'
@@ -308,8 +321,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '10px',
-                    padding: '12px 26px',
+                    gap: '8px',
+                    padding: '12px 24px',
                     backgroundColor: 'var(--orange)',
                     color: '#ffffff',
                     fontWeight: 700,
@@ -318,31 +331,53 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   }}
                 >
                   <Icons.PlayCircle size={18} />
-                  Watch Video
+                  Watch Video on YouTube
                 </a>
               )}
 
               {project.pdfUrl && project.isPdfPublished && (
-                <a
-                  href={project.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    padding: '12px 26px',
-                    borderColor: 'var(--denim)',
-                    color: 'var(--denim)',
-                    fontWeight: 700,
-                    borderRadius: '999px',
-                    textDecoration: 'none'
-                  }}
-                >
-                  <Icons.ExternalLink size={18} />
-                  View Report
-                </a>
+                <>
+                  <a
+                    href={project.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '12px 24px',
+                      borderColor: 'var(--denim)',
+                      color: 'var(--denim)',
+                      fontWeight: 700,
+                      borderRadius: '999px',
+                      textDecoration: 'none'
+                    }}
+                  >
+                    <Icons.FileText size={18} />
+                    View Report (PDF)
+                  </a>
+
+                  <a
+                    href={`${project.pdfUrl}?download=1`}
+                    download
+                    className="btn btn-outline"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '12px 22px',
+                      borderColor: 'rgba(23, 59, 97, 0.3)',
+                      color: 'var(--denim)',
+                      fontWeight: 600,
+                      borderRadius: '999px',
+                      textDecoration: 'none'
+                    }}
+                  >
+                    <Icons.Download size={16} />
+                    Download PDF
+                  </a>
+                </>
               )}
             </div>
           </div>

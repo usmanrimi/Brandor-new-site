@@ -1,12 +1,9 @@
 import React from 'react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import * as Icons from 'lucide-react'
 import Link from 'next/link'
 
 export const dynamic = "force-dynamic";
-
-
-const prisma = new PrismaClient()
 
 export default async function AdminDashboard() {
   // Fetch dashboard stats

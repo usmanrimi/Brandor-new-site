@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import { execSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
-
-const prisma = new PrismaClient()
 
 export interface GitHubPublishResult {
   success: boolean

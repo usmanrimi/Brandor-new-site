@@ -1,10 +1,8 @@
 "use server"
 
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 import bcrypt from 'bcryptjs'
-
-const prisma = new PrismaClient()
 
 export async function updatePassword(formData: FormData) {
   const currentPassword = formData.get('currentPassword') as string

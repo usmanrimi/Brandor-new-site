@@ -1,12 +1,9 @@
 import React from 'react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import { updateHomeContent } from './actions'
 import MediaPicker from '../../../components/MediaPicker'
 
 export const dynamic = "force-dynamic";
-
-
-const prisma = new PrismaClient()
 
 export default async function HomeCMS() {
   let content = await prisma.homeContent.findUnique({ where: { id: 'global' } })

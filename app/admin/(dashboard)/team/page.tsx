@@ -1,11 +1,9 @@
 export const dynamic = "force-dynamic";
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import SortableTeamList from './components/SortableTeamList'
 import { reorderTeamMembers, deleteTeamMember } from './actions'
-
-const prisma = new PrismaClient()
 
 export default async function AdminTeamPage() {
   const members = await prisma.teamMember.findMany({ orderBy: { order: 'asc' } })

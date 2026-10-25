@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react'
 import * as Icons from 'lucide-react'
 import ProjectModal, { ProjectData } from './ProjectModal'
+import { parseImages, mediaSrc } from '@/lib/media'
 
 interface ProjectListProps {
   projects: ProjectData[]
@@ -33,6 +34,10 @@ export default function ProjectList({ projects }: ProjectListProps) {
         width: '100%'
       }}>
         {projects.map((project) => {
+          const gallery = parseImages(project.images)
+          const coverImage = gallery[0] || '/assets/why-image.jpg'
+          const thumbSrc = mediaSrc(coverImage, 640)
+
           return (
             <div 
               key={project.id}
@@ -71,7 +76,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                 }}
               >
                 <img 
-                  src={project.images?.startsWith('[') ? (JSON.parse(project.images)[0] || '/assets/why-image.jpg') : (project.images || '/assets/why-image.jpg')} 
+                  src={thumbSrc} 
                   alt={project.title} 
                   loading="lazy"
                   decoding="async"
@@ -94,10 +99,30 @@ export default function ProjectList({ projects }: ProjectListProps) {
                   fontSize: '0.75rem',
                   fontWeight: 700,
                   textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
+                  letterSpacing: '0.05em',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.18)'
                 }}>
                   {project.category}
                 </div>
+
+                {project.videoUrl && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '16px',
+                    right: '16px',
+                    backgroundColor: 'rgba(23, 59, 97, 0.85)',
+                    color: '#ffffff',
+                    padding: '4px 8px',
+                    borderRadius: '6px',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
+                  }}>
+                    <Icons.PlayCircle size={14} color="var(--orange)" /> Video
+                  </div>
+                )}
 
                 <div 
                   className="project-hover-overlay"
@@ -121,7 +146,8 @@ export default function ProjectList({ projects }: ProjectListProps) {
                     fontWeight: 700,
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '6px'
+                    gap: '6px',
+                    boxShadow: '0 4px 14px rgba(0,0,0,0.15)'
                   }}>
                     <Icons.Maximize2 size={14} /> View Details
                   </span>
@@ -134,7 +160,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                 <div style={{
                   fontSize: '0.85rem',
                   color: '#64748b',
-                  marginBottom: '12px',
+                  marginBottom: '10px',
                   display: 'flex',
                   gap: '8px',
                   fontWeight: 600,
@@ -201,7 +227,7 @@ export default function ProjectList({ projects }: ProjectListProps) {
                       color: 'var(--denim)'
                     }}
                   >
-                    <Icons.Eye size={15} /> View Project
+                    <Icons.Eye size={15} /> View Details
                   </button>
 
                   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>

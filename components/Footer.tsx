@@ -36,6 +36,8 @@ export default function Footer() {
               <img 
                 src="/assets/brandor-logo-full.png" 
                 alt="Brandor Logo" 
+                width={160}
+                height={46}
                 style={{ 
                   height: '46px', 
                   width: 'auto',

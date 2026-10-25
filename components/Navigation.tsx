@@ -76,11 +76,13 @@ export default function Navigation() {
           padding: '14px 28px',
           minHeight: '74px'
         }}>
-          {/* Logo with proper proportions */}
+          {/* Logo with proper proportions and explicit aspect ratio to prevent CLS */}
           <Link href="/" className="logo-mark" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img 
               src="/assets/brandor-logo-full.png" 
               alt="Brandor Logo" 
+              width={160}
+              height={42}
               style={{ height: '42px', width: 'auto', objectFit: 'contain' }} 
             />
           </Link>

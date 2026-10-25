@@ -3,10 +3,8 @@ import React from 'react'
 import { updateInitiative } from './actions'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import MediaPicker from '../../../components/MediaPicker'
-
-const prisma = new PrismaClient()
 
 export default async function EditInitiative({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

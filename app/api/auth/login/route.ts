@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 import { SignJWT } from 'jose'
-
-const prisma = new PrismaClient()
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || 'brandor-super-secret-key-2026')
 
 export async function POST(request: Request) {

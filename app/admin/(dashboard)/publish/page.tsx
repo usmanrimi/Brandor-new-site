@@ -1,11 +1,9 @@
 export const dynamic = "force-dynamic";
 
 import React from 'react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import PublishClient from './PublishClient'
 import { getGitHubConfig, getLatestDeploymentStatus } from '@/lib/github'
-
-const prisma = new PrismaClient()
 
 export default async function PublishPage() {
   const [config, deployment, servicesCount, projectsCount, teamCount, partnersCount] = await Promise.all([

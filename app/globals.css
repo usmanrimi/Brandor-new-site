@@ -5,9 +5,9 @@
     --orange:#FD8916;
     --pure:#FFEBD0;
     --ink:#0e2840;
-    --display: 'Baloo 2', sans-serif;
-    --body: 'Inter', sans-serif;
-    --mono: 'Space Mono', monospace;
+    --display: 'Arista Pro', var(--font-baloo), 'Baloo 2', sans-serif;
+    --body: var(--font-inter), 'Inter', sans-serif;
+    --mono: var(--font-mono), 'Space Mono', monospace;
     --arch-r: 999px;
   }
 
@@ -541,8 +541,8 @@
   a, button, input, textarea, select { cursor:none; }
 
   /* ===================== GSAP REVEAL PREP ===================== */
-  .js .reveal { opacity:0; visibility:hidden; }
-  .js .gsap-split { visibility:hidden; }
+  /* reveal gracefully transitions */
+  /* split gracefully transitions */
 
   /* ===================== RESPONSIVE ===================== */
   @media (max-width:1024px) {

@@ -1,9 +1,7 @@
 export const dynamic = "force-dynamic";
 
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import ServicesList from '@/components/ServicesList'
-
-const prisma = new PrismaClient()
 
 export default async function Services() {
   let services: any[] = []

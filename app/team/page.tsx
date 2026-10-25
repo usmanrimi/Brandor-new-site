@@ -1,8 +1,6 @@
 export const dynamic = "force-dynamic";
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import TeamCard from './TeamCard'
-
-const prisma = new PrismaClient()
 
 export default async function Team() {
   let teamMembers: any[] = []

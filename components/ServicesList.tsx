@@ -46,15 +46,15 @@ export default function ServicesList({ services }: ServicesListProps) {
             onBlur={() => setHoveredId(null)}
             className="service-row-item"
             style={{
-              padding: '32px 24px',
+              padding: '32px 28px',
               borderBottom: '1px solid rgba(255, 235, 208, 0.12)',
               display: 'grid',
               gridTemplateColumns: '80px 1fr auto',
               gap: '28px',
               alignItems: 'center',
-              backgroundColor: isHovered ? 'rgba(255, 235, 208, 0.04)' : 'transparent',
-              borderRadius: '12px',
-              transition: 'background-color 0.25s ease, transform 0.25s ease, padding 0.25s ease',
+              backgroundColor: isHovered ? 'rgba(255, 235, 208, 0.05)' : 'transparent',
+              borderRadius: '16px',
+              transition: 'background-color 0.25s ease, transform 0.25s ease, border-color 0.25s ease',
               outline: 'none',
               cursor: 'default'
             }}
@@ -63,8 +63,8 @@ export default function ServicesList({ services }: ServicesListProps) {
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
               <span style={{
                 fontFamily: 'var(--mono)',
-                fontSize: '0.85rem',
-                color: isHovered ? 'var(--orange)' : 'rgba(255, 235, 208, 0.5)',
+                fontSize: '0.82rem',
+                color: isHovered ? 'var(--orange)' : 'rgba(255, 235, 208, 0.55)',
                 fontWeight: 700,
                 letterSpacing: '0.08em',
                 transition: 'color 0.25s ease'
@@ -72,17 +72,18 @@ export default function ServicesList({ services }: ServicesListProps) {
                 {orderNumber}
               </span>
               <div style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '50%',
+                width: '46px',
+                height: '46px',
+                borderRadius: '12px',
                 backgroundColor: isHovered ? 'var(--orange)' : 'rgba(255, 235, 208, 0.08)',
                 color: isHovered ? '#ffffff' : 'var(--orange)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'all 0.25s ease'
+                transition: 'all 0.25s ease',
+                boxShadow: isHovered ? '0 4px 14px rgba(253, 137, 22, 0.4)' : 'none'
               }}>
-                <IconComponent size={20} />
+                <IconComponent size={22} />
               </div>
             </div>
 
@@ -102,9 +103,9 @@ export default function ServicesList({ services }: ServicesListProps) {
               <p style={{
                 margin: 0,
                 color: 'var(--pure)',
-                opacity: isHovered ? 0.95 : 0.8,
-                fontSize: '1rem',
-                lineHeight: 1.6,
+                opacity: isHovered ? 0.95 : 0.82,
+                fontSize: '1.02rem',
+                lineHeight: 1.65,
                 maxWidth: '780px',
                 transition: 'opacity 0.25s ease'
               }}>
@@ -114,8 +115,8 @@ export default function ServicesList({ services }: ServicesListProps) {
 
             {/* Animated Micro-Arrow Indicator */}
             <div style={{
-              width: '40px',
-              height: '40px',
+              width: '42px',
+              height: '42px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

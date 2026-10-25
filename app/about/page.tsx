@@ -1,21 +1,29 @@
 export const dynamic = "force-dynamic";
 
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import * as LucideIcons from 'lucide-react'
-
-const prisma = new PrismaClient()
+import VideoEmbed from '@/components/VideoEmbed'
 
 export default async function About() {
   let aboutContent = await prisma.aboutContent.findUnique({ where: { id: 'global' } })
 
-  // Fallback in case the DB is empty or migrating
+  const defaultCoreValues = [
+    'Creativity & Innovation: Developing fresh, imaginative media and visual solutions that elevate African narratives and capture audience attention.',
+    'Inclusion & Accessibility: Championing accessible storytelling and inclusive media practices that empower marginalized communities, youths, and persons with disabilities.',
+    'Integrity & Accountability: Upholding absolute transparency, honesty, and professional responsibility in every client partnership, donor engagement, and project delivery.',
+    'Excellence & Professionalism: Delivering uncompromising craft, broadcast-grade production standards, and meticulous attention to detail in all our work.',
+    'Purpose-Driven Storytelling: Transforming real human experiences, programs, and social impact into compelling narratives that drive meaningful change.',
+    'Collaboration & Empowerment: Partnering closely with organizations, institutions, and communities to build lasting capacity, shared ownership, and mutual growth.'
+  ].join('\n')
+
+  // Fallback in case DB fields are empty
   if (!aboutContent) {
     aboutContent = {
       id: 'global',
       aboutText: "Brandor is a creative branding, media production, and storytelling agency dedicated to helping organizations, businesses, institutions, and development partners communicate their impact with clarity, creativity, and purpose.\n\nWe believe every project, every event, and every initiative has a story worth telling. Our role is to transform moments, achievements, and ideas into compelling visual experiences that inspire trust, engagement, and action.\n\nFrom corporate branding and media production to event documentation, strategic storytelling, and capacity building, we help our clients showcase their work professionally while creating meaningful connections with their audiences.",
       mission: "To empower brands, organizations, and communities through strategic branding, impactful storytelling, professional media production, and capacity-building initiatives that drive visibility, growth, and lasting impact.",
       vision: "To become Africa's leading creative agency for branding, storytelling, and impact documentation, helping organizations communicate their value, amplify their achievements, and inspire positive change.",
-      coreValues: "Creativity with Purpose: We turn ideas into meaningful visuals and stories that serve clear goals.\nQuality & Craft: We bring care, consistency, and attention to detail to every project.\nIntegrity & Trust: We work honestly, communicate clearly, and honour our commitments.\nCollaboration: We listen closely and work with our clients as creative partners.\nAuthentic Storytelling: We represent people, organisations, and their experiences with accuracy and respect.\nLearning & Innovation: We keep improving our skills and exploring better ways to create and communicate.",
+      coreValues: defaultCoreValues,
       process: "",
       whyUs: "",
       aboutHeroImage: "/assets/hero-image.jpg",
@@ -23,6 +31,11 @@ export default async function About() {
       updatedAt: new Date()
     }
   }
+
+  // Ensure core values are always populated with the 6 approved values
+  const activeCoreValues = (aboutContent.coreValues && aboutContent.coreValues.trim().length > 10 && aboutContent.coreValues !== '[]') 
+    ? aboutContent.coreValues 
+    : defaultCoreValues
 
   // Extract the 3 existing About paragraphs
   const rawParagraphs = (aboutContent.aboutText || '')
@@ -44,15 +57,16 @@ export default async function About() {
 
   const getCoreValueIcon = (title: string) => {
     const t = title.toLowerCase()
-    if (t.includes('creativity') || t.includes('purpose')) return LucideIcons.Lightbulb
-    if (t.includes('quality') || t.includes('craft') || t.includes('excellence')) return LucideIcons.Award
-    if (t.includes('integrity') || t.includes('trust')) return LucideIcons.ShieldCheck
-    if (t.includes('collaboration')) return LucideIcons.Users
-    if (t.includes('story') || t.includes('authentic')) return LucideIcons.BookOpen
-    if (t.includes('learning') || t.includes('innovation')) return LucideIcons.Sparkles
-    if (t.includes('impact')) return LucideIcons.Target
-    return LucideIcons.CheckCircle
+    if (t.includes('creativity') || t.includes('innovation')) return LucideIcons.Lightbulb
+    if (t.includes('inclusion') || t.includes('accessibility')) return LucideIcons.HeartHandshake
+    if (t.includes('integrity') || t.includes('accountability')) return LucideIcons.ShieldCheck
+    if (t.includes('excellence') || t.includes('professionalism')) return LucideIcons.Award
+    if (t.includes('purpose') || t.includes('storytelling')) return LucideIcons.BookOpen
+    if (t.includes('collaboration') || t.includes('empowerment')) return LucideIcons.Users
+    return LucideIcons.Sparkles
   }
+
+  const agencyVideoUrl = "https://youtu.be/uVEWo6469eE?si=hV8RhfGhOBR24KRO"
 
   return (
     <div style={{ paddingTop: '100px' }}>
@@ -67,7 +81,7 @@ export default async function About() {
             alignItems: 'center'
           }}>
             {/* Left Column: Heading & Core Introduction */}
-            <div className="reveal">
+            <div>
               <p className="eyebrow" style={{ color: 'var(--orange)', marginBottom: '14px', letterSpacing: '0.14em' }}>
                 About Us
               </p>
@@ -102,8 +116,8 @@ export default async function About() {
               </p>
             </div>
 
-            {/* Right Column: Hero Photograph with Super Admin Customization */}
-            <div className="reveal" style={{
+            {/* Right Column: Hero Photograph */}
+            <div style={{
               width: '100%',
               height: '420px',
               borderRadius: '20px',
@@ -113,7 +127,7 @@ export default async function About() {
             }}>
               <img 
                 src={aboutContent.aboutHeroImage || "/assets/hero-image.jpg"} 
-                alt="Brandor Creative Agency Team" 
+                alt="Brandor Creative Agency Team in Action" 
                 loading="lazy" 
                 decoding="async" 
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
@@ -124,7 +138,7 @@ export default async function About() {
       </section>
 
       {/* ===================== THREE ALIGNED PANELS FOR ABOUT PARAGRAPHS ===================== */}
-      <section style={{ padding: '40px 0 90px', background: 'var(--pure)' }}>
+      <section style={{ padding: '40px 0 80px', background: 'var(--pure)' }}>
         <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{
             display: 'grid',
@@ -132,12 +146,10 @@ export default async function About() {
             gap: '28px'
           }}>
             {paragraphs.map((para, i) => {
-              // Alternating coordinated cream, navy, and orange treatments
               const isDark = i === 1
               return (
                 <div 
                   key={i}
-                  className="reveal"
                   style={{
                     backgroundColor: isDark ? 'var(--denim)' : '#ffffff',
                     color: isDark ? 'var(--pure)' : 'var(--denim)',
@@ -185,12 +197,38 @@ export default async function About() {
         </div>
       </section>
 
+      {/* ===================== AGENCY INTRODUCTION VIDEO ===================== */}
+      <section id="agency-video" style={{ padding: '80px 0', background: '#f8fafc', borderTop: '1px solid rgba(23, 59, 97, 0.06)', borderBottom: '1px solid rgba(23, 59, 97, 0.06)' }}>
+        <div className="wrap" style={{ maxWidth: '1080px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 40px' }}>
+            <span className="eyebrow" style={{ color: 'var(--orange)', justifyContent: 'center', marginBottom: '12px' }}>
+              Brandor in Action
+            </span>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', color: 'var(--denim)', marginBottom: '16px' }}>
+              See how we capture impact.
+            </h2>
+            <p style={{ color: 'var(--ink)', opacity: 0.85, fontSize: '1.1rem', lineHeight: 1.7 }}>
+              Watch our agency introduction video to explore how we document developmental programs, empower communities, and craft memorable visual narratives across Africa.
+            </p>
+          </div>
+
+          <div style={{ maxWidth: '880px', margin: '0 auto' }}>
+            <VideoEmbed 
+              url={agencyVideoUrl}
+              title="Brandor Creative Agency — Introduction Video"
+              aspectRatio="16/9"
+              customThumbnail="/assets/hero-image.jpg"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ===================== MISSION & VISION ===================== */}
       <section id="mission-vision" style={{ background: 'var(--denim)', padding: '100px 0', color: 'var(--pure)' }}>
         <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '60px', marginBottom: '80px' }}>
             
-            <div className="reveal stagger-1" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
                 <div style={{ width: '40px', height: '40px', borderRadius: '10px', backgroundColor: 'rgba(253, 137, 22, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--orange)' }}>
                   <LucideIcons.Compass size={22} />
@@ -200,7 +238,7 @@ export default async function About() {
               <p style={{ lineHeight: '1.8', opacity: '0.92', fontSize: '1.1rem' }}>{aboutContent.mission}</p>
             </div>
             
-            <div className="reveal stagger-2" style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
                 <div style={{ width: '40px', height: '40px', borderRadius: '10px', backgroundColor: 'rgba(253, 137, 22, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--orange)' }}>
                   <LucideIcons.Eye size={22} />
@@ -211,8 +249,8 @@ export default async function About() {
             </div>
           </div>
 
-          {/* Core Values Section */}
-          <div className="reveal stagger-3" style={{ borderTop: '1px solid rgba(255, 235, 208, 0.12)', paddingTop: '64px' }}>
+          {/* ===================== CORE VALUES (ITEM 7) ===================== */}
+          <div style={{ borderTop: '1px solid rgba(255, 235, 208, 0.12)', paddingTop: '64px' }}>
             <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 48px' }}>
               <span className="eyebrow" style={{ color: 'var(--orange)', justifyContent: 'center', marginBottom: '12px' }}>
                 What Guides Us
@@ -224,14 +262,14 @@ export default async function About() {
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
               gap: '28px'
             }}>
-              {aboutContent.coreValues.split('\n').map((line, idx) => {
+              {activeCoreValues.split('\n').map((line, idx) => {
                 if (!line.trim()) return null
                 const parts = line.split(':')
                 const title = parts[0].trim()
-                const desc = (parts[1] || '').trim()
+                const desc = parts.slice(1).join(':').trim()
                 const Icon = getCoreValueIcon(title)
 
                 return (
@@ -239,13 +277,13 @@ export default async function About() {
                     key={idx} 
                     style={{ 
                       backgroundColor: 'rgba(255, 235, 208, 0.05)',
-                      border: '1px solid rgba(255, 235, 208, 0.1)',
+                      border: '1px solid rgba(255, 235, 208, 0.12)',
                       borderRadius: '16px',
-                      padding: '24px',
+                      padding: '28px 24px',
                       display: 'flex', 
                       gap: '18px', 
                       alignItems: 'flex-start',
-                      transition: 'background-color 0.2s ease'
+                      transition: 'background-color 0.2s ease, transform 0.2s ease'
                     }}
                   >
                     <div style={{ 
@@ -257,7 +295,8 @@ export default async function About() {
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center',
-                      flexShrink: 0
+                      flexShrink: 0,
+                      boxShadow: '0 4px 14px rgba(253, 137, 22, 0.3)'
                     }}>
                       <Icon size={22} />
                     </div>
@@ -275,8 +314,8 @@ export default async function About() {
                         <p style={{ 
                           fontSize: '0.95rem', 
                           color: 'var(--pure)',
-                          opacity: 0.85, 
-                          lineHeight: 1.6,
+                          opacity: 0.88, 
+                          lineHeight: 1.65,
                           margin: 0 
                         }}>
                           {desc}
@@ -291,35 +330,102 @@ export default async function About() {
         </div>
       </section>
 
-      {/* ===================== APPROACH / THE PROCESS ===================== */}
-      <section id="approach" className="approach" style={{ padding: '100px 0' }}>
+      {/* ===================== PROCESS (ITEM 8: REMOVE 'THE PROCESS', KEEP 'HOW WE BRING YOUR VISION TO LIFE') ===================== */}
+      <section id="approach" className="approach" style={{ padding: '100px 0', background: 'var(--turquoise)', color: 'var(--pure)' }}>
         <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
-          <div className="section-head reveal" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 60px' }}>
-            <span className="eyebrow" style={{ color: 'var(--orange)', justifyContent: 'center' }}>The Process</span>
-            <h2 style={{ fontSize: '2.5rem', color: 'var(--denim)' }}>How we bring your vision to life.</h2>
-            <p style={{ color: 'var(--ink)', opacity: 0.85 }}>A systematic, collaborative approach to ensure every deliverable hits the mark and exceeds expectations.</p>
+          <div className="section-head" style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 60px' }}>
+            <h2 style={{ fontSize: 'clamp(2.2rem, 4vw, 3rem)', color: 'var(--pure)', marginBottom: '16px' }}>
+              How We Bring Your Vision to Life
+            </h2>
+            <p style={{ color: 'var(--pure)', opacity: 0.9, fontSize: '1.1rem', lineHeight: 1.7 }}>
+              A systematic, collaborative approach to ensure every deliverable hits the mark, respects community context, and exceeds stakeholder expectations.
+            </p>
           </div>
-          <div className="timeline">
-            <div className="step reveal stagger-1">
-              <div className="step-arch"></div>
-              <h4>Discovery</h4>
-              <p>Deep-dive into your goals, audience, and the core message you need to communicate.</p>
-            </div>
-            <div className="step reveal stagger-2">
-              <div className="step-arch"></div>
-              <h4>Strategy</h4>
-              <p>Developing a creative and strategic roadmap tailored to your objectives.</p>
-            </div>
-            <div className="step reveal stagger-3">
-              <div className="step-arch"></div>
-              <h4>Production</h4>
-              <p>Executing the creative work through branding, photography, videography, and content creation.</p>
-            </div>
-            <div className="step reveal stagger-4">
-              <div className="step-arch"></div>
-              <h4>Delivery</h4>
-              <p>Refining and delivering professional assets that are ready to make an impact.</p>
-            </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '24px'
+          }}>
+            {[
+              {
+                step: '01',
+                title: 'Discovery',
+                desc: 'Deep-dive into your goals, audience, stakeholders, and the core impact message you need to communicate.'
+              },
+              {
+                step: '02',
+                title: 'Strategy',
+                desc: 'Developing a creative and strategic roadmap tailored to your specific institutional or corporate objectives.'
+              },
+              {
+                step: '03',
+                title: 'Production',
+                desc: 'Executing the creative work through broadcast-standard branding, photography, videography, and content creation.'
+              },
+              {
+                step: '04',
+                title: 'Delivery',
+                desc: 'Refining, packaging, and delivering professional digital and print assets that are immediately ready to make an impact.'
+              }
+            ].map((stage, idx) => (
+              <div 
+                key={idx}
+                style={{
+                  backgroundColor: 'rgba(23, 59, 97, 0.4)',
+                  border: '1px solid rgba(255, 235, 208, 0.15)',
+                  borderRadius: '16px',
+                  padding: '32px 24px',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px'
+                }}
+              >
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '8px'
+                }}>
+                  <span style={{
+                    fontFamily: 'var(--mono)',
+                    fontSize: '1rem',
+                    color: 'var(--orange)',
+                    fontWeight: 700,
+                    letterSpacing: '0.1em'
+                  }}>
+                    {stage.step}
+                  </span>
+                  <div style={{
+                    width: '32px',
+                    height: '2px',
+                    backgroundColor: 'var(--orange)',
+                    borderRadius: '1px'
+                  }} />
+                </div>
+
+                <h4 style={{
+                  fontFamily: 'var(--display)',
+                  fontSize: '1.35rem',
+                  fontWeight: 700,
+                  color: 'var(--pure)',
+                  margin: 0
+                }}>
+                  {stage.title}
+                </h4>
+
+                <p style={{
+                  fontSize: '0.95rem',
+                  opacity: 0.88,
+                  lineHeight: 1.65,
+                  margin: 0,
+                  color: 'var(--pure)'
+                }}>
+                  {stage.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -328,31 +434,39 @@ export default async function About() {
       <section id="why" style={{ background: 'var(--denim)', color: 'var(--pure)', padding: '100px 0' }}>
         <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
           <div className="why-grid">
-            <div className="why-visual reveal">
-              <img src={aboutContent?.whyUsImage || "/assets/why-image.jpg"} alt="Brandor abstract" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
+            <div className="why-visual">
+              <img 
+                src={aboutContent?.whyUsImage || "/assets/why-image.jpg"} 
+                alt="Why Organizations Choose Brandor" 
+                loading="lazy" 
+                decoding="async" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} 
+              />
             </div>
-            <div className="reveal">
-              <h2 style={{ marginBottom: '16px', color: 'var(--pure)', fontSize: '2.8rem', position: 'relative', display: 'inline-block' }} className="gsap-split">
+            <div>
+              <h2 style={{ marginBottom: '16px', color: 'var(--pure)', fontSize: '2.8rem', position: 'relative', display: 'inline-block' }}>
                 Why Organizations Choose Us
                 <div style={{ position: 'absolute', bottom: '-8px', left: '0', width: '60px', height: '4px', background: 'var(--orange)', borderRadius: '2px' }}></div>
               </h2>
-              <p style={{ fontSize: '1.2rem', color: 'var(--pure)', opacity: 0.9, marginBottom: '40px', marginTop: '24px' }}>We don't just record events we capture impact.</p>
+              <p style={{ fontSize: '1.2rem', color: 'var(--pure)', opacity: 0.9, marginBottom: '40px', marginTop: '24px' }}>
+                We don't just record events — we capture impact.
+              </p>
               <div className="why-list">
                 <div className="why-item">
                   <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Camera size={36} strokeWidth={1.5} /></div>
-                  <div><h4 style={{ color: 'var(--orange)' }}>Professional Documentation</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>Every project is planned, executed, and delivered to the highest professional standards.</p></div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>Professional Documentation</h4><p style={{ color: 'var(--pure)', opacity: 0.85 }}>Every project is planned, executed, and delivered to the highest professional standards.</p></div>
                 </div>
                 <div className="why-item">
                   <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Award size={36} strokeWidth={1.5} /></div>
-                  <div><h4 style={{ color: 'var(--orange)' }}>High-Quality Production</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We prioritize quality at every stage, from concept development to final delivery.</p></div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>High-Quality Production</h4><p style={{ color: 'var(--pure)', opacity: 0.85 }}>We prioritize quality at every stage, from concept development to final broadcast-ready delivery.</p></div>
                 </div>
                 <div className="why-item">
                   <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Megaphone size={36} strokeWidth={1.5} /></div>
-                  <div><h4 style={{ color: 'var(--orange)' }}>Strategic Storytelling</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We transform activities, projects, and events into stories that resonate with audiences.</p></div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>Strategic Storytelling</h4><p style={{ color: 'var(--pure)', opacity: 0.85 }}>We transform activities, projects, and events into stories that resonate with donors and audiences.</p></div>
                 </div>
                 <div className="why-item">
                   <div className="why-icon" style={{ background: 'transparent', color: 'var(--orange)' }}><LucideIcons.Globe size={36} strokeWidth={1.5} /></div>
-                  <div><h4 style={{ color: 'var(--orange)' }}>NGO &amp; Development Expertise</h4><p style={{ color: 'var(--pure)', opacity: 0.8 }}>We understand development programs, donor expectations, and impact communication.</p></div>
+                  <div><h4 style={{ color: 'var(--orange)' }}>NGO &amp; Development Expertise</h4><p style={{ color: 'var(--pure)', opacity: 0.85 }}>We understand development programs, donor expectations, and community-centered communication.</p></div>
                 </div>
               </div>
             </div>

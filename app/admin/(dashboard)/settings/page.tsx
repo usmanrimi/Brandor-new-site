@@ -1,11 +1,8 @@
 import React from 'react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import { updateSettings } from './actions'
 
 export const dynamic = "force-dynamic";
-
-
-const prisma = new PrismaClient()
 
 export default async function AdminSettings() {
   let settings = await prisma.setting.findUnique({ where: { id: 'global' } })

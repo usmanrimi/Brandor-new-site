@@ -1,10 +1,8 @@
 export const dynamic = "force-dynamic";
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import * as Icons from 'lucide-react'
 import { revalidatePath } from 'next/cache'
-
-const prisma = new PrismaClient()
 
 async function deleteProject(formData: FormData) {
   'use server'

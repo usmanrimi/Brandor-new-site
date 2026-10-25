@@ -1,11 +1,9 @@
 export const dynamic = "force-dynamic";
 import React from 'react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
 import { updateBranding } from './actions'
 import * as Icons from 'lucide-react'
 import MediaPicker from '../../components/MediaPicker'
-
-const prisma = new PrismaClient()
 
 export default async function BrandingSettingsPage() {
   const settings = await prisma.setting.findUnique({
