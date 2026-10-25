@@ -16,7 +16,7 @@
   body{
     font-family:var(--body);
     color:var(--denim);
-    background:var(--pure);
+    background:#ffffff;
     line-height:1.6;
     overflow-x:hidden;
   }
@@ -29,7 +29,7 @@
   /* ===================== NAV ===================== */
   .site-header{
     position:fixed; top:0; left:0; right:0; z-index:100;
-    background:rgba(255,235,208,0.86);
+    background:rgba(255,255,255,0.95);
     backdrop-filter:blur(10px);
     border-bottom:1px solid rgba(23,59,97,0.08);
     transition:background .3s ease;
@@ -116,10 +116,10 @@
     padding:15px 30px; border-radius:var(--arch-r); font-weight:700; font-size:.95rem;
     transition:all .25s ease; border:2px solid transparent;
   }
-  .btn-primary{background:var(--denim); color:var(--pure);}
+  .btn-primary{background:var(--orange); color:#ffffff;}
   .btn-primary:hover{background:var(--orange); transform:translateY(-3px); box-shadow:0 10px 24px rgba(23,59,97,.25);}
   .btn-outline{border-color:var(--denim); color:var(--denim);}
-  .btn-outline:hover{background:var(--denim); color:var(--pure); transform:translateY(-3px);}
+  .btn-outline:hover{background:var(--denim); color:#ffffff; transform:translateY(-3px);}
 
   /* The Door visual */
   .door-frame{
@@ -319,7 +319,7 @@
   .why-item p{font-size:.92rem; color:var(--ink); opacity:.75;}
 
   /* ===================== CLIENTS ===================== */
-  .clients{background:var(--pure); text-align:center;}
+  .clients{background:#ffffff; text-align:center;}
   .clients .section-head{margin:0 auto 50px; text-align:center;}
   .clients .section-head p{margin:0 auto;}
   .client-pills{
@@ -425,7 +425,7 @@
   }
 
   /* ===================== TEAM ===================== */
-  .team{background:var(--pure);}
+  .team{background:#ffffff;}
   .team .section-head{text-align:center; margin:0 auto 64px;}
   .team-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:40px;}
   
@@ -610,3 +610,13 @@
   } 
 }
 
+
+@media (max-width: 680px) {
+  .services-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .service-card-block {
+    padding: 26px 20px !important;
+  }
+}

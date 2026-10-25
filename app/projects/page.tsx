@@ -22,14 +22,14 @@ export default async function Projects() {
     <div style={{ paddingTop: '100px' }}>
       {/* ===================== HERO SECTION ===================== */}
       <section style={{ 
-        paddingTop: '60px', 
+        paddingTop: '70px', 
         paddingBottom: '60px', 
-        background: 'var(--pure)',
+        background: '#ffffff',
         borderBottom: '1px solid rgba(23, 59, 97, 0.06)'
       }}>
         <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
           <div style={{ 
-            maxWidth: '920px', 
+            maxWidth: '960px', 
             margin: '0 auto', 
             textAlign: 'center',
             display: 'flex',
@@ -52,7 +52,7 @@ export default async function Projects() {
             {/* Prominent Introductory Headline */}
             <h1 style={{ 
               color: 'var(--denim)', 
-              fontSize: 'clamp(2.4rem, 5vw, 3.8rem)', 
+              fontSize: 'clamp(2.5rem, 5.2vw, 4rem)', 
               fontFamily: 'var(--display)',
               fontWeight: 800,
               lineHeight: 1.15,
@@ -64,10 +64,10 @@ export default async function Projects() {
             {/* Centered, widened supporting description */}
             <p style={{ 
               color: 'var(--ink)', 
-              fontSize: '1.15rem',
-              lineHeight: 1.7,
-              opacity: 0.85,
-              maxWidth: '760px',
+              fontSize: '1.18rem',
+              lineHeight: 1.75,
+              opacity: 0.88,
+              maxWidth: '840px',
               margin: '0 auto'
             }}>
               Explore our recent event documentation, branding projects, documentary films, and strategic storytelling initiatives across Africa.
@@ -79,7 +79,7 @@ export default async function Projects() {
       {/* ===================== PROJECTS GRID ===================== */}
       <section style={{ 
         padding: '70px 0 90px', 
-        background: 'var(--pure)', 
+        background: '#f8fafc', 
         minHeight: '40vh' 
       }}>
         <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
@@ -104,21 +104,21 @@ export default async function Projects() {
         </div>
       </section>
 
-      {/* ===================== VIDEO & DOCUMENTARY SHOWCASE (ITEM 5) ===================== */}
+      {/* ===================== VIDEO & DOCUMENTARY SHOWCASE ===================== */}
       <section style={{ 
         padding: '90px 0 110px', 
         background: 'var(--denim)', 
-        color: 'var(--pure)' 
+        color: '#ffffff' 
       }}>
         <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
-          <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 50px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '860px', margin: '0 auto 50px' }}>
             <span className="eyebrow" style={{ color: 'var(--orange)', justifyContent: 'center', marginBottom: '12px' }}>
               Documentary & Video Showcase
             </span>
-            <h2 style={{ color: 'var(--pure)', fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', marginBottom: '16px' }}>
+            <h2 style={{ color: '#ffffff', fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)', marginBottom: '16px', fontFamily: 'var(--display)', fontWeight: 800 }}>
               Stories in motion.
             </h2>
-            <p style={{ color: 'var(--pure)', opacity: 0.88, fontSize: '1.1rem', lineHeight: 1.7 }}>
+            <p style={{ color: '#ffffff', opacity: 0.9, fontSize: '1.14rem', lineHeight: 1.75, maxWidth: '780px', margin: '0 auto' }}>
               Broadcast-quality videography, stakeholder testimonials, and human-centered documentaries capturing developmental impact across communities.
             </p>
           </div>
@@ -129,19 +129,18 @@ export default async function Projects() {
             gap: '36px',
             alignItems: 'start'
           }}>
-            {/* Featured Agency Video */}
+            {/* Featured Agency Video - Uses real video thumbnail */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               <VideoEmbed 
                 url={introVideoUrl}
                 title="Brandor Creative Agency — Introduction Documentary"
                 aspectRatio="16/9"
-                customThumbnail="/assets/hero-image.jpg"
               />
               <div>
-                <h3 style={{ color: 'var(--pure)', fontFamily: 'var(--display)', fontSize: '1.35rem', margin: '6px 0 6px' }}>
+                <h3 style={{ color: '#ffffff', fontFamily: 'var(--display)', fontSize: '1.35rem', margin: '6px 0 6px', fontWeight: 700 }}>
                   Brandor Agency Overview
                 </h3>
-                <p style={{ color: 'var(--pure)', opacity: 0.8, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+                <p style={{ color: '#ffffff', opacity: 0.85, fontSize: '0.96rem', lineHeight: 1.65, margin: 0 }}>
                   A behind-the-scenes look at how Brandor partners with international agencies, institutions, and local communities to document milestones with authentic storytelling.
                 </p>
               </div>
@@ -167,10 +166,10 @@ export default async function Projects() {
                     }}>
                       {vp.category} • {vp.client}
                     </span>
-                    <h3 style={{ color: 'var(--pure)', fontFamily: 'var(--display)', fontSize: '1.35rem', margin: '6px 0 6px' }}>
+                    <h3 style={{ color: '#ffffff', fontFamily: 'var(--display)', fontSize: '1.35rem', margin: '6px 0 6px', fontWeight: 700 }}>
                       {vp.title}
                     </h3>
-                    <p style={{ color: 'var(--pure)', opacity: 0.8, fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+                    <p style={{ color: '#ffffff', opacity: 0.85, fontSize: '0.96rem', lineHeight: 1.65, margin: 0 }}>
                       {vp.description?.length > 140 ? `${vp.description.substring(0, 140)}...` : vp.description}
                     </p>
                   </div>
@@ -178,8 +177,8 @@ export default async function Projects() {
               ))
             ) : (
               <div style={{ 
-                backgroundColor: 'rgba(255, 235, 208, 0.05)', 
-                border: '1px solid rgba(255, 235, 208, 0.1)', 
+                backgroundColor: 'rgba(255, 255, 255, 0.05)', 
+                border: '1px solid rgba(255, 255, 255, 0.12)', 
                 borderRadius: '16px', 
                 padding: '36px 28px',
                 display: 'flex',
@@ -188,14 +187,14 @@ export default async function Projects() {
                 minHeight: '260px'
               }}>
                 <Icons.Clapperboard size={36} color="var(--orange)" style={{ marginBottom: '16px' }} />
-                <h4 style={{ color: 'var(--pure)', fontSize: '1.25rem', fontFamily: 'var(--display)', margin: '0 0 8px' }}>
+                <h4 style={{ color: '#ffffff', fontSize: '1.35rem', fontFamily: 'var(--display)', margin: '0 0 8px', fontWeight: 700 }}>
                   Comprehensive Video Production
                 </h4>
-                <p style={{ color: 'var(--pure)', opacity: 0.85, fontSize: '0.95rem', lineHeight: 1.65, margin: 0 }}>
+                <p style={{ color: '#ffffff', opacity: 0.88, fontSize: '0.98rem', lineHeight: 1.7, margin: 0 }}>
                   We provide 4K camera teams, multi-microphone audio setups, aerial drone coverage, and post-production editing for conferences, field visits, and human-interest documentaries across Nigeria and West Africa.
                 </p>
                 <div style={{ marginTop: '20px' }}>
-                  <a href="/contact" className="btn btn-primary" style={{ backgroundColor: 'var(--orange)', color: '#ffffff', padding: '10px 22px', fontSize: '0.88rem' }}>
+                  <a href="/contact" className="btn btn-primary" style={{ backgroundColor: 'var(--orange)', color: '#ffffff', padding: '10px 22px', fontSize: '0.88rem', fontWeight: 700 }}>
                     Request Video Coverage
                   </a>
                 </div>

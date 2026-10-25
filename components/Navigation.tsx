@@ -61,7 +61,7 @@ export default function Navigation() {
         left: 0,
         right: 0,
         zIndex: 1000,
-        backgroundColor: 'rgba(255, 235, 208, 0.94)',
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderBottom: '1px solid rgba(23, 59, 97, 0.08)',
@@ -185,7 +185,7 @@ export default function Navigation() {
         }}
       >
         <div style={{
-          backgroundColor: '#FFEBD0',
+          backgroundColor: '#ffffff',
           borderBottom: '2px solid rgba(23, 59, 97, 0.1)',
           padding: '28px 24px 36px',
           boxShadow: '0 20px 40px rgba(23, 59, 97, 0.15)',

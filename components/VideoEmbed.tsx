@@ -68,8 +68,8 @@ export default function VideoEmbed({
   }
 
   // Use YouTube maxresdefault thumbnail with hqdefault fallback, or custom image
-  const defaultThumb = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
-  const thumbnailSrc = customThumbnail || defaultThumb
+  const defaultThumb = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`
+  const [thumbSrc, setThumbSrc] = useState(customThumbnail || defaultThumb)
 
   return (
     <div 
@@ -82,7 +82,7 @@ export default function VideoEmbed({
         overflow: 'hidden',
         backgroundColor: '#0e2840',
         boxShadow: '0 20px 40px rgba(23, 59, 97, 0.16)',
-        border: '1px solid rgba(255, 235, 208, 0.1)'
+        border: '1px solid rgba(255, 255, 255, 0.12)'
       }}
     >
       {isPlaying ? (
@@ -123,10 +123,15 @@ export default function VideoEmbed({
         >
           {/* Thumbnail */}
           <img 
-            src={thumbnailSrc} 
+            src={thumbSrc} 
             alt={title}
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"
+            onError={() => {
+              if (thumbSrc !== `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`) {
+                setThumbSrc(`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`)
+              }
+            }}
             style={{
               width: '100%',
               height: '100%',
@@ -141,7 +146,7 @@ export default function VideoEmbed({
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(180deg, rgba(23, 59, 97, 0.25) 0%, rgba(14, 40, 64, 0.72) 100%)',
+              background: 'linear-gradient(180deg, rgba(23, 59, 97, 0.2) 0%, rgba(14, 40, 64, 0.65) 100%)',
               transition: 'background 0.3s ease'
             }}
           />
@@ -180,10 +185,10 @@ export default function VideoEmbed({
             <span 
               style={{
                 fontFamily: 'var(--mono)',
-                fontSize: '0.8rem',
-                letterSpacing: '0.12em',
+                fontSize: '0.82rem',
+                letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: '#FFEBD0',
+                color: '#ffffff',
                 fontWeight: 700,
                 textShadow: '0 2px 8px rgba(0,0,0,0.6)'
               }}

@@ -30,7 +30,17 @@ export default function ServicesList({ services }: ServicesListProps) {
   }
 
   return (
-    <div className="services-row-container" style={{ width: '100%', maxWidth: '1080px', margin: '0 auto' }}>
+    <div 
+      className="services-cards-grid"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+        gap: '28px',
+        width: '100%',
+        maxWidth: '1180px',
+        margin: '0 auto'
+      }}
+    >
       {services.map((service, index) => {
         const IconComponent = getServiceIcon(service.title)
         const isHovered = hoveredId === service.id
@@ -39,92 +49,136 @@ export default function ServicesList({ services }: ServicesListProps) {
         return (
           <div
             key={service.id}
+            id={`service-${service.id}`}
             tabIndex={0}
             onMouseEnter={() => setHoveredId(service.id)}
             onMouseLeave={() => setHoveredId(null)}
             onFocus={() => setHoveredId(service.id)}
             onBlur={() => setHoveredId(null)}
-            className="service-row-item"
+            className="service-card-block"
             style={{
-              padding: '32px 28px',
-              borderBottom: '1px solid rgba(255, 235, 208, 0.12)',
-              display: 'grid',
-              gridTemplateColumns: '80px 1fr auto',
-              gap: '28px',
-              alignItems: 'center',
-              backgroundColor: isHovered ? 'rgba(255, 235, 208, 0.05)' : 'transparent',
-              borderRadius: '16px',
-              transition: 'background-color 0.25s ease, transform 0.25s ease, border-color 0.25s ease',
+              backgroundColor: isHovered ? 'rgba(23, 59, 97, 0.55)' : 'rgba(255, 255, 255, 0.05)',
+              border: isHovered ? '1px solid rgba(253, 137, 22, 0.45)' : '1px solid rgba(255, 255, 255, 0.12)',
+              borderRadius: '20px',
+              padding: '36px 30px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              transition: 'transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
+              transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
+              boxShadow: isHovered ? '0 18px 40px rgba(0, 0, 0, 0.28)' : '0 4px 20px rgba(0, 0, 0, 0.1)',
               outline: 'none',
-              cursor: 'default'
+              position: 'relative'
             }}
           >
-            {/* Service Number & Icon */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <span style={{
-                fontFamily: 'var(--mono)',
-                fontSize: '0.82rem',
-                color: isHovered ? 'var(--orange)' : 'rgba(255, 235, 208, 0.55)',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                transition: 'color 0.25s ease'
-              }}>
-                {orderNumber}
-              </span>
+            {/* Top Row: Index number & Brand Icon */}
+            <div>
               <div style={{
-                width: '46px',
-                height: '46px',
-                borderRadius: '12px',
-                backgroundColor: isHovered ? 'var(--orange)' : 'rgba(255, 235, 208, 0.08)',
-                color: isHovered ? '#ffffff' : 'var(--orange)',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.25s ease',
-                boxShadow: isHovered ? '0 4px 14px rgba(253, 137, 22, 0.4)' : 'none'
+                justifyContent: 'space-between',
+                marginBottom: '24px'
               }}>
-                <IconComponent size={22} />
-              </div>
-            </div>
+                <span style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: '0.9rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  color: 'var(--orange)'
+                }}>
+                  {orderNumber}
+                </span>
 
-            {/* Title & Description */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '12px',
+                  backgroundColor: isHovered ? 'var(--orange)' : 'rgba(253, 137, 22, 0.12)',
+                  color: isHovered ? '#ffffff' : 'var(--orange)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.3s ease',
+                  boxShadow: isHovered ? '0 6px 18px rgba(253, 137, 22, 0.35)' : 'none'
+                }}>
+                  <IconComponent size={22} />
+                </div>
+              </div>
+
+              {/* Title & Description */}
               <h3 style={{
-                margin: 0,
                 fontFamily: 'var(--display)',
-                fontSize: 'clamp(1.3rem, 2.8vw, 1.75rem)',
+                fontSize: '1.45rem',
                 fontWeight: 700,
-                color: isHovered ? 'var(--orange)' : 'var(--pure)',
-                transition: 'color 0.25s ease',
+                color: '#ffffff',
+                marginBottom: '14px',
                 lineHeight: 1.25
               }}>
                 {service.title}
               </h3>
+
               <p style={{
-                margin: 0,
-                color: 'var(--pure)',
-                opacity: isHovered ? 0.95 : 0.82,
-                fontSize: '1.02rem',
-                lineHeight: 1.65,
-                maxWidth: '780px',
-                transition: 'opacity 0.25s ease'
+                color: '#ffffff',
+                opacity: 0.88,
+                fontSize: '1rem',
+                lineHeight: 1.7,
+                margin: '0 0 28px'
               }}>
                 {service.description}
               </p>
             </div>
 
-            {/* Animated Micro-Arrow Indicator */}
+            {/* Meaningful CTAs */}
             <div style={{
-              width: '42px',
-              height: '42px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              color: isHovered ? 'var(--orange)' : 'rgba(255, 235, 208, 0.3)',
-              transform: isHovered ? 'translate(4px, -4px)' : 'none',
-              transition: 'transform 0.25s ease, color 0.25s ease'
+              justifyContent: 'space-between',
+              gap: '12px',
+              paddingTop: '20px',
+              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+              flexWrap: 'wrap'
             }}>
-              <Icons.ArrowUpRight size={24} />
+              <a 
+                href={`/services#service-${service.id}`}
+                style={{
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  color: '#ffffff',
+                  opacity: 0.85,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s ease, opacity 0.2s ease'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.opacity = '0.85' }}
+              >
+                Explore Service
+              </a>
+
+              <a 
+                href={`/contact?service=${encodeURIComponent(service.title)}`}
+                style={{
+                  backgroundColor: 'var(--orange)',
+                  color: '#ffffff',
+                  padding: '9px 18px',
+                  borderRadius: '999px',
+                  fontSize: '0.86rem',
+                  fontWeight: 700,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  textDecoration: 'none',
+                  transition: 'background-color 0.2s ease, transform 0.2s ease',
+                  boxShadow: '0 4px 12px rgba(253, 137, 22, 0.3)'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)' }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)' }}
+              >
+                <span>Discuss Your Project</span>
+                <Icons.ArrowRight size={14} />
+              </a>
             </div>
           </div>
         )

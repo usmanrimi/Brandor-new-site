@@ -16,10 +16,10 @@ export default function Footer() {
   return (
     <footer className="site-footer" style={{
       backgroundColor: 'var(--denim)',
-      color: 'var(--pure)',
+      color: '#ffffff',
       paddingTop: '80px',
       paddingBottom: '36px',
-      borderTop: '1px solid rgba(255, 235, 208, 0.12)'
+      borderTop: '1px solid rgba(255, 255, 255, 0.12)'
     }}>
       <div className="wrap" style={{ maxWidth: '1180px', margin: '0 auto', padding: '0 24px' }}>
         {/* Main 4-Column Footer Grid */}
@@ -28,7 +28,7 @@ export default function Footer() {
           gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: '48px',
           paddingBottom: '56px',
-          borderBottom: '1px solid rgba(255, 235, 208, 0.12)'
+          borderBottom: '1px solid rgba(255, 255, 255, 0.12)'
         }}>
           {/* Column 1: Brand & Tagline */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -82,12 +82,12 @@ export default function Footer() {
               Quick Navigation
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem' }}>
-              <Link href="/" style={{ opacity: 0.85, transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = 'var(--pure)'; e.currentTarget.style.opacity = '0.85' }}>Home</Link>
-              <Link href="/about" style={{ opacity: 0.85, transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = 'var(--pure)'; e.currentTarget.style.opacity = '0.85' }}>About Us</Link>
-              <Link href="/services" style={{ opacity: 0.85, transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = 'var(--pure)'; e.currentTarget.style.opacity = '0.85' }}>Services</Link>
-              <Link href="/projects" style={{ opacity: 0.85, transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = 'var(--pure)'; e.currentTarget.style.opacity = '0.85' }}>Projects & Portfolio</Link>
-              <Link href="/testimonials" style={{ opacity: 0.85, transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = 'var(--pure)'; e.currentTarget.style.opacity = '0.85' }}>Testimonials</Link>
-              <Link href="/team" style={{ opacity: 0.85, transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = 'var(--pure)'; e.currentTarget.style.opacity = '0.85' }}>Our Team</Link>
+              <Link href="/" style={{ opacity: 0.88, color: '#ffffff', transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.opacity = '0.88' }}>Home</Link>
+              <Link href="/about" style={{ opacity: 0.88, color: '#ffffff', transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.opacity = '0.88' }}>About Us</Link>
+              <Link href="/services" style={{ opacity: 0.88, color: '#ffffff', transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.opacity = '0.88' }}>Services</Link>
+              <Link href="/projects" style={{ opacity: 0.88, color: '#ffffff', transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.opacity = '0.88' }}>Projects & Portfolio</Link>
+              <Link href="/testimonials" style={{ opacity: 0.88, color: '#ffffff', transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.opacity = '0.88' }}>Testimonials</Link>
+              <Link href="/team" style={{ opacity: 0.88, color: '#ffffff', transition: 'color 0.2s, opacity 0.2s', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.color = 'var(--orange)'; e.currentTarget.style.opacity = '1' }} onMouseLeave={e => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.opacity = '0.88' }}>Our Team</Link>
             </div>
           </div>
 
@@ -105,7 +105,7 @@ export default function Footer() {
             }}>
               What We Do
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', opacity: 0.85 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.92rem', opacity: 0.88 }}>
               <span>Branding & Identity</span>
               <span>Media Production</span>
               <span>Event & Training Documentation</span>
@@ -143,10 +143,10 @@ export default function Footer() {
 
             {/* Prominent "Let's Work Together" CTA */}
             <div style={{
-              backgroundColor: 'rgba(255, 235, 208, 0.06)',
+              backgroundColor: 'rgba(255, 255, 255, 0.06)',
               borderRadius: '14px',
               padding: '20px',
-              border: '1px solid rgba(255, 235, 208, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
               marginTop: '4px'
             }}>
               <p style={{
