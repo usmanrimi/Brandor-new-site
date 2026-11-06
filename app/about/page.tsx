@@ -150,6 +150,7 @@ export default async function About() {
               return (
                 <div 
                   key={i}
+                  className="about-panel-card"
                   style={{
                     backgroundColor: isDark ? 'var(--denim)' : '#ffffff',
                     color: isDark ? '#ffffff' : 'var(--denim)',
@@ -280,6 +281,7 @@ export default async function About() {
                 return (
                   <div 
                     key={idx} 
+                    className="core-value-card"
                     style={{ 
                       backgroundColor: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid rgba(255, 255, 255, 0.12)',
@@ -376,6 +378,7 @@ export default async function About() {
             ].map((stage, idx) => (
               <div 
                 key={idx}
+                className="process-stage-card"
                 style={{
                   backgroundColor: 'rgba(23, 59, 97, 0.4)',
                   border: '1px solid rgba(255, 255, 255, 0.15)',

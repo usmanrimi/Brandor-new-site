@@ -620,3 +620,156 @@
     padding: 26px 20px !important;
   }
 }
+
+
+/* ===================== GLOBAL ANIMATIONS & MICRO-INTERACTIONS ===================== */
+.brandor-animation-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Smooth Interactive Button Transitions */
+.btn {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease !important;
+  will-change: transform;
+}
+.btn:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+}
+.btn:active {
+  transform: translateY(-1px) scale(0.99) !important;
+}
+
+/* Service Card Block Enhanced Micro-Interaction */
+.service-card-block {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, background-color 0.3s ease, border-color 0.3s ease !important;
+  will-change: transform;
+}
+.service-card-block:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.32) !important;
+  border-color: rgba(253, 137, 22, 0.55) !important;
+}
+.service-card-block:hover .service-icon-box {
+  transform: rotate(6deg) scale(1.08);
+}
+
+/* Project Card Polish */
+.project-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease !important;
+  will-change: transform;
+}
+.project-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 22px 48px rgba(23, 59, 97, 0.16) !important;
+}
+.project-card .project-cover-img {
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.project-card:hover .project-cover-img {
+  transform: scale(1.06) !important;
+}
+
+/* Video Embed Hover & Play Pulse */
+@keyframes playPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(253, 137, 22, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(253, 137, 22, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(253, 137, 22, 0);
+  }
+}
+.play-pulse-btn {
+  animation: playPulse 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1) !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease !important;
+}
+.video-embed-wrapper:hover .play-pulse-btn {
+  transform: scale(1.12) !important;
+  background-color: #ff9d3a !important;
+}
+
+/* Team Member Card Animation */
+.team-member-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease !important;
+  will-change: transform;
+}
+.team-member-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 24px 50px rgba(23, 59, 97, 0.18) !important;
+}
+.team-member-card .team-portrait img {
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.team-member-card:hover .team-portrait img {
+  transform: scale(1.08) !important;
+}
+
+/* Partner Logo Floating Hover */
+.partner-logo-item {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease !important;
+  will-change: transform;
+}
+.partner-logo-item:hover {
+  transform: translateY(-5px) scale(1.03) !important;
+  box-shadow: 0 10px 24px rgba(23, 59, 97, 0.12) !important;
+  border-color: rgba(253, 137, 22, 0.35) !important;
+}
+
+/* Form Input Interactive Elevation */
+.form-row input, .form-row textarea, .form-row select {
+  transition: all 0.25s ease !important;
+}
+.form-row input:focus, .form-row textarea:focus, .form-row select:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 40, 64, 0.12) !important;
+}
+
+/* Eyebrow Badge Subtle Shimmer/Pulse */
+.eyebrow {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Global Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* About Page Interactive Cards */
+.about-panel-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease !important;
+  will-change: transform;
+}
+.about-panel-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 42px rgba(23, 59, 97, 0.14) !important;
+}
+
+.core-value-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+  will-change: transform;
+}
+.core-value-card:hover {
+  transform: translateY(-6px) !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(253, 137, 22, 0.4) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25) !important;
+}
+
+.process-stage-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+  will-change: transform;
+}
+.process-stage-card:hover {
+  transform: translateY(-6px) !important;
+  background-color: rgba(23, 59, 97, 0.6) !important;
+  border-color: rgba(253, 137, 22, 0.45) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2) !important;
+}

@@ -89,10 +89,12 @@ export default function ServicesList({ services }: ServicesListProps) {
                   {orderNumber}
                 </span>
 
-                <div style={{
-                  width: '46px',
-                  height: '46px',
-                  borderRadius: '12px',
+                <div 
+                  className="service-icon-box"
+                  style={{
+                    width: '46px',
+                    height: '46px',
+                    borderRadius: '12px',
                   backgroundColor: isHovered ? 'var(--orange)' : 'rgba(253, 137, 22, 0.12)',
                   color: isHovered ? '#ffffff' : 'var(--orange)',
                   display: 'flex',

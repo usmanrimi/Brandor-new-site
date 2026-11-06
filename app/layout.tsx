@@ -4,6 +4,7 @@ import { Baloo_2, Inter, Space_Mono } from 'next/font/google'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import CustomCursor from '@/components/CustomCursor'
+import AnimationProvider from '@/components/AnimationProvider'
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -57,7 +58,9 @@ export default function RootLayout({
       <body>
         <CustomCursor />
         <Navigation />
-        <main id="main-content">{children}</main>
+        <AnimationProvider>
+          <main id="main-content">{children}</main>
+        </AnimationProvider>
         <Footer />
       </body>
     </html>

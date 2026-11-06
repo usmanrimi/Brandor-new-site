@@ -415,6 +415,7 @@ export default async function Home() {
               {partners.map((partner) => (
                 <div 
                   key={partner.id}
+                  className="partner-logo-item"
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -425,8 +426,7 @@ export default async function Home() {
                     border: '1px solid rgba(23, 59, 97, 0.08)',
                     boxShadow: '0 4px 14px rgba(23, 59, 97, 0.04)',
                     minWidth: '180px',
-                    height: '84px',
-                    transition: 'transform 0.25s ease, box-shadow 0.25s ease'
+                    height: '84px'
                   }}
                 >
                   <img 
